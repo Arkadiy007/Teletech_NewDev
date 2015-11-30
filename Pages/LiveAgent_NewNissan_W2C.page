@@ -1,0 +1,783 @@
+<apex:page doctype="html-5.0" controller="LiveAgent_W2C_Controller" showheader="false"
+           sidebar="false" title="Nissan Chat" id="thePage">
+
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <script type="text/javascript">
+                     var loaded=false;
+        var bypass=false;
+        var lastResize;
+        var timer = null;
+        var counter = 0;
+        var flag = false;
+        var widthDiff =0;
+        var heightDiff=0;
+
+        document.onreadystatechange = function(e)
+        {
+            if (document.readyState === 'interactive')
+            {
+                initResize();
+            }
+        };
+
+        function initResize() {
+            if (window.outerWidth==0 || window.outerHeight==0)
+                setTimeout(initResize,50);
+            else {
+                loaded=true;
+                bypass=true;
+                widthDiff = eval('window.outerWidth - window.innerWidth');
+                heightDiff = eval('window.outerHeight - window.innerHeight');
+                resize(500,516);
+            }
+
+
+
+        }
+
+
+        window.onresize = function()
+        {
+            if (!loaded)
+                return;
+
+                if (flag) {
+                    flag = false; return; }
+
+                if (timer==null)
+                {
+                    flag = false;
+                    counter=0;
+                    if (bypass)
+                    {
+                        bypass=false;
+                        delayResize();
+                    } else {
+                        timer = setTimeout(function(){delayResize();}, 200);
+                    }
+
+                } else {
+                    counter++;
+                }
+        };
+
+        function delayResize() {
+            timer = null;
+            if (counter==0) {
+                flag=true;
+                if (!resize(500,516))
+                    flag = false;
+            } else {
+                    flag = false;
+                    counter=0;
+                    timer = setTimeout(function(){delayResize();}, 200);
+            }
+        }
+
+        function resize(width, height) {
+            var innerWidth = document.documentElement.clientWidth || window.innerWidth || document.body.clientWidth;
+            var innerHeight = document.documentElement.clientHeight || window.innerHeight || document.body.clientHeight;
+            var targetWidth = width;
+            var targetHeight = height;
+            var heightBy = targetHeight-innerHeight;
+            var widthBy = targetWidth-innerWidth;
+
+            if (widthBy == 0 && heightBy==0)
+            {
+                return false;
+            }
+            else
+            {
+                if (window.outerWidth==innerWidth)
+                {
+                    widthBy+=widthDiff;
+                    heightBy+=heightDiff-(window.outerHeight - window.innerHeight);
+                }
+
+                window.resizeBy(widthBy, heightBy);
+                return true;
+            }
+        }
+    </script>
+
+    <apex:stylesheet value="{!URLFOR($Resource.NissanStyle, 'NewNissan.css')}" />
+    <!--<apex:stylesheet value="{!URLFOR($Resource.LiveAgent_PreChat_Style, 'NewNissan_Adaptive.css')}" />-->
+    <script src="{!$Resource.jQuery1_8}"></script>
+    <style>
+        .submitButtonPosition {
+            background-image: url({!URLFOR($Resource.NissanStyle, 'img/LiveAgent_Resized_Submit.png')}) !important; background-position: 0 0!important; width:96px; height:30px; border:none!important;
+        }
+
+        .submitButtonPosition:hover {
+            background-image: url({!URLFOR($Resource.NissanStyle, 'img/LiveAgent_Resized_Submit.png')}) !important; background-position: 0 0!important; width:96px; height:30px; border:none!important;
+        }
+
+        /*
+        .error_msg_position {
+            position: absolute;
+            top: 295px;
+            left: 125px;
+        }
+        */
+
+        /* Descktop (portrait and landscape) ----------- */
+        @media screen {
+
+            /*
+               Web 2 Case styles
+            */
+
+            #divOperationHoursTextId {
+                top: 85px !important;
+                position: absolute !important;
+            }
+
+            #inputAreaContainerId {
+                top: 130px;
+                position: absolute;
+            }
+
+            #submitButtonPositionId {
+                position: absolute;
+                top: 307px;
+                left: 352px;
+            }
+
+            .error_message {
+                position: absolute;
+                top: 305px;
+                left: 128px;
+                width: 210px;
+            }
+
+
+            [id*=submitButtonId] {
+                text-indent: -9999px;
+            }
+
+
+            [id*=inputTextField] {
+                width: 203px !important;
+                max-width: 203px !important;
+            }
+
+            .bPageBlock .labelCol, body .print .topics-label {
+                padding-right: 2px;
+            }
+            /*Buttons*/
+            .buttonPosition {
+                position: absolute;
+                top: 410px;
+                left: 290px;
+            }
+
+            .pleaseWaitPosition {
+                position: absolute;
+                top: 410px;
+                left: 290px;
+                color: #666666 !important;
+                font-style: italic;
+            }
+
+
+            /**/
+            .contentInputLable {
+                height: 305px;
+                padding-top: 35px;
+            }
+            /*Texts*/
+            .livechat_footer_txt {
+                position: absolute;
+                top: 343px;
+                text-align: left;
+                width: 470px;
+            }
+
+            .livechat_footer_txt_policy {
+                position: absolute;
+                top: 360px;
+                text-align: right;
+                width: 465px;
+            }
+
+            .livechat_txt_required {
+                padding-top: 25px;
+            }
+            /*Div*/
+            .inputAreaDesktop {
+                display: block;
+            }
+
+            body {
+                overflow: hidden;
+                touch-action: pan-y;
+            }
+
+            .radioButtonPositionDesktop {
+                padding-left: 70px;
+                padding-top: 5px;
+            }
+
+            .selectRadio {
+                width: 300px;
+                font: 13px Verdana !important;
+            }
+
+            .btn-startchat {
+                text-indent: -9999px;
+            }
+        }
+
+        /* Smartphones (landscape) ----------- */
+        @media screen and (min-aspect-ratio: 1/1) and (min-device-width : 605px) and (max-device-width : 640px), screen and (min-aspect-ratio: 1/1) and (max-device-width : 599px) {
+            [id*=inputTextField] {
+                max-width: 170px !important;
+                width: 170px !important;
+                min-width: 170px !important;
+            }
+
+            .inputAreaContainer {
+                height: 260px !important;
+            }
+
+            .bPageBlock .labelCol, body .print .topics-label {
+                padding-right: 2px;
+            }
+
+            .data2Coll {
+                padding-left: 0px !important;
+            }
+
+
+            #inputAreaContainerId {
+                top: 165px;
+                position: absolute;
+            }
+
+            /*Buttons*/
+            .buttonPosition {
+                position: absolute;
+                top: 270px;
+                left: 380px;
+            }
+
+            #submitButtonPositionId {
+                position: absolute;
+                top: 240px !important;
+                left: 365px !important;
+            }
+
+
+            [id*=submitButtonId] {
+                text-indent: -9999px;
+            }
+
+            .pleaseWaitPosition {
+                position: absolute;
+                top: 270px;
+                left: 380px;
+                color: #666666 !important;
+                font-style: italic;
+            }
+
+            .issueTypeInput {
+                width: 170px !important;
+                max-width: 170px !important;
+                min-width: 170px !important;
+            }
+
+            .commentsInput {
+                width: 167px !important;
+                max-width: 167px !important;
+                min-width: 167px !important;
+            }
+
+            /*Header Message*/
+            .livechat_header {
+                background: url({!URLFOR($Resource.LiveAgent_Headers_Without_Text, 'img/NewNissan_header_without_text.png')}) no-repeat !important; height:97px !important; width:100%; text-align:right;
+        }
+
+        .divHeaderTextClass {
+            display: block !important;
+            width: 350px !important;
+        }
+        /**/
+        .contentInputLable {
+            height: 305px;
+            padding-top: 0px;
+        }
+        /*Texts*/
+        .livechat_footer_txt {
+            -webkit-text-size-adjust: 100%;
+            position: absolute !important;
+            top: 20px;
+            left: 300px;
+            text-align: center !important;
+            width: 200px;
+        }
+
+        .livechat_footer_txt_policy {
+            display: block !important;
+            position: absolute !important;
+            left: 305px;
+            top: 95px;
+            text-align: center !important;
+            font: Verdana, Geneva, sans-serif;
+            font-size: 9px;
+            vertical-align: text-top;
+            padding-left: 0px !important;
+        }
+
+        .livechat_txt {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
+
+
+        .error_message {
+            top: 195px !important;
+            left: 330px !important;
+        }
+
+        .livechat_txt_required {
+            padding-top: 0px !important;
+        }
+
+        .bPageBlock .labelCol { /*overwrite standart*/
+            text-align: left;
+            padding-left: 8px;
+        }
+
+        .bPageBlock .detailList .labelCol { /*overwrite standart*/
+            width: 23% !important;
+        }
+
+        .bPageBlock .detailList .data2Col { /*overwrite standart*/
+            padding-left: 0px;
+        }
+
+        .radioButtonPositionDesktop {
+            position: absolute !important;
+            top: 105px !important;
+            left: 345px !important;
+            padding-left: 0px !important;
+        }
+
+        .selectRadio {
+            width: 180px !important;
+            font: 13px Verdana !important;
+        }
+
+
+        /*Div*/
+        .inputAreaDesktop {
+            padding-top: 0px;
+            display: block !important;
+            width: 480px !important;
+        }
+
+        .livechat_bg {
+            background: none !important;
+            width: 100%;
+            height: 100px !important;
+        }
+
+        .inputAreaContainer {
+            padding-top: 0px !important;
+        }
+
+        .divOperationHoursArea {
+            height: 380px !important;
+            width: 500px !important;
+        }
+
+        .divOperationHoursText {
+            width: 380px !important;
+            left: 5px !important;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .btn-startchat {
+            text-indent: -9999px;
+        }
+
+        body {
+            overflow: visible !important;
+        }
+
+        }
+
+        /* Smartphones (portrait) ----------- */
+        @media screen and (min-width : 320px) and (max-width : 479px) {
+            [id*=inputTextField] {
+                width: 185px !important;
+                max-width: 185px !important;
+                min-width: 185px !important;
+            }
+
+            #inputAreaContainerId {
+                top: 150px;
+                position: absolute;
+            }
+
+
+            .bPageBlock .labelCol, body .print .topics-label {
+                padding-right: 2px;
+            }
+
+            .bPageBlock .detailList .dataCol {
+                width: 90%;
+            }
+
+            /*Buttons*/
+            .buttonPosition {
+                position: absolute;
+                top: 410px;
+                left: 100px;
+            }
+
+            #submitButtonPositionId {
+                position: absolute;
+                top: 290px !important;
+                left: 110px !important;
+            }
+
+            [id*=submitButtonId] {
+                text-indent: -9999px;
+            }
+
+            .issueTypeInput {
+                width: 185px !important;
+                max-width: 185px !important;
+                min-width: 185px !important;
+            }
+
+            .commentsInput {
+                width: 182px !important;
+                max-width: 182px !important;
+                min-width: 182px !important;
+            }
+
+            .pleaseWaitPosition {
+                position: absolute;
+                left: 100px;
+                top: 415px;
+                color: #666666 !important;
+                font-style: italic;
+            }
+
+            /*Header Message*/
+            .livechat_header {
+                background: url({!URLFOR($Resource.LiveAgent_Headers_Without_Text, 'img/NewNissan_header_without_text.png')}) no-repeat !important; height:97px; width:100%; text-align:right;
+        }
+
+        .divHeaderTextClass {
+            display: block !important;
+        }
+        /**/
+        .contentInputLable {
+            height: auto;
+            padding-top: 35px;
+        }
+        /*Texts*/
+        .livechat_txt {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+        }
+
+        .livechat_footer_txt_Table {
+            width: 320px !important;
+        }
+
+        .livechat_footer_txt {
+            position: absolute !important;
+            top: 330px;
+            left: 10px;
+            text-align: center !important;
+            width: 280px !important;
+        }
+
+        .livechat_footer_txt_policy {
+            display: block !important;
+            position: absolute;
+            top: 380px;
+            text-align: center;
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 9px !important;
+            padding-bottom: 0px !important;
+            padding-left: 0px !important;
+        }
+
+        .error_message {
+            padding-top: 0px !important;
+            position: absolute;
+            top: 270px !important;
+            left: 25px !important;
+        }
+
+        .livechat_txt_required {
+            padding-top: 0px !important;
+        }
+
+        .radioButtonPositionDesktop {
+            position: absolute !important;
+            top: 305px !important;
+            left: 30px !important;
+            padding-left: 0px !important;
+        }
+
+        .selectRadio {
+            width: 270px !important;
+            font: 13px Verdana !important;
+        }
+
+        .bPageBlock .detailList .labelCol { /*increase standart width of input labels*/
+            width: 20% !important;
+        }
+
+        .bPageBlock .detailList .dataCol {
+            width: 100%;
+        }
+
+        /*Div*/
+        .inputAreaDesktop {
+            display: block !important;
+            width: 320px !important;
+        }
+
+        .livechat_bg {
+            background: none !important;
+            width: 100%;
+            height: 100px;
+        }
+
+        .inputAreaContainer {
+            padding-top: 0px !important;
+        }
+
+        .divOperationHoursArea {
+            height: 540px !important;
+            width: 340px !important;
+        }
+
+        .divOperationHoursText {
+            width: 300px !important;
+            left: 0px !important;
+        }
+
+        .btn-startchat {
+            text-indent: -9999px;
+        }
+
+        body {
+            overflow: visible !important;
+        }
+
+        }
+    </style>
+
+    <apex:form id="frmMain">
+        <apex:inputhidden id="parentSiteName" value="{!parentSiteURL}" />
+        <apex:actionfunction name="doProcessParentSiteInformation" action="{!processParentSiteInformation}" rerender="" />
+
+        <apex:pagemessages escape="false" />
+        <div class="livechat_header"></div>
+        <div class="livechat_bg" id="livechat_bg_id">
+            <apex:pageblock id="inputPageBlock">
+                <div class="inputAreaContainer" style="height: 375px; padding-top: 15px;" id="inputAreaContainerId">
+                    <div style="padding-left: 135px; font-family: Verdana, Geneva, sans-serif;" id="livechatRequired"
+                         class="livechat_txt livechat_txt_required">*required</div>
+                    <!-- Capturing device info (Device Type, OS, Browse) -->
+                    <apex:inputhidden id="userAgentInput" value="{!userAgent}" />
+                    <apex:inputhidden id="browserInput" value="{!browser}" />
+                    <script type="text/javascript">
+
+                            var OPERA = 'Opera';
+                            var FIREFOX = 'Firefox';
+                            var SAFARI = 'Safari';
+                            var CHROME = 'Chrome';
+                            var IE = 'Internet Explorer';
+
+                            var browserName = "Unknown Browser";
+                            var userAgent = navigator.userAgent;
+
+                            var getCurrentBrowser = function() {
+                                if( !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+                                    browserName = OPERA;
+                                }
+                                if(isFirefox = typeof InstallTrigger !== 'undefined') {
+                                    browserName = FIREFOX;
+                                }
+                                if(isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+                                    browserName = SAFARI;
+                                }
+                                if(isChrome = !!window.chrome && !isOpera) {
+                                    browserName = CHROME;
+                                }
+                                if(isIE = /*@cc_on!@*/false || !!document.documentMode) {
+                                    browserName = IE;
+                                }
+                            }
+
+                            getCurrentBrowser();
+
+                            document.getElementById('thePage:frmMain:inputPageBlock:browserInput').value = browserName;
+                            document.getElementById('thePage:frmMain:inputPageBlock:userAgentInput').value = userAgent;
+                    </script>
+                    <!-- -->
+                    <div class="inputAreaDesktop" style="padding-top: 2px; padding-left: 10px; width: 470px;">
+                        <apex:pageblocksection collapsible="false" columns="1" id="inputPageblockSection">
+                            <apex:pageblocksectionitem labelstyle="width:23%;"
+                                                       labelstyleclass="livechat_field_label_txt">
+                                <apex:outputlabel value="First Name *"
+                                                  style="font-family: Verdana, Geneva, sans-serif; white-space: nowrap;" />
+                                <apex:input type="text" id="inputTextField" value="{!firstName}"
+                                            styleclass="livechat_textbox"
+                                            html-placeholder="First Name" />
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem labelstyleclass="livechat_field_label_txt">
+                                <apex:outputlabel value="Last Name"
+                                                  style="font-family: Verdana, Geneva, sans-serif" />
+                                <apex:input type="text" id="inputTextField" value="{!lastName}"
+                                            styleclass="livechat_textbox"
+                                            html-placeholder="Last Name" />
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem labelstyle="text-align:left;">
+                                <apex:outputlabel value="Email *"
+                                                  style="font-family: Verdana, Geneva, sans-serif" />
+                                <apex:input type="email" id="inputTextField" value="{!emailAddress}"
+                                            styleclass="livechat_textbox"
+                                            html-placeholder="user@gmail.com" />
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem labelstyle="text-align:left;">
+                                <apex:outputlabel value="Phone"
+                                                  style="font-family: Verdana, Geneva, sans-serif" />
+                                <apex:input type="tel" id="inputTextField" value="{!phone}"
+                                            styleclass="livechat_textbox"
+                                            html-placeholder="XXX-XXX-XXXX" />
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem labelstyle="text-align:left;" id="issueTypePageblockSectionItem" rendered="{!renderReason}">
+                                <apex:outputlabel value="Reason *" id="inputTextField" style="font-family: Verdana, Geneva, sans-serif" />
+                                <apex:selectlist value="{!selectedDepartment}" style="   width: 203px;" id="issueTypeInputId" size="1" styleclass="issueTypeInput">
+                                    <apex:selectoptions value="{!reasons}"></apex:selectoptions>
+                                </apex:selectlist>
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem labelstyle="text-align:left;" id="commentPageblockSectionItem">
+                                <apex:outputlabel value="Comments *" id="inputTextField" style="font-family: Verdana, Geneva, sans-serif" />
+                                <apex:inputtextarea id="commentsDataId" cols="26" rows="3" value="{!comments}"
+                                                    style="background-color: #E2E2E2; border: 0px solid; font-size: 14px; resize: none; width: 200px;" styleclass="commentsInput" />
+                            </apex:pageblocksectionitem>
+                        </apex:pageblocksection>
+                    </div>
+
+                    <div class="buttonPosition" id="submitButtonPositionId">
+                        <apex:commandbutton action="{!submitCaseCreation}"
+                                            rerender="opErrorMessage,opSuccess" styleclass="submitButtonPosition" id="submitButtonId">
+                        </apex:commandbutton>
+                    </div>
+                    <apex:outputpanel id="opErrorMessage" styleclass="livechat_txt error_message">
+                        <apex:outputlabel value="{!errorMessage}"
+                                          rendered="{!showErrorMessage}" />
+                    </apex:outputpanel>
+                    <table class="livechat_footer_txt_Table" width="480px" align="left">
+                        <tr>
+                            <td class="livechat_footer_txt" valign="top" id="footerPosition"
+                                style="padding-left: 10px; padding-right: 10px;">
+                                If you have a concern or issue
+                                with your Nissan vehicle that you would like us to address, we
+                                want to help, but we cannot help you from this forum. Please
+                                contact us at (800) 647-7261 Mon-Fri 7am-7pm CT or visit <a href="http://www.nissanusa.com/apps/contactus" target="_blank">http://www.nissanusa.com/apps/contactus</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="livechat_footer_txt livechat_footer_txt_policy" valign="top" align="right"
+                                style="padding-left: 10px; padding-right: 10px; margin-top: 5px;">
+                                <a href="http://www.Nissanusa.com/global/privacy.html" target="_blank">Privacy Policy</a> <br />
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </apex:pageblock>
+        </div>
+
+        <!-- Operation Hours Message -->
+        <div id="divOperationHours">
+            <div class="divOperationHoursText" id="divOperationHoursTextId"
+                 style=" z-index: 6 !important; color: #09C; font: bold 11px Arial !important; width: 370px; left: 5px; position: absolute; top: 115px; padding: 15px 10px 5px 10px;">
+                <apex:outputtext escape="false" value="{!afterHoursMessage}" />
+            </div>
+        </div>
+        <!--Header Message-->
+        <div class="divHeaderTextClass" id="divHeaderText"
+             style="display: none; z-index: 6 !important; color: black; font: bold 13px Arial !important; width: 200px; position: absolute; top: 15px; left: 110px;">
+            <apex:outputtext escape="false" value="{!headerMessage}" />
+        </div>
+    </apex:form>
+
+    <script type="text/javascript">
+               var picklist = document.getElementById('thePage:frmMain:inputPageBlock:inputPageblockSection:issueTypePageblockSectionItem:issueTypeInputId');
+                if( picklist == null && window.matchMedia('(orientation: landscape) ').matches){
+                    var submitButton = document.getElementById('submitButtonPositionId');
+
+                    $(submitButton).css("cssText", "top: 190px !important;");
+                }
+            var isiph = isiPhone();
+            console.log(isiph);
+            if(isiph && window.matchMedia('(orientation: portrait) and (max-device-width : 479px)').matches){
+                 var inputText = document.getElementById('thePage:frmMain:inputPageBlock:inputPageblockSection:j_id33:inputTextField');
+
+                 $(inputText).css("cssText", "max-width: 170px !important; width: 170px !important; min-width: 170px !important;");
+
+             var inputText2 = document.getElementById('thePage:frmMain:inputPageBlock:inputPageblockSection:j_id35:inputTextField');
+
+                 $(inputText2).css("cssText", "max-width: 170px !important; width: 170px !important; min-width: 170px !important;");
+             var inputText3 = document.getElementById('thePage:frmMain:inputPageBlock:inputPageblockSection:j_id37:inputTextField');
+
+                 $(inputText3).css("cssText", "max-width: 170px !important; width: 170px !important; min-width: 170px !important;");
+            var inputText4 = document.getElementById('thePage:frmMain:inputPageBlock:inputPageblockSection:j_id39:inputTextField');
+
+                 $(inputText4).css("cssText", "max-width: 170px !important; width: 170px !important; min-width: 170px !important;");
+
+
+            }
+           if(isiph && window.matchMedia('(orientation: landscape)').matches){
+
+                 var inputArea = document.getElementById('commentsDataId');
+
+                 $(inputArea).css("cssText", "max-width: 200px !important; width: 200px !important; min-width: 200px !important;");
+        //if(picklist != null){
+                 $(picklist).css("cssText", "max-width: 200px !important; width: 200px !important; min-width: 200px !important;");
+
+     //   }
+
+            }
+              function isiPhone(){
+
+                return (
+                    //Detect iPhone
+                //var isiPad = navigator.userAgent.match(/iPad/i) != null;
+                    (navigator.platform.indexOf("iPhone") != -1) ||
+                    //Detect iPod
+                    (navigator.platform.indexOf("iPad") != -1)
+                );
+            }
+    </script>
+    <script></script>
+    <script>
+               window.onload=function()
+               {
+                 try {
+                     var parentSite =  window.opener;
+                     var parentSiteName = document.getElementById('thePage:frmMain:parentSiteName');
+
+                     parentSiteName.value = parentSite.location.href;
+                 } catch (e) {
+                 }
+                 doProcessParentSiteInformation();
+               };
+
+    </script>
+</apex:page>

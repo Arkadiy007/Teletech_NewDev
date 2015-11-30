@@ -1,0 +1,76 @@
+<apex:page showHeader="false" sidebar="false"  doctype="html-5.0" controller="HomePageController"> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>NMAC Investor Relations Home</title>
+    <apex:stylesheet value="{!URLFOR($Resource.fancybox, 'jquery.fancybox-1.3.4.css')}"/>
+    <apex:stylesheet value="{!$Resource.Home_Page_Styles}"/>
+    <style>
+        .nametitle {
+              font-family: verdana;
+        } 
+    </style>
+    <script src="https://www.nissanusa.com/AppGateway/nissan_global_navigation.js?baseURL=www.nissanusa.com&secure=true" async="true"></script>
+</head>
+
+<body>
+<div id="nissan_global_navigation"></div>
+
+<div class="wrapper">
+    <nav class="navigation">
+        <ul>
+            <li class="active"><a href="{!HomeLink}">Home</a></li>
+            <li><a href="{!AbsLink}">ABS</a></li>
+            <apex:form rendered="{!qd.Available__c}"><li><a href="{!QuarterlyDataLink}">Quarterly Data</a></li></apex:form>
+            <apex:form rendered="{!!qd.Available__c}"><li><a href="#" class="deactivated">Quarterly Data</a></li></apex:form>
+            <li><a href="{!PresentationsLink}">Presentations</a></li>
+            <li><a href="{!FAQLink}">FAQ</a></li>
+        </ul>
+    </nav>
+
+    <div class="wrapMain">
+        <div class="wrapMain__left">
+            <div class="contentText">
+                <h3 style="margin-top: 0">Overview</h3>
+                <p><apex:outputText value="{!home.InformationText}" escape="false"/></p>
+                <p>
+                    <img src="{!bussinessActivitiesLink}" alt="" width="100%" style="margin-top: 10px;"/>
+                </p>
+            </div>
+        </div>
+        <div class="wrapMain__right">
+            <div class="rating">
+                <h2 class="nametitle">Rating</h2>
+                <p><apex:outputText value="{!home.RatingsText}" escape="false"/></p>
+            </div>
+
+            <div class="comp_overview">
+                <h2 class="nametitle">Keepwell Agreement</h2>
+                <a class="js_popup" rel="group" href="#">
+                    <img src="{!spreadsheetImageLink}" alt=""/>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup">
+    <div class="popup__img">
+        <i class="js_close"><img src="{!$Resource.Close}"/></i>
+    </div>
+</div>
+
+
+
+<div id="nissan_global_footer"></div>
+
+<script src="{!$Resource.jQuery1_8}"></script>
+<script>window.jQuery || document.write('<script src="scripts/vendor/jquery.min.js"><\/script>')</script>
+
+<script type="text/javascript" src="{!$Resource.jquery_fancybox134JS}"></script>
+<script src="{!$Resource.script}"></script>
+
+</body>
+</html>
+</apex:page>

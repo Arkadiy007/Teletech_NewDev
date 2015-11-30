@@ -1,0 +1,71 @@
+<apex:page showHeader="false" sidebar="false" title="Infiniti Chat">
+    <script type="text/javascript">
+        document.onreadystatechange = function(e)
+        {
+            if (document.readyState === 'interactive')
+            {
+               resize(500,516); 
+            }
+        };
+        
+        window.onresize = function() 
+        {
+            resize(500,516);
+        }
+
+        function resize(width, height) {
+            var innerWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            var innerHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+            var targetWidth = width;
+            var targetHeight = height;
+            window.resizeBy(targetWidth-innerWidth, targetHeight-innerHeight);
+        }
+    </script>
+    <script type="text/javascript">
+    function openPopup() {
+        var url = 'http://nna.force.com/livechat/'; //PROD
+        var branding = getUrlVars()["branding"];
+        var routingGroup = getUrlVars()["routingGroup"];
+        
+        switch(branding) {
+            case 'Nissan': 
+                url += 'LiveAgent_Nissan_Direct';
+                break;
+                
+            case 'Infiniti': 
+                url += 'LiveAgent_Infiniti_Direct';
+                break;
+                
+            case 'Leaf': 
+                url += 'LiveAgent_NewLeafDirect';
+                break;
+        }
+        
+        url += '?routingGroup=' + routingGroup;
+        
+        window.open(url,'LiveAgent','scrollbars=no,resizable=no,width=500,height=516');
+    }
+    
+    // Read a page's GET URL variables and return them as an associative array.
+    function getUrlVars()
+    {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+    
+    setTimeout("openPopup()",500);
+    </script>
+
+    <div>
+        Please, check that the chat popup is not being blocked by your
+        browser, or click <a href="#" onclick="openPopup();">here</a>
+    </div>
+
+</apex:page>

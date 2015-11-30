@@ -1,0 +1,55 @@
+<apex:component access="global" controller="EmailTemplateImages_Controller">
+    <apex:attribute name="make" type="String" assignTo="{!makeVehicle}" description="make of Vehicle"/>
+    <apex:attribute name="firstName" type="String" assignTo="{!First_Name}" description="first name of buyer"/>
+    <apex:attribute name="yearMakeModel" type="String" assignTo="{!year_Make_Model}" description="year, make, Model of Vehicle"/>
+    <apex:attribute name="dealerName" type="String" assignTo="{!dealer_Name}" description="name of dealer"/>
+    <apex:attribute name="dayOfSale" type="String" assignTo="{!day_of_Sale}" description="day of sale"/>
+    <apex:attribute name="surveyId" type="String" assignTo="{!survey_Id}" description="id of related survey"/>
+    
+    <apex:image url="{!LogoUrl}"/>
+    <apex:outputText > <p style="margin: 20px 0 20px 0;">Dear {!First_Name},</p></apex:outputText>
+    <apex:outputText > <p style="margin: 0 0 20px;">Thank you for your interest in a {!year_Make_Model} from {!dealer_Name} on {!day_of_Sale}.</p></apex:outputText>
+    <apex:outputText rendered="{!NissanOrInfiniti}"> <p style="margin: 0 0 20px;" >We are writing to ensure that you received a promt response to your inquiry. Did {!dealer_Name} attempt to contact you? Please let us know by selecting either the YES or NO response below.</p></apex:outputText>
+    <apex:outputText rendered="{!!NissanOrInfiniti}"> <p style="margin: 0 0 20px;" >We want to ensure that you received a promt response to your inquiry. Did {!dealer_Name} attempt to contact you? Please let us know by selecting either the YES or NO response below.</p></apex:outputText>
+    <apex:outputText ><p style="margin: 0 0 20px;">Thank you in advance for taking a minute to share your thoughts with us. We look forward to serving you in the future.</p></apex:outputText>
+    <div style="margin-bottom: 10px;">
+        <a href="https://newdev-nna.cs7.force.com/surveyCampaign/VehicleInformationRequest?sid={!survey_Id}&answer=yes" style="text-decoration:none;">
+        <apex:image url="{!YesButtonUrl}" />
+        </a> 
+        <a style="margin-left: 20px; text-decoration:none;" href="https://newdev-nna.cs7.force.com/surveyCampaign/VehicleInformationRequest?sid={!survey_Id}&answer=no">
+        <apex:image url="{!NoButtonUrl}" />
+        </a>
+    </div>
+        <apex:outputText rendered="{!NissanOrInfiniti}">
+        <p style="margin: 0 0 10px;">Sincerely,</p>
+        <p style="margin: 0 0 30px;">
+            Nissan North America, Inc.<br/>
+            800-826-6500
+        </p>
+                    
+        <div style="font-size: 8pt;">
+            <a href="http://www.nissanusa.com/global/privacy.html"> Privacy Policy</a><br/>
+            If you would like to unsubscribe from Nissan emails, <a href="http://www.nnainfo.com/email/unsubscribenissan.aspx?x=H409">click here</a> to submit the e-mail address you want removed from our list.<br/>
+            Nissan North America<br/>
+            Mail Stop P3C<br/>
+            One Nissan Way<br/>
+            Franklin, TN 37068
+       </div>
+    </apex:outputText>
+    <apex:outputText rendered="{!!NissanOrInfiniti}">
+        <p style="margin: 0 0 10px;">Sincerely,</p>
+        <p style="margin: 0 0 30px;">
+            Infiniti USA<br/>
+            800.235.8880
+        </p>
+                    
+        <div style="font-size: 8pt;">
+            <a href="http://www.infinitiusa.com/global/privacy.html"> Privacy Policy</a><br/>
+            If you would like to unsubscribe from Infiniti emails, <a href="http://www.nnainfo.com/email/unsubscribeinfiniti.aspx?x=H409">click here</a> to submit the e-mail address you want removed from our list.<br/>
+            Infiniti USA<br/>
+            Mail Stop P3C<br/>
+            One Nissan Way<br/>
+            Franklin, TN 37068
+       </div>
+    </apex:outputText>
+</apex:component>

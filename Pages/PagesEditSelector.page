@@ -1,0 +1,18 @@
+<apex:page controller="PageEditSelectorController">
+
+   <apex:form id="frm">
+                         
+        <apex:pageblock >
+            <h1> Please choose what page you want to edit from picklist below: </h1>
+            <apex:outputpanel layout="block" style="margin:5px !important;padding:10px;padding-top:2px;">
+                 <apex:selectList value="{!linkToEditPage}" multiselect="false" size="1" label="Page to Edit">
+                    <apex:selectOptions value="{!pages}"></apex:selectOptions>  
+                 </apex:selectList>
+                 
+                   <apex:commandButton value="Go" action="{!redirectToEditPage}"/>  
+                              
+            </apex:outputpanel>
+
+        </apex:pageblock>
+    </apex:form> 
+</apex:page>

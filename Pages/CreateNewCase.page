@@ -1,0 +1,22 @@
+<apex:page standardController="Case" extensions="Controller_CreateNewCase">
+<apex:form >
+    <apex:pageBlock title="Create New Case" mode="edit">
+      <apex:pageBlockButtons >
+        <apex:commandButton action="{!saveAction}" value="Save"/>
+      </apex:pageBlockButtons>
+      <apex:pageBlockSection title="Create New Case" columns="2">
+		<apex:inputField value="{!caseItem.ContactId}"/>
+		<apex:inputField value="{!CaseItem.Priority}"/>
+        <apex:inputField value="{!caseItem.Issue_Type__c}"/>
+		<apex:inputField value="{!caseItem.Issue_Details__c}"/>
+		<apex:inputField value="{!CaseItem.Suggested_Hours_Worked__c}"/>
+        <apex:inputField value="{!caseItem.URL_Related_to_Issue__c}"/>
+		<apex:inputField value="{!caseItem.Subject}"/>
+		<apex:inputField value="{!CaseItem.Description}"/>
+        <apex:inputField value="{!caseItem.Defect__c}"/>
+		<apex:inputField value="{!caseItem.Severity__c}"/>
+		<apex:inputField value="{!caseItem.Requesting_Department__c}"/>
+      </apex:pageBlockSection>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -1,0 +1,3 @@
+<apex:page controller="SerializeArchivedActivitiesController" readOnly="true" showHeader="false" sidebar="false" standardStylesheets="false" contentType="text/csv#ConsignmentSearchData.csv">
+<apex:outputtext >{!fileresult}</apex:outputtext>
+</apex:page>

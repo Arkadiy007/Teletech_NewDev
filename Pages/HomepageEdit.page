@@ -1,0 +1,175 @@
+<apex:page controller="HomepageEditController" doctype="html-5.0">
+    <script>
+        function makeFileloadVisible(input) {
+            if(input.checked) document.getElementById('inputFilesBlock').style.display = "block";
+            else document.getElementById('inputFilesBlock').style.display = "none";
+        }
+        
+
+
+    </script>
+    <style>
+        .bPageBlock .detailList .labelCol {
+            width: 8%;
+        }
+
+        .homeTab .tertiaryPalette, .individualPalette .homeBlock .tertiaryPalette, .layoutEdit .individualPalette .homeBlock .tertiaryPalette {
+            background-color: #00A2D7;
+            border-color: #cfeef8;
+        }
+
+        #blockmainanim {
+            background: rgba(0, 0, 0, 0.2);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 9999;
+            rgba(0, 0, 0, 0.71);
+            cursor: wait;
+        }
+
+        #apimgld {
+            top: 49%;
+            left: 45%;
+            position: fixed;
+            border-radius: 2px;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+        }
+    </style>
+
+    <apex:form id="frm">
+                <div id="blockbckanim" style="display:none">
+                    <img id="apimgld" style="" src="/img/loading32.gif" />
+                </div>  
+
+            <apex:pageblock >
+            <apex:pageMessage summary="{!errorMsg}" severity="error" strength="3" rendered="{!IF(LEN(errorMsg)==0, 'false', 'true')}" />
+            <apex:pageMessage summary="{!commentsMsg}" severity="info" strength="3" rendered="{!IF(LEN(commentsMsg)==0, 'false', 'true')}" />
+            
+                              
+            <apex:outputpanel layout="block" style="margin:5px;padding:10px;padding-top:2px;">
+                <apex:pageblocksection title="Homepage Object Edit" columns="2" >
+
+                    
+                    <apex:inputTextarea richtext="true" value="{!home.InformationText}" label="Information Text"/>
+                    <apex:inputTextarea richtext="true" value="{!home.RatingsText}" label="Ratings"/>
+                    <apex:pageBlockSectionItem rendered="{!isBAImageAvailable}">
+                        <apex:outputLabel value="Business Activities Image:" style="font-style:bold"/>
+                        <img src="{!home.BusinessActivitiesImageLink}" style="width: 100%; "/>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem rendered="{!isSpreadsheetImageAvailable}">
+                        <apex:outputLabel value="Spreadsheet Image:" style="font-style:bold"/>
+                        <img src="{!home.SpreadsheetImageLink}" style="width: 100%; "/>
+                    </apex:pageBlockSectionItem>
+                    
+                </apex:pageblocksection>
+                <apex:pageblocksection title="Upload new images?" columns="1">
+                    <apex:inputCheckbox value="{!showBAImgLoaderBlock}" label="Upload new images?" onchange="makeFileloadVisible(this);"/>
+                </apex:pageblocksection>
+                
+                <div id="inputFilesBlock" style="display: none;">
+                    <apex:pageblocksection title="Homepage Object Edit" columns="2" >
+                        <apex:outputLabel value="Business Activities Image:" style="font-style:bold"/>
+                        <apex:inputFile value="{!businessActivitiesImg.body}" filename="{!businessActivitiesImg.name}"/>
+                        <apex:outputLabel value="Spreadsheet Image:" style="font-style:bold"/>
+                        <apex:inputFile value="{!spreadsheetImg.body}" filename="{!spreadsheetImg.name}"/>
+                        
+                     </apex:pageblocksection>   
+                </div>
+            </apex:outputpanel>
+
+          
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Save" action="{!save}" onclick="return checkFileSize();" />
+                <apex:commandButton value="Send For Approval" action="{!saveAndSubmit}" onclick="return checkFileSize();" />
+                <apex:commandButton value="Save And Preview" styleClass="preview" action="{!saveAndPreview}" onclick="return checkFileSize();" />
+             </apex:pageBlockButtons>
+        </apex:pageblock>
+    </apex:form> 
+    <script src="{!$Resource.jQuery1_8}"></script>
+    <script  type="text/javascript">
+         function ShowLoading() {
+            document.getElementById('blockbckanim').style.display="block";
+         }
+         
+         function HideLoading() {
+            document.getElementById('blockbckanim').style.display="none";
+         }
+
+        
+         function getIEFileSize(file){
+        var myFSO = new ActiveXObject("Scripting.FileSystemObject"),
+        filepath = file.value,
+        thefile = myFSO.getFile(filepath);
+        return thefile.size;
+    }
+ 
+    function checkFileSize()
+    {
+        ShowLoading();
+        var goodSize = true;
+        $('input[type=file]').each(function()
+        {
+            if(typeof this.files[0] !== 'undefined')
+            {
+                var file = this.files[0],
+                size = typeof ActiveXObject !== 'undefined' ?
+                    getIEFileSize(file)
+                    :
+                    file.fileSize || file.size;
+ 
+                goodSize = 1000000 > size;
+                if(!goodSize)
+                {
+                    HideLoading();
+                    alert(this.files[0].name +' is too large - please choose a file that is 1Mb or less');
+                }
+                else
+                {
+                    if (500000 < size)
+                    {   
+                        goodSize=confirm('The file size is ' + size + 
+                            ' bytes - this may take some time. Are you sure you wish to continue');
+                    }
+                }
+ 
+                return goodSize;
+            }
+
+            if(typeof this.files[1] !== 'undefined')
+            {
+                var file = this.files[1],
+                size = typeof ActiveXObject !== 'undefined' ?
+                    getIEFileSize(file)
+                    :
+                    file.fileSize || file.size;
+ 
+                goodSize = 1000000 > size;
+                if(!goodSize)
+                {
+                    HideLoading();
+                    alert(this.files[1].name +' is too large - please choose a file that is 1Mb or less');
+                }
+                else
+                {
+                    if (500000 < size)
+                    {
+                        goodSize=confirm('The file size is ' + size + 
+                            ' bytes - this may take some time. Are you sure you wish to continue');
+                    }
+                }
+                $( "input[type=checkbox]" ).prop("checked", false);
+                return goodSize;
+            }
+        });
+       $( "input[type=checkbox]" ).prop("checked", false);
+        return goodSize;
+    }
+ 
+            
+    </script>
+
+</apex:page>

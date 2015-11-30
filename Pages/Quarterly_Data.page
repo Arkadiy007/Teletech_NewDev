@@ -1,0 +1,62 @@
+<apex:page showHeader="false" sidebar="false"  doctype="html-5.0" controller="QuarterlyDataController">
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Quarterly Data</title>
+    <apex:stylesheet value="{!$Resource.Home_Page_Styles}"/>
+    <script src="https://www.nissanusa.com/AppGateway/nissan_global_navigation.js?baseURL=www.nissanusa.com&secure=true" async="true"></script>
+</head>
+<body>
+<div id="nissan_global_navigation"></div>
+<apex:form id="frm" rendered="{!IsComponentsAvailable}">
+<div class="wrapper">
+    <nav class="navigation">
+        <ul>
+            <li><a href="{!HomeLink}">Home</a></li>
+            <li><a href="{!ABSLink}">ABS</a></li>
+            <li class="active"><a href="{!QuarterlyDataLink}">Quarterly Data</a></li>
+             <li><a href="{!PresentationsLink}" >Presentations</a></li>
+            <li><a href="{!FAQLink}">FAQ</a></li>
+        </ul>
+    </nav>
+
+    <div class="wrapMain">
+        <p>
+            <apex:outputText value="{!qData.HeaderText}" escape="false"/>
+        </p>
+
+        <apex:repeat value="{!items}" var="itm">
+        
+        <a href="{!itm.DocumentLink}" target="_blank" class="quarterly">
+            <apex:outputText value="{!itm.InfoText}" escape="false"/>
+        </a>
+
+        </apex:repeat>        
+
+    </div>
+</div>
+ </apex:form>
+       <apex:form rendered="{!NOT(IsComponentsAvailable)}">
+        <nav class="navigation">
+            <ul>
+                <li><a href="{!HomeLink}">Home</a></li>
+                <li><a href="{!ABSLink}">ABS</a></li>
+                <li class="active " ><a href="{!QuarterlyDataLink}" class="deactivated">Quarterly Data</a></li>
+                <li><a href="{!PresentationsLink}" >Presentations</a></li>
+                <li><a href="{!FAQLink}">FAQ</a></li>
+            </ul>
+         </nav>
+        <div class="wrapMain">
+            <p align="center">This page is not currently available</p>
+        </div>
+ 
+        </apex:form>
+<div id="nissan_global_footer"></div>
+
+</body>
+</html>
+
+<script src="{!$Resource.jQuery1_8}"></script>
+<script src="{!$Resource.script}"></script>
+
+</apex:page>

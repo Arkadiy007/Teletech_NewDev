@@ -1,0 +1,41 @@
+<apex:page controller="PagesHistoryController">
+
+   <apex:form id="frm" rendered="{!NOT(IsPageDefined)}">
+        <apex:pageblock >
+            <h1> Show history list for: </h1>
+            <apex:outputpanel layout="block" style="margin:5px !important;padding:10px;padding-top:2px;">
+                 <apex:selectList value="{!linkToEditPage}" multiselect="false" size="1" label="Page to Edit">
+                    <apex:selectOptions value="{!pages}"></apex:selectOptions>  
+                 </apex:selectList>
+                 <apex:commandButton value="Go" action="{!redirectToEditPage}"/>  
+            </apex:outputpanel>
+        </apex:pageblock>
+    </apex:form> 
+
+    <apex:pageblock title="{!PageName} Pages History" rendered="{!IsPageDefined}">
+                
+                <apex:outputpanel style="margin:10px;overflow-Y:auto;" layout="block">
+
+                    <apex:pageblocktable align="center" title="{!PageName} Pages History" value="{!records}" var="record"  columnsWidth="15%, 15%, 25%, 15%, 15%, 15%" >
+                    
+                        <apex:column headervalue="Record Type">
+                            <apex:outputText value="{!record.RecordTypeName}" />
+                        </apex:column>
+                        <apex:column headervalue="Comments">
+                            <apex:outputText value="{!record.Comments}" />
+                        </apex:column>
+                        <apex:column headervalue="Last Modified">
+                            <apex:outputText value="{!record.LastModified}" />
+                        </apex:column>
+                        <apex:column headervalue="Review link">
+                             <apex:outputLink value="{!record.link}" >Link to review page</apex:outputLink>
+                        </apex:column>
+                        <apex:column headervalue="Restore page to test">
+                            <apex:outputLink value="{!record.restorationLink}">Restore as current test page</apex:outputLink>
+                        </apex:column>
+
+                    </apex:pageblocktable>
+                    
+                </apex:outputpanel>      
+        </apex:pageblock>
+</apex:page>

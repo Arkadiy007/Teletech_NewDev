@@ -1,0 +1,48 @@
+<apex:page showHeader="false">
+    <apex:stylesheet value="{!URLFOR($Resource.VehicleInfoRequestStyle, 'VehicleInfoRequestStyle.css')}" />
+    <apex:form id="frmMain">
+        <div class="sg-wrapper">
+            <div class="sg-header">
+                <div style="width: 100%;">
+                    <apex:image url="{!$Resource.Infiniti_logo}"/>
+                </div>       
+                
+                <h1 class="sg-title"><span>QA - Your Infiniti Vehicle Information Request</span></h1>
+            </div>
+            <div class="sg-content">
+		        <div class="sg-content-hook-1"></div>		           
+		        <div class="sg-question-set"><div id="sgE-1921732-2-1-box" class="sg-question sg-type-instruction">
+	
+	                <div class="sg-instructions">
+		                Thank you for taking our survey. Your response is very important to us.  We use feedback like yours to improve our own processes and those of our retailer partners. If you need assistance now, we are here to help with your shopping experience. Please chat with us by clicking the button below or call us at 800.235.8880. Our business hours are Monday through Friday 10:00 AM to 8:00 PM Eastern.	</div>
+
+                    </div>
+
+
+                    <div id="sgE-1921732-2-53-box" class="sg-question sg-type-instruction">
+	
+	                    <div class="sg-instructions">
+		                    <div style="text-align: center;">
+                                <b>Click below to chat with an Agent</b><br/><br/>
+
+                                <button onclick="openWin()"><font style="color:Green; font-weight:bold;">Live Chat</font></button>
+
+                                <script>
+                                    function openWin()
+                                    {
+                                        window.open("http://qa-nna.cs7.force.com/livechat/LiveAgent_NewInfiniti?routingGroup=Infiniti_DealerContacted","LiveAgent","scrollbars=no,resizable=no,width=500,height=520");
+                                    }
+                                </script>
+                            </div>
+
+	                    </div>
+                    </div>
+
+
+                </div>
+
+	
+	        </div>
+        </div>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>CA_T5_HA_Owner__c</fullName>
+        <externalId>false</externalId>
+        <label>CA T5 HA Owner</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CA_T5_HA_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>CA T5 HA Record Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CA_T5_HA_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>CA T5 HA Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Case_Survey_type_Empty_invalid_error__c</fullName>
+        <externalId>false</externalId>
+        <label>Case/Survey type Empty/invalid error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Case_Type_is_empty_error__c</fullName>
+        <externalId>false</externalId>
+        <label>Case Type is empty error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Case_With_Lead_Id_not_found_error__c</fullName>
+        <externalId>false</externalId>
+        <label>Case With Lead Id not found error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_ID_Empty_error__c</fullName>
+        <externalId>false</externalId>
+        <label>Contact ID Empty error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DTU_HA_Owner__c</fullName>
+        <externalId>false</externalId>
+        <label>DTU HA Owner</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DTU_HA_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>DTU HA Record Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DTU_HA_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>DTU HA Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DTU_HA_Subject__c</fullName>
+        <externalId>false</externalId>
+        <label>DTU HA Subject</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DTU_HA_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>DTU HA Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Defection_HA_Owner__c</fullName>
+        <externalId>false</externalId>
+        <label>Defection HA Owner</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Defection_HA_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Defection HA Record Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Defection_HA_Subject__c</fullName>
+        <externalId>false</externalId>
+        <label>Defection HA Subject</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Infiniti_HA_Owner__c</fullName>
+        <externalId>false</externalId>
+        <label>Infiniti HA Owner</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Infiniti_HA_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Infiniti HA Record Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Infiniti_HA_Subject__c</fullName>
+        <externalId>false</externalId>
+        <label>Infiniti HA Subject</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_ID_empty_error__c</fullName>
+        <externalId>false</externalId>
+        <label>Lead ID empty error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nissan_HA_Owner__c</fullName>
+        <externalId>false</externalId>
+        <label>Nissan HA Owner</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nissan_HA_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Nissan HA Record Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Nissan_HA_Subject__c</fullName>
+        <externalId>false</externalId>
+        <label>Nissan HA Subject</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_Customer_for_Contact_Id_error__c</fullName>
+        <externalId>false</externalId>
+        <label>No Customer for Contact Id error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>One_minute_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>One-minute Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>One_minute_Infiniti_Owner__c</fullName>
+        <externalId>false</externalId>
+        <label>One-minute Infiniti Owner</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>One_minute_Nissan_owner__c</fullName>
+        <externalId>false</externalId>
+        <label>One-minute Nissan owner</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>One_minute_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>One-minute Record Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>One_minute_Subject__c</fullName>
+        <externalId>false</externalId>
+        <label>One-minute Subject</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>One_minute_other_owner__c</fullName>
+        <externalId>false</externalId>
+        <label>One-minute other owner</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quality_Connection_HA_Record_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Quality Connection HA Record Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quality_Connection_HA_Subject__c</fullName>
+        <externalId>false</externalId>
+        <label>Quality Connection HA Subject</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Survey_Type_is_Empty_error__c</fullName>
+        <externalId>false</externalId>
+        <label>Survey Type is Empty error</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>HotAlertsSettings</label>
+    <visibility>Public</visibility>
+</CustomObject>

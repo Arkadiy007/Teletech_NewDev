@@ -1,0 +1,141 @@
+<apex:page cache="true" expires="1" controller="ABSEditController" doctype="html-5.0">
+    <script>
+        function createNewLineVisible(input) {
+            if(input.checked) document.getElementById('newSection').style.display = "block";
+            else document.getElementById('newSection').style.display = "none";
+        }
+
+    </script>
+    <html>
+    <head>
+
+    </head>
+    <style>
+        .bPageBlock .detailList .labelCol {
+            width: 8%;
+        }
+
+        .homeTab .tertiaryPalette, .individualPalette .homeBlock .tertiaryPalette, .layoutEdit .individualPalette .homeBlock .tertiaryPalette {
+            background-color: #00A2D7;
+            border-color: #cfeef8;
+        }
+
+        .input[type="text"] {
+            padding: 1px 0px;
+            width: 60% !important;
+        }
+    </style>
+
+    <apex:form id="frm">
+
+        <apex:pageblock >
+            <apex:pagemessages />
+
+            <apex:outputpanel layout="block" style="margin:5px;padding:10px;padding-top:2px;">
+                <apex:pageblocksection title="ABS Object Edit" columns="1">
+                    <apex:inputtextarea richtext="true" value="{!abs.Overview}" label="Overview Text" />
+                </apex:pageblocksection>
+                <apex:repeat value="{!absLines}" var="line">
+
+                    <apex:pageblocksection title="{!line.heading}" columns="1">
+                        <apex:repeat value="{!absLines[line]}" var="key">
+                            <apex:pageblocksection title="{!key.Name} Line Edit" columns="3">
+                                <apex:inputtext value="{!key.Name}" size="40" label="Name" />
+                                <apex:inputtext value="{!key.OrderNumber}" label="Sorting Order" />
+                                <apex:inputcheckbox value="{!key.IsDeleted}" label="Delete this line?" />
+                            </apex:pageblocksection>
+                            <apex:pageblocksection title="{!key.Name} Items" columns="1">
+                                <apex:pageblocktable value="{!absLines[line][key]}" var="itm">
+                                    <apex:column >
+                                        <apex:facet name="header">Link To Review</apex:facet>
+                                        <apex:outputlink value="{!itm.Link}">Review document: {!itm.Subheading}</apex:outputlink>
+                                    </apex:column>
+                                    <apex:column >
+                                        <apex:facet name="header">Sort Order</apex:facet>
+                                        <apex:inputtext id="order" value="{!itm.OrderNumber}" />
+
+                                    </apex:column>
+                                    <apex:column >
+                                        <apex:facet name="header">Delete Document?</apex:facet>
+                                        <apex:inputcheckbox value="{!itm.IsDeleted}" />
+                                    </apex:column>
+
+                                </apex:pageblocktable>
+                                <apex:outputlabel value="Upload new document:" />
+                                <input type="button" value="Upload" onclick="var newwindow = window.open('/apex/UploadABSDocument?id={!key.ObjectId}', 'Upload',  'width=420,height=320,resizable=no,scrollbars=yes,status=yes'); newwindow.focus();" />
+
+                            </apex:pageblocksection>
+
+                        </apex:repeat>
+                    </apex:pageblocksection>
+
+                </apex:repeat>
+
+            </apex:outputpanel>
+
+
+            <apex:inputhidden value="{!errorMsgAvailable}" id="myHiddenField" immediate="true" />
+
+            <apex:actionfunction name="doControllerSave" action="{!saveAndPreview}" status="processing" oncomplete="onControllerReturn('{!errorMsgAvailable}');" />
+
+            <apex:pageblockbuttons location="bottom">
+                <apex:commandbutton value="Save" action="{!save}" />
+                <apex:commandbutton value="Send For Approval" action="{!saveAndSubmit}" />
+                <apex:commandbutton value="Save And Preview" onclick="doControllerSave();return false; " />
+            </apex:pageblockbuttons>
+        </apex:pageblock>
+        <script src="{!$Resource.jQuery1_8}"></script>
+        <script>
+                function onControllerReturn(val) {
+
+                 //console.log($('[id$=myHiddenField]').val());
+                 //if($('[id$=myHiddenField]').val() == 'false')
+
+
+                 console.log(val);
+                 if(val == 'false')
+                    {
+                    var params = [
+                         'height='+screen.height,
+                         'width='+screen.width,
+                        'fullscreen=yes'
+                            ].join(',');
+
+                     var popup = window.open('/apex/ABS?version=test', '', params);
+                     popup.moveTo(0,0);
+                     window.open ('/apex/ABSPageEdit?sfdc.tabName=01rM00000009E97','_self',false);
+
+                } else {
+                    alert('Order number should be unique');
+
+                }
+                }
+        </script>
+
+    </apex:form>
+
+    <apex:form >
+        <apex:pageblock >
+            <apex:pageblocksection title="Create new line?" columns="1">
+                <apex:inputcheckbox value="{!showNewDiv}" label="Create new line?" onchange="createNewLineVisible(this);" />
+            </apex:pageblocksection>
+            <div id="newSection" style="display: none;">
+                <apex:pageblocksection columns="3">
+                    <apex:inputtext value="{!newLine.Name}" label="Header title" size="40" />
+                    <apex:selectlist id="chooseColor" value="{!newLine.MHeading}" size="1" label="Heading">
+                        <apex:selectoption itemvalue="Retail" itemlabel="Retail" />
+                        <apex:selectoption itemvalue="Lease" itemlabel="Lease" />
+                        <apex:selectoption itemvalue="Floor Plan" itemlabel="Floor Plan" />
+                    </apex:selectlist>
+                    <apex:inputtext value="{!newLine.OrderNumber}" label="Order Number" />
+                </apex:pageblocksection>
+
+                <apex:pageblockbuttons location="bottom">
+                    <apex:commandbutton value="Add" action="{!add}" />
+                </apex:pageblockbuttons>
+            </div>
+        </apex:pageblock>
+
+    </apex:form>
+</html>
+</apex:page>

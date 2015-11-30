@@ -1,0 +1,50 @@
+<apex:page showHeader="false">
+    <apex:stylesheet value="{!URLFOR($Resource.VehicleInfoRequestStyle, 'VehicleInfoRequestStyle.css')}" />
+    <apex:form id="frmMain">
+        <div class="sg-wrapper">
+            <div class="sg-header">
+                <div style="width: 100%;">
+                    <apex:image url="{!$Resource.Infiniti_logo}"/>
+                </div>                   
+                <h1 class="sg-title"><span>QA - Your Infiniti Vehicle Information Request</span></h1>
+            </div>
+            <div class="sg-content">
+                <div class="sg-content-hook-1"></div>
+
+                <div class="sg-question-set">
+                    <div class="sg-question sg-type-instruction">    
+                        <div class="sg-instructions">
+                            We apologize for the inconvenience and appreciate your feedback. A member of our Customer Loyalty Team will be reaching out to you.
+                            <br/>
+                            <br/>
+                            In the meantime, you can contact us immediately <a href="http://qa-nna.cs7.force.com/livechat/LiveAgent_NewInfiniti?routingGroup=Infiniti_DealerNotContacted">via chat</a>, phone (800)-235-8880, or email at InfinitiHQ@infiniti.com. Our operating hours are Monday through Friday 10:00 AM to 8:00 PM EST.
+                            <br/>
+                            <br/>
+                            We look forward to speaking with you.
+                            <br/>
+                            <br/>
+                            Thank you.  
+                        </div>
+                    </div>
+                    <div class="sg-question sg-type-instruction">    
+                        <div class="sg-instructions">
+                            <div style="text-align: center;">
+                                <b>Click below to chat with an Agent</b><br/><br/>
+
+                                <button onclick="openWin()"><font style="color:Green; font-weight:bold;">Live Chat</font></button>
+
+                                <script>
+                                function openWin()
+                                {
+                                    window.open("http://qa-nna.cs7.force.com/livechat/LiveAgent_NewNissan?routingGroup=Nissan_DealerNotContacted","_blank","toolbar=no, scrollbars=no, resizable=no, top=200, left=500, width=500, height=520");
+                                }
+                                </script>
+                            </div>  
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </apex:form>
+</apex:page>

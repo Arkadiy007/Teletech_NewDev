@@ -1,0 +1,84 @@
+//delete all the custom settings except of 'Default'
+List<Id> toDelete = new List<Id>{};
+
+List<Maritz_Case_Mappings__c> fTfMappings = Maritz_Case_Mappings__c.getAll().values();
+for (Maritz_Case_Mappings__c m : fTfMappings) {
+	if (m.Template_Name__c == null || !m.Template_Name__c.equals('Default')) {
+		toDelete.add(m.id);
+	}
+}
+
+List<Maritz_Case_Mappings_ForAdditionalFields__c> addMappings = Maritz_Case_Mappings_ForAdditionalFields__c.getAll().values();
+for (Maritz_Case_Mappings_ForAdditionalFields__c m : addMappings) {
+	if (m.Template_Name__c == null || !m.Template_Name__c.equals('Default')) {
+		toDelete.add(m.id);
+	}
+}
+
+List<Maritz_Mappings_Record_Type__c> rtMappings = Maritz_Mappings_Record_Type__c.getAll().values();
+for (Maritz_Mappings_Record_Type__c m : rtMappings) {
+	if (m.Template_Name__c == null || !m.Template_Name__c.equals('Default')) {
+		toDelete.add(m.id);
+	}
+}
+
+List<Maritz_Mappings_Lookups__c> lookMappings = Maritz_Mappings_Lookups__c.getAll().values();
+for (Maritz_Mappings_Lookups__c m : lookMappings) {
+	if (m.Template_Name__c == null || !m.Template_Name__c.equals('Default')) {
+		toDelete.add(m.id);
+	}
+}
+
+List<Maritz_Mappings_Ownership__c> ownMappings = Maritz_Mappings_Ownership__c.getAll().values();
+for (Maritz_Mappings_Ownership__c m : ownMappings) {
+	if (m.Template_Name__c == null || !m.Template_Name__c.equals('Default')) {
+		toDelete.add(m.id);
+	}
+}
+
+if (!toDelete.isEmpty()) {
+	DataBase.delete(toDelete);
+}
+//
+
+//cleare Template Name on mappings
+List<Maritz_Case_Mappings__c> toUpdateFTfMappings = new List<Maritz_Case_Mappings__c>{};
+
+List<Maritz_Case_Mappings__c> fTfMappings = Maritz_Case_Mappings__c.getAll().values();
+for (Maritz_Case_Mappings__c m : fTfMappings) {
+	m.Template_Name__c = null;
+	toUpdateFTfMappings.add(m);
+}
+DataBase.update(toUpdateFTfMappings);
+
+List<Maritz_Case_Mappings_ForAdditionalFields__c> toUpdateAddMappings = new List<Maritz_Case_Mappings_ForAdditionalFields__c>{};
+List<Maritz_Case_Mappings_ForAdditionalFields__c> addMappings = Maritz_Case_Mappings_ForAdditionalFields__c.getAll().values();
+for (Maritz_Case_Mappings_ForAdditionalFields__c m : addMappings) {
+	m.Template_Name__c = null;
+	toUpdateAddMappings.add(m);
+}
+DataBase.Update(toUpdateAddMappings);
+
+List<Maritz_Mappings_Record_Type__c> toUpdateRtMappings = new List<Maritz_Mappings_Record_Type__c>{};
+List<Maritz_Mappings_Record_Type__c> rtMappings = Maritz_Mappings_Record_Type__c.getAll().values();
+for (Maritz_Mappings_Record_Type__c m : rtMappings) {
+	m.Template_Name__c = null;
+	toUpdateRtMappings.add(m);
+}
+DataBase.Update(toUpdateRtMappings);
+
+List<Maritz_Mappings_Lookups__c> toUpdateLookMappings = new List<Maritz_Mappings_Lookups__c>{};
+List<Maritz_Mappings_Lookups__c> lookMappings = Maritz_Mappings_Lookups__c.getAll().values();
+for (Maritz_Mappings_Lookups__c m : lookMappings) {
+	m.Template_Name__c = null;
+	toUpdateLookMappings.add(m);
+}
+DataBase.Update(toUpdateLookMappings);
+
+List<Maritz_Mappings_Ownership__c> toUpdateOwnMappings = new List<Maritz_Mappings_Ownership__c>{};
+List<Maritz_Mappings_Ownership__c> ownMappings = Maritz_Mappings_Ownership__c.getAll().values();
+for (Maritz_Mappings_Ownership__c m : ownMappings) {
+	m.Template_Name__c = null;
+	toUpdateOwnMappings.add(m);
+}
+DataBase.Update(toUpdateOwnMappings);

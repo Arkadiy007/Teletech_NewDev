@@ -1,0 +1,28 @@
+<apex:page controller="EQACS_Controller" doctype="html-5.0">
+    <apex:tabpanel switchtype="client" selectedtab="XMLEnabled" id="theTabPanel">
+        <apex:tab label="EQA Quick Reports Fields" name="XMLEnabled" id="XMLEnabled_Tab">
+
+        </apex:tab>
+        <apex:tab label="EQA Quick Reports Filters" name="XMLEnabled">
+
+        </apex:tab>
+        <apex:tab label="EQA Quick Reports API Names" name="XMLEnabled">
+
+        </apex:tab>
+        <apex:tab label="EQA Profiles" name="XMLEnabled">
+
+        </apex:tab>
+        <apex:tab label="EQA Notification Settings" name="XMLEnabled">
+
+        </apex:tab>
+        <apex:tab label="EQA Escalation Settings" name="XMLEnabled">
+
+        </apex:tab>
+        <apex:tab label="EQA Current Owner Rules" name="XMLEnabled">
+
+        </apex:tab>
+        <apex:tab label="Notification Settings" name="XMLEnabled">
+
+        </apex:tab>
+    </apex:tabpanel>
+</apex:page>

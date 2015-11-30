@@ -1,0 +1,472 @@
+<apex:page standardcontroller="Surveys__c" extensions="BellomySurveyController" sidebar="false" showheader="false" cache="false">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <style>
+        /* Descktop (portrait and landscape) ----------- */
+        @media screen {
+            .nissan_logo_header {
+                background: url("{!URLFOR($Resource.BellomySurveyStyle, 'BellomySurveyStyle/img/nissan.gif')}") no-repeat;
+                height: 80px;
+                width: initial;
+                margin-left: 5%;
+            }
+
+            .infiniti_logo_header {
+                background: url("{!URLFOR($Resource.BellomySurveyStyle, 'BellomySurveyStyle/img/infiniti.png')}") no-repeat;
+                height: 80px;
+                width: initial;
+                margin-left: 5%;
+            }
+            .textlogo {
+                font-size: 38px !important;
+                width: 70%;
+                max-width: 900px;
+                padding-top: 25px;
+                text-align: center;
+            }
+
+            .textlogoSpan {
+                text-transform: uppercase;
+                font-weight: bold;
+                color: #585858 !important;
+                /*font-size: 22px; */
+                top: 1%;
+                position: absolute;
+            }
+            .div_radio_scale {
+                //width: 200px !important;
+                display: inline-table;
+            }
+
+            .div_extremely {
+                //display: inline-table;
+                margin-left: 5% !important;
+                font-size: medium;
+                font-family: Verdana;
+            }
+
+            .InfinitiLine {
+                position: relative;
+                height: 10px;
+                width: 98%;
+                background-color: #430285;
+                margin-bottom: 2%;
+                margin-top: 1%;
+            }
+
+            .nissanLine {
+                position: relative;
+                height: 10px;
+                width: 98%;
+                background-color: #AD1C4C;
+                margin-bottom: 2%;
+            }
+
+            .text_question {
+                font-size: medium;
+                font-family: Verdana;
+                font-weight: bold;
+                margin-left: 5% !important;
+                margin-top: 1% !important;
+                display: block;
+            }
+
+            .extremely_selectRadio {
+                font-size: medium;
+                font-family: Verdana;
+                margin-left: 5% !important;
+            }
+            .headingCl {
+                margin-left: 5%;
+                margin-right: 10%;
+                font-size: medium;
+                font-family: Verdana;
+            }
+            .likelyMob {
+            display:none;
+            }
+
+            .startBtn {
+                margin-left: 40% !important;
+                margin-right: 40% !important;
+                margin-top: 10% !important;
+                width: 150px !important;
+                height: 32px !important;
+                font-size: medium !important;
+            }
+            .nextbtn {
+                margin-left: 5% !important;
+                margin-right: auto;
+                // margin-top: 2% !important;
+                width: 150px;
+                height: 32px;
+                font-size: medium;
+                display: block;
+            }
+            .textarea {
+                margin-left: 5% !important;
+                margin-top: 1% !important;
+                margin-bottom: 1% !important;
+                width: 400px;
+                height: 45px;
+                margin-left: 20px;
+                font-size: medium;
+                resize:none;
+            }
+            .textField {
+                margin-left: 5% !important;
+                font-size: medium;
+                display: block;
+                margin-top: 1% !important;
+                margin-bottom: 1% !important;
+            }
+            .submbtn {
+                margin-left: 5% !important;
+                margin-right: auto;
+                display: block;
+                width: 150px;
+                height: 32px;
+                font-size: medium;
+            }
+        }
+        /* Smartphones (landscape) ----------- */
+        @media screen and (min-aspect-ratio: 1/1) and (min-device-width : 605px) and (max-device-width : 640px), screen and (min-aspect-ratio: 1/1) and (max-device-width : 599px) {
+        }
+        /* Smartphones (portrait) ----------- */
+        @media screen and (min-width : 320px) and (max-width : 479px) {
+            .headingCl {
+                margin-left: 2%;
+                font: bold 13px Arial !important;
+            }
+            .text_question {
+                font-size: small;
+                font-family: Verdana;
+                font-weight: bold;
+                margin-bottom: 4%;
+            }
+
+            .extremely_selectRadio {
+                font-size: small;
+                font-family: Verdana;
+                
+            }
+            .div_radio_scale {
+              //  width: 200px !important;
+                display: none !important;
+            }
+
+            .div_extremely {
+                display: inline-table;
+                margin-left: 10%;
+                font-size: small;
+                font-family: Verdana;
+            }
+            .extremely_selectRadioMob {
+                display: block !important;
+            }
+            .extremely_selectRadio {
+                display: none !important;
+            }
+            .likelyMob {
+                display: block !important;
+            }
+            .likely {
+                display: none !important; 
+            }
+            .startBtn {
+                position: absolute;
+                margin-left: 25% !important;
+                bottom: 1% !important;
+                align-self:center;
+            }
+            .textlogo {
+                width: 90% !important;
+                max-width: 268px;
+                /*width: 268px !important;*/
+                margin-right: 1%;
+                margin-left: auto;
+                text-align: center !important;
+                margin-top: 5px !important;
+                //margin-left: -25px !important;
+                font-size: 20px !important;
+                padding: 0px !important;
+                -webkit-appearance: none;
+                -webkit-border-radius: 0;
+            }
+        }
+    </style>
+    <apex:form id="frmMain">
+        <apex:outputpanel rendered="{!nissanBrand}">
+            <div class="nissan_logo_header"></div>
+            
+        </apex:outputpanel>
+        <apex:outputpanel rendered="{!infinitiBrand}">
+            <div class="infiniti_logo_header"></div>
+            
+        </apex:outputpanel>
+        <div class="textlogo">
+            <span class="textlogoSpan">
+                CONSUMER AFFAIRS SURVEY
+            </span>
+        </div>
+        <apex:pagemessages id="messages" />
+        <apex:outputpanel id="intro">
+            <apex:outputpanel rendered="{!introText}">
+                <div class="headingCl">
+                    Dear {!brand} Customer,<br />
+                    As a valued {!brand} customer, your satisfaction throughout your ownership experience is our company's highest priority.<br />
+                    You recently contacted our Consumer Affairs center about a question or concern. We would like to understand your impression of the resolution process so that we can serve you better in the future.<br />
+                    This survey will take less than 5 minutes of your time.<br />
+                    Note that the information you provide will be used for research and quality control purposes only. For more information, please see our Privacy Policy at {!brandPrivacy}.<br />
+                    As you complete the survey, please use the Next button at the bottom of the survey and not your browser to move to the next page. Once you answer a question you will not be able to return to the previous page.
+
+                </div>
+            </apex:outputpanel>
+        </apex:outputpanel>
+        <apex:outputpanel id="start">
+            <apex:commandbutton value="Start survey >>" rendered="{!introText}" action="{!startSurvey}" rerender="questionsList,intro,next,start" styleclass="startBtn" />
+        </apex:outputpanel>
+        <apex:outputpanel id="questionsList">
+            <apex:outputpanel id="infinitiLineHeaderPanel" rendered="{!!introText&&infinitiBrand}">
+                <div class="InfinitiLine"></div>
+            </apex:outputpanel>
+            <apex:outputpanel id="nissanLineHeaderPanel" rendered="{!!introText&&nissanBrand}">
+                <div class="nissanLine"></div>
+            </apex:outputpanel>
+            <apex:outputpanel id="q1a" rendered="{!questions[0]}">
+                <apex:outputpanel >
+                    <apex:outputlabel value="How likely are you to recommend {!brand} to a colleague or friend? " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+                </apex:outputpanel>
+                    <apex:outputpanel >
+                        <div class="div_extremely">Not at all likely
+                        <div class="div_radio_scale" style="width: 300px;"></div>
+                        Extremely Likely</div>
+                    </apex:outputpanel>
+                    <apex:selectradio styleclass="extremely_selectRadio" value="{!Surveys__c.RecommendBrand__c}">
+                        <apex:selectoption itemvalue="0" itemlabel="0" />
+                        <apex:selectoption itemvalue="1" itemlabel="1" />
+                        <apex:selectoption itemvalue="2" itemlabel="2" />
+                        <apex:selectoption itemvalue="3" itemlabel="3" />
+                        <apex:selectoption itemvalue="4" itemlabel="4" />
+                        <apex:selectoption itemvalue="5" itemlabel="5" />
+                        <apex:selectoption itemvalue="6" itemlabel="6" />
+                        <apex:selectoption itemvalue="7" itemlabel="7" />
+                        <apex:selectoption itemvalue="8" itemlabel="8" />
+                        <apex:selectoption itemvalue="9" itemlabel="9" />
+                        <apex:selectoption itemvalue="10" itemlabel="10" />
+                    </apex:selectradio>
+                    <apex:selectradio styleclass="extremely_selectRadioMob" value="{!Surveys__c.RecommendBrand__c}" layout="pageDirection" style="display:none;">
+                        <apex:selectoption itemvalue="0" itemlabel="0" />
+                        <apex:selectoption itemvalue="1" itemlabel="1" />
+                        <apex:selectoption itemvalue="2" itemlabel="2" />
+                        <apex:selectoption itemvalue="3" itemlabel="3" />
+                        <apex:selectoption itemvalue="4" itemlabel="4" />
+                        <apex:selectoption itemvalue="5" itemlabel="5" />
+                        <apex:selectoption itemvalue="6" itemlabel="6" />
+                        <apex:selectoption itemvalue="7" itemlabel="7" />
+                        <apex:selectoption itemvalue="8" itemlabel="8" />
+                        <apex:selectoption itemvalue="9" itemlabel="9" />
+                        <apex:selectoption itemvalue="10" itemlabel="10" />
+                    </apex:selectradio>
+                    <div class="div_extremely likelyMob">Extremely Likely</div>
+                </apex:outputpanel>
+            <apex:outputpanel id="q1b" rendered="{!questions[1]}">
+                <apex:outputtext value="Please describe anything you especially liked or disliked about your experience with {!brand}.
+	You have up to 500 words for your comments." styleclass="text_question" style="margin-left: 20px;" /><br />
+
+                <apex:inputtextarea disabled="{!refuseQOne}" styleclass="textarea" value="{!Surveys__c.Describe_Experience__c}"/>
+                <!--  <label for="theCheckbox" style="margin-left: 20px;">Refused</label>
+
+                <apex:inputcheckbox id="theCheckbox" value="{!refuseQOne}"><apex:actionsupport event="onchange" rerender="q1b" /></apex:inputcheckbox>-->
+
+            </apex:outputpanel>
+            <apex:outputpanel id="q2" rendered="{!questions[2]}">
+                <apex:outputlabel value="Based on your overall experience as a {!brand} owner, how likely are you to return to a {!dealer} for service?    " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+
+                <div class="div_extremely">Not at all likely
+                    <div class=" div_radio_scale" style="width: 120px;"></div>
+                Extremely Likely</div>
+
+                <apex:selectradio styleclass="extremely_selectRadio" value="{!Surveys__c.ReturnForService__c}">
+                    <apex:selectoption itemvalue="0" itemlabel="0" />
+                    <apex:selectoption itemvalue="1" itemlabel="1" />
+                    <apex:selectoption itemvalue="2" itemlabel="2" />
+                    <apex:selectoption itemvalue="3" itemlabel="3" />
+                    <apex:selectoption itemvalue="4" itemlabel="4" />
+                    <apex:selectoption itemvalue="5" itemlabel="5" />
+                    <apex:selectoption itemvalue="6" itemlabel="6" />
+                    <apex:selectoption itemvalue="7" itemlabel="7" />
+                </apex:selectradio>
+            </apex:outputpanel>
+            <apex:outputpanel id="q3" rendered="{!questions[3]}">
+                <div class="test">
+                    <apex:outputlabel value="Thinking about the question or concern that led you to contact {!brand} Consumer Affairs, has this question or concern been resolved?   " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+                </div>
+
+                <apex:selectradio styleclass="extremely_selectRadio" value="{!questionThree}">
+                    <!--value="{!Surveys__c.Question_resolved_CA__c}">-->
+                    <apex:selectoption itemvalue="Yes" itemlabel="Yes" />
+                    <apex:selectoption itemvalue="No" itemlabel="No" />
+                </apex:selectradio>
+            </apex:outputpanel>
+            <apex:outputpanel id="q4" rendered="{!questions[4]}">
+                <apex:outputlabel value="About how many times did you need to contact {!brand} Consumer Affairs before your question or concern was resolved?
+	Please enter a number between 1 and 25.   " styleclass="text_question" ></apex:outputlabel>
+                <apex:inputtext styleclass="textField" disabled="{!refuseQFour}" value="{!questionFour}" /> 
+                <!-- <label for="theCheckbox4" style="margin-left: 20px;">Refused</label>
+                <apex:inputcheckbox id="theCheckbox4" value="{!refuseQFour}"><apex:actionsupport event="onchange" rerender="q4"  /></apex:inputcheckbox>-->
+            </apex:outputpanel>
+            <apex:outputpanel id="q5" rendered="{!questions[5]}">
+                <div>
+                    <apex:outputlabel value="Did your {!dealer} attempt to resolve your question or concern before you contacted {!brand} Consumer Affairs?   " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+                </div>
+
+                <apex:selectradio styleclass="extremely_selectRadio" value="{!questionFive}">
+                    <!--value="{!Surveys__c.ResolveBeforeContact__c}">-->
+                    <apex:selectoption itemvalue="Yes" itemlabel="Yes" />
+                    <apex:selectoption itemvalue="No" itemlabel="No" />
+                    <apex:selectoption itemvalue="Not Applicable" itemlabel="Not Applicable" />
+                </apex:selectradio>
+            </apex:outputpanel>
+            <apex:outputpanel id="q5a" rendered="{!questions[6]}">
+                <div>
+                    <apex:outputlabel value="Did your {!dealer} specifically ask you to contact {!brand} Consumer Affairs?" styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+                </div>
+
+                <apex:selectradio styleclass="extremely_selectRadio" value="{!Surveys__c.AskToContact_CA__c}">
+                    <apex:selectoption itemvalue="Yes" itemlabel="Yes" />
+                    <apex:selectoption itemvalue="No" itemlabel="No" />
+                </apex:selectradio>
+            </apex:outputpanel>
+            <apex:outputpanel id="q6" rendered="{!questions[7]}">
+                <apex:outputlabel value="Thinking about your contact with {!brand} Consumer Affairs, how satisfied are you with the following aspects of the experience, prior to reaching a representative?  " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+
+                <apex:repeat value="{!QuestionSixScales}" var="string" id="theRepeat">
+                    <apex:outputlabel value="{!string} " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+
+                    <div class="div_extremely">Not at all satisfied
+                        <div class=" div_radio_scale" style="width: 120px;"></div>
+                    Completely satisfied</div>
+
+                    <apex:selectradio styleclass="extremely_selectRadio" value="{!answersQSix[string]}">
+                        <apex:selectoption itemvalue="0" itemlabel="0" />
+                        <apex:selectoption itemvalue="1" itemlabel="1" />
+                        <apex:selectoption itemvalue="2" itemlabel="2" />
+                        <apex:selectoption itemvalue="3" itemlabel="3" />
+                        <apex:selectoption itemvalue="4" itemlabel="4" />
+                        <apex:selectoption itemvalue="5" itemlabel="5" />
+                        <apex:selectoption itemvalue="6" itemlabel="6" />
+                        <apex:selectoption itemvalue="7" itemlabel="7" />
+                        <apex:selectoption itemvalue="NA" itemlabel="NA" />
+                    </apex:selectradio>
+
+                </apex:repeat>
+            </apex:outputpanel>
+            <apex:outputpanel id="q7" rendered="{!questions[8]}">
+                <apex:outputlabel value="Thinking about the {!brand} representative who helped you, how satisfied are you with each of the following aspects of your interaction? " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+
+                <apex:repeat value="{!QuestionSevenScales}" var="string" id="theRepeat2">
+                    <apex:outputlabel value="{!string} " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+
+                    <div class="div_extremely">Not at all satisfied
+                    <div class=" div_radio_scale" style="width: 120px;"></div>
+                    Completely satisfied</div>
+
+                    <apex:selectradio styleclass="extremely_selectRadio" value="{!answersQSeven[string]}">
+                        <apex:selectoption itemvalue="0" itemlabel="0" />
+                        <apex:selectoption itemvalue="1" itemlabel="1" />
+                        <apex:selectoption itemvalue="2" itemlabel="2" />
+                        <apex:selectoption itemvalue="3" itemlabel="3" />
+                        <apex:selectoption itemvalue="4" itemlabel="4" />
+                        <apex:selectoption itemvalue="5" itemlabel="5" />
+                        <apex:selectoption itemvalue="6" itemlabel="6" />
+                        <apex:selectoption itemvalue="7" itemlabel="7" />
+                    </apex:selectradio>
+
+                </apex:repeat>
+                <apex:outputlabel value="Length of time you were on hold while the representative was dealing with your question/issue " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+
+                <div class="div_extremely">Not at all satisfied
+                <div class=" div_radio_scale" style="width: 120px;"></div>
+                Completely satisfied</div>
+
+                <apex:selectradio styleclass="extremely_selectRadio" value="{!Surveys__c.TimeOnHold__c}">
+                    <apex:selectoption itemvalue="0" itemlabel="0" />
+                    <apex:selectoption itemvalue="1" itemlabel="1" />
+                    <apex:selectoption itemvalue="2" itemlabel="2" />
+                    <apex:selectoption itemvalue="3" itemlabel="3" />
+                    <apex:selectoption itemvalue="4" itemlabel="4" />
+                    <apex:selectoption itemvalue="5" itemlabel="5" />
+                    <apex:selectoption itemvalue="6" itemlabel="6" />
+                    <apex:selectoption itemvalue="7" itemlabel="7" />
+                    <apex:selectoption itemvalue="NA" itemlabel="NA" />
+                </apex:selectradio>
+            </apex:outputpanel>
+            <apex:outputpanel id="q8" rendered="{!questions[9]}">
+                <apex:outputlabel value="Overall, how satisfied are you with the process of resolving your question or concern with the {!brand} Consumer Affairs center? " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+
+                <div class="div_extremely">Not at all satisfied
+                <div class=" div_radio_scale" style="width: 100px;"></div>
+                Completely satisfied</div>
+
+                <apex:selectradio styleclass="extremely_selectRadio" value="{!Surveys__c.Satisfied_CA__c}">
+                    <apex:selectoption itemvalue="0" itemlabel="0" />
+                    <apex:selectoption itemvalue="1" itemlabel="1" />
+                    <apex:selectoption itemvalue="2" itemlabel="2" />
+                    <apex:selectoption itemvalue="3" itemlabel="3" />
+                    <apex:selectoption itemvalue="4" itemlabel="4" />
+                    <apex:selectoption itemvalue="5" itemlabel="5" />
+                    <apex:selectoption itemvalue="6" itemlabel="6" />
+                    <apex:selectoption itemvalue="7" itemlabel="7" />
+                </apex:selectradio>
+            </apex:outputpanel>
+            <apex:outputpanel id="q10" rendered="{!questions[10]}">
+                <apex:outputlabel value="How much effort did you personally have to put forth to get your request handled? " styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+
+                <div class="div_extremely">Very low effort
+                <div class=" div_radio_scale" style="width: 50px;"></div>
+                Very high effort</div>
+
+                <apex:selectradio styleclass="extremely_selectRadio" value="{!questionTen}">
+                    <apex:selectoption itemvalue="0" itemlabel="0" />
+                    <apex:selectoption itemvalue="1" itemlabel="1" />
+                    <apex:selectoption itemvalue="2" itemlabel="2" />
+                    <apex:selectoption itemvalue="3" itemlabel="3" />
+                    <apex:selectoption itemvalue="4" itemlabel="4" />
+                    <apex:selectoption itemvalue="5" itemlabel="5" />
+                </apex:selectradio>
+            </apex:outputpanel>
+            <apex:outputpanel id="q10a" rendered="{!questions[11]}">
+                <apex:outputlabel value="Please explain or give examples of why you gave a rating of {!questionTen} on the amount of effort you put forth to get your request handled.  You have up to 500 words for your comments." styleclass="text_question" style="margin-left: 20px;"></apex:outputlabel>
+
+                <apex:inputtextarea styleclass="textarea" disabled="{!refuseQTen}" value="{!Surveys__c.WhyRating__c}" style="width: 300px; height: 45px; margin-left: 20px; font-size:medium;" />
+                <!-- <label for="theCheckbox10" style="margin-left: 20px;">Refused</label>
+                <apex:inputcheckbox id="theCheckbox10" value="{!refuseQTen}"><apex:actionsupport event="onchange" rerender="q4" /></apex:inputcheckbox>-->
+            </apex:outputpanel>
+        </apex:outputpanel>
+        <apex:outputpanel id="next">
+            <apex:commandbutton value="Next >>" rendered="{!!introText&&!readySubmit}" action="{!goToNextQuestion}" rerender="questionsList,subm,next,messages" styleclass="nextbtn" />
+            <apex:outputpanel id="infinitiLineFooterPanel" rendered="{!!introText&&infinitiBrand&&!readySubmit}">
+                <div class="InfinitiLine"></div>
+            </apex:outputpanel>
+            <apex:outputpanel id="nissanLineFooterPanel" rendered="{!!introText&&nissanBrand&&!readySubmit}">
+                <div class="nissanLine"></div>
+            </apex:outputpanel>
+        </apex:outputpanel>
+        <script type="text/javascript">
+            function openThank(){
+                window.open('{!returnThank}', "_self");
+            }
+        </script>
+        <apex:outputpanel id="subm">
+            <apex:actionfunction name="GoToThank" action="{!submit}" rerender="refresh,messages,msg" status="Sending" />
+            <apex:commandbutton rendered="{!readySubmit}" value="Submit survey >>" action="{!quicksave}" rerender="msg,messages" oncomplete="GoToThank();window.open('{!returnThank}', '_self');" styleclass="submbtn" />
+            <apex:outputpanel rendered="{!!introText&&infinitiBrand&&readySubmit}">
+                <div class="InfinitiLine"></div>
+            </apex:outputpanel>
+            <apex:outputpanel rendered="{!!introText&&nissanBrand&&readySubmit}">
+                <div class="nissanLine"></div>
+            </apex:outputpanel>
+        </apex:outputpanel>
+    </apex:form>
+</apex:page>

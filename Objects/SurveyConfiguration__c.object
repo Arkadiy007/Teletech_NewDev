@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>Contains configuration values for Nissan and Infiniti</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>infinitiChat__c</fullName>
+        <description>Chat link prefix for Infiniti</description>
+        <externalId>false</externalId>
+        <label>infinitiChat</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>infinitiEmail__c</fullName>
+        <description>Email for support for infiniti</description>
+        <externalId>false</externalId>
+        <label>infinitiEmail</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>infinitiPhone__c</fullName>
+        <description>contains contact phone number for infiniti</description>
+        <externalId>false</externalId>
+        <label>infinitiPhone</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>nissanChat__c</fullName>
+        <description>Chat Link prefix for nissan</description>
+        <externalId>false</externalId>
+        <label>nissanChat</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>nissanEmail__c</fullName>
+        <externalId>false</externalId>
+        <label>nissanEmail</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>nissanPhone__c</fullName>
+        <description>Contains phone number for support for Nissan</description>
+        <externalId>false</externalId>
+        <label>nissanPhone</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>SurveyConfiguration</label>
+    <visibility>Public</visibility>
+</CustomObject>

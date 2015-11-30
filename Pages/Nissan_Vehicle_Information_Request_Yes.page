@@ -1,0 +1,70 @@
+<apex:page controller="VehicleInformationRequest_Controller" showHeader="false">
+    <apex:stylesheet value="{!URLFOR($Resource.VehicleInfoRequestStyle, 'VehicleInfoRequestStyle.css')}" />
+    <apex:form id="frmMain">
+        <div class="sg-wrapper">
+            <div class="sg-header">
+                <div style="width: 100%;">
+                    <apex:image url="{!$Resource.Nissan_logo}"/>
+                </div>       
+                
+                <h1 class="sg-title"><span>QA - Your Nissan Vehicle Information Request</span></h1>
+            </div>
+            <div class="sg-content">
+                <div class="sg-content-hook-1"></div>
+
+                <div class="sg-question-set">
+                    <div class="sg-question sg-type-radio sg-required">
+		                    <div class="sg-question-title" title="This question is required.">
+	                            Great to hear that your Dealer has been in touch. We would love to hear about your experience with Test Dealer by rating that experience and telling us why you gave this rating.<br/><br/>
+                                This will take less than 1 minute, we promise!<br/><br/>
+                                Based on your recent experience with Test Dealer, <em><strong>How </strong></em>likely are you to recommend Test Dealer? <strong class="sg-required-icon" title="This question is required.">*<span class="sg-access-helper">This question is required.</span></strong>	
+		                    </div>
+		                    <div class="sg-question-options">
+                                <apex:selectRadio value="{!recomend}" layout="pageDirection">   
+                                    <apex:selectOption itemValue="0" itemLabel="0 - Not all likely" />
+	                               
+                                    <apex:selectOption itemValue="1" itemLabel="1" />
+		                            
+                                    <apex:selectOption itemValue="2" itemLabel="2" />
+		                           
+                                    <apex:selectOption itemValue="3" itemLabel="3" />
+		                            
+                                    <apex:selectOption itemValue="4" itemLabel="4" />	
+		                                                                 
+                                    <apex:selectOption itemValue="5" itemLabel="5" />
+		                                                           
+                                    <apex:selectOption itemValue="6" itemLabel="6" />
+		                           
+                                    <apex:selectOption itemValue="7" itemLabel="7" />
+		                           
+                                    <apex:selectOption itemValue="8" itemLabel="8" />
+		                                                                  
+                                    <apex:selectOption itemValue="9" itemLabel="9" />
+		                                                                   
+                                    <apex:selectOption itemValue="10" itemLabel="10 - Extremely likely" />
+                                </apex:selectRadio>			
+		                    </div>
+                    </div>
+                </div>
+
+                <div id="sgE-1921723-1-6-box" class="sg-question sg-type-essay">
+		            <div class="sg-question-title">
+			            <label for="sgE-1921723-1-6-element">
+			                What are the most important reasons for the rating you gave?  Be sure to SUBMIT your response and THANK YOU for your valued time.		
+			            </label>
+			        </div>
+		            <div class="sg-question-options">
+                        <apex:inputTextArea value="{!reasonsForRating}" cols="40" rows="5" />
+	                    <div class="sg-max-characters">Characters used: <span id="sgE-1921723-1-6-maxcharacters">0</span> out of 500.</div>			<!-- /sg-question-options -->
+		            </div>
+                </div>
+            </div>
+                    
+            <div class="sg-footer">        
+                <div class="sg-footer-hook-1"></div>            
+                <apex:commandButton value="Submit" action="{!submitForm}" styleClass="sg-button"></apex:commandButton>                    
+                <div class="sg-footer-hook-2"></div>
+            </div>            
+        </div>
+    </apex:form>
+</apex:page>

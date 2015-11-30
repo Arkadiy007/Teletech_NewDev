@@ -1,0 +1,40 @@
+<apex:page standardController="Case" extensions="Controller_ManageCases">
+	<apex:form >
+		<apex:pageMessages />
+		<apex:pageBlock >
+			<apex:outputText value="My Cases" /><br/>
+            <apex:selectList value="{!myCasesFilter}" multiselect="false" size="1">
+                <apex:actionSupport event="onchange" action="{!queryMyCases}" rerender="pbTable"/>
+                <apex:selectOptions value="{!MyCasesOptions}"/>
+            </apex:selectList>	
+			<apex:pageblocktable value="{!myOpenCases}" var="a" id="pbTable">
+				<apex:column headerValue="Case Number"><apex:outputLink value="/{!myOpenCases[a].id}" id="theLink">{!myOpenCases[a].CaseNumber}</apex:outputLink></apex:column>
+				<apex:column value="{!myOpenCases[a].Subject}"/>
+				<apex:column value="{!myOpenCases[a].Origin}"/>
+				<apex:column value="{!myOpenCases[a].Status}"/>
+				<apex:column value="{!myOpenCases[a].Issue_Type__c}"/>
+				<apex:column value="{!myOpenCases[a].Issue_Details__c}"/>
+				<apex:column value="{!myOpenCases[a].CreatedDate }"/>
+				<apex:column value="{!myOpenCases[a].Requesting_Department__c}"/>
+			</apex:pageblocktable>	            
+		</apex:pageBlock>
+		<apex:pageBlock >
+			<apex:outputText value="My Department's Cases" /><br/>
+            <apex:selectList value="{!myDeptCasesFilter}" multiselect="false" size="1">
+                <apex:actionSupport event="onchange" action="{!queryMyDeptCases}" rerender="pbTable"/>
+                <apex:selectOptions value="{!MyDeptCasesOptions}"/>
+            </apex:selectList>	
+			<apex:pageblocktable value="{!openCases}" var="a" id="pbTable">
+				<apex:column headerValue="Case Number"><apex:outputLink value="/{!openCases[a].id}" id="theLink">{!openCases[a].CaseNumber}</apex:outputLink></apex:column>
+				<apex:column value="{!openCases[a].Subject}"/>
+				<apex:column value="{!openCases[a].Origin}"/>
+				<apex:column value="{!openCases[a].Status}"/>
+				<apex:column value="{!openCases[a].Issue_Type__c}"/>
+				<apex:column value="{!openCases[a].Issue_Details__c}"/>
+				<apex:column value="{!openCases[a].CreatedDate }"/>
+				<apex:column value="{!openCases[a].Requesting_Department__c}"/>
+			</apex:pageblocktable>
+			<apex:commandbutton value="New Case" action="{!createNewCase}"/>
+		</apex:pageBlock>		
+	</apex:form>
+</apex:page>

@@ -1,0 +1,183 @@
+<apex:page showHeader="false" controller="LiveAgent_Direct_PreChat">
+    <script type="text/javascript">
+                     var loaded=false;
+        var bypass=false;
+        var lastResize;
+        var timer = null;
+        var counter = 0;
+        var flag = false;
+        var widthDiff =0;
+        var heightDiff=0;
+        
+        document.onreadystatechange = function(e)
+        {
+            if (document.readyState === 'interactive')
+            {
+                initResize();
+            }
+        };
+        
+        function initResize() {
+            if (window.outerWidth==0 || window.outerHeight==0)
+                setTimeout(initResize,50);
+            else {
+                loaded=true;
+                bypass=true;                
+                widthDiff = eval('window.outerWidth - window.innerWidth');
+                heightDiff = eval('window.outerHeight - window.innerHeight');
+                resize(500,516);
+            }
+        }
+
+
+        window.onresize = function()
+        {
+            if (!loaded)
+                return;
+
+                if (flag) {
+                    flag = false; return; }
+
+                if (timer==null)
+                {
+                    flag = false;
+                    counter=0;
+                    if (bypass) 
+                    {
+                        bypass=false;
+                        delayResize();
+                    } else {
+                        timer = setTimeout(function(){delayResize();}, 200);
+                    }
+                    
+                } else {
+                    counter++;
+                }
+        };   
+
+        function delayResize() {
+            timer = null;
+            if (counter==0) {
+                flag=true;
+                if (!resize(500,516))
+                    flag = false;
+            } else {
+                    flag = false;
+                    counter=0;
+                    timer = setTimeout(function(){delayResize();}, 200);
+            }
+        }
+
+        function resize(width, height) {
+            var innerWidth = document.documentElement.clientWidth || window.innerWidth || document.body.clientWidth;
+            var innerHeight = document.documentElement.clientHeight || window.innerHeight || document.body.clientHeight;
+            var targetWidth = width;
+            var targetHeight = height;
+            var heightBy = targetHeight-innerHeight;
+            var widthBy = targetWidth-innerWidth;
+
+            if (widthBy == 0 && heightBy==0)
+            {
+                return false;
+            }
+            else
+            {
+                if (window.outerWidth==innerWidth)
+                {
+                    widthBy+=widthDiff;
+                    heightBy+=heightDiff-(window.outerHeight - window.innerHeight);
+                }
+                
+                window.resizeBy(widthBy, heightBy);
+                return true;
+            }
+        }
+    </script>
+    <script type='text/javascript'
+        src='{!$Label.LiveAgent_ServerURL}/content/g/js/29.0/prechat.js'></script>
+
+    <script type="text/javascript">
+    (function() {
+        function handlePageLoad() {
+            var endpointMatcher = new RegExp("[\\?\\&]endpoint=([^&#]*)");
+            document.getElementById('j_id0:preChatForm:hdnSetToAction').value = endpointMatcher.exec(document.location.search)[1];
+            liveagent.details.preChatInit('{!$Label.LiveAgent_ServerURL}/chat', 'getPreChatInfo');
+        } 
+        if (window.addEventListener) {
+            window.addEventListener('load', handlePageLoad, false);
+        } else { 
+            window.attachEvent('onload', handlePageLoad, false);
+        }
+    })();
+    
+    function setAction() {
+        document.getElementById('j_id0:preChatForm').setAttribute('action', decodeURIComponent(document.getElementById('j_id0:preChatForm:hdnSetToAction').value));
+        document.getElementById('j_id0:preChatForm').submit();
+    }
+    
+    function getPreChatInfo(details) {
+        //alert('executed');
+        for(var key in details['customDetails']){
+            if (details['customDetails'][key]['label'] == 'CustomSessionId') {
+                document.getElementById('j_id0:preChatForm:hdnSessionKey').value = details['customDetails'][key]['value'];
+                retrieveParameters();
+                break;
+            }
+        }
+    }
+    </script>
+
+    <apex:form id="preChatForm">
+        <apex:actionFunction name="retrieveParameters"
+            action="{!retrievePreChatInfo}">
+        </apex:actionFunction>
+
+        <div
+            style="color: #888888 !important; font-style: italic; text-align: center;">
+            Connecting... <br />
+        </div>
+
+        <apex:inputHidden value="{!sessionKey}" id="hdnSessionKey" />
+        <apex:inputHidden value="{!setToAction}" id="hdnSetToAction" />
+
+        <input type='hidden' name='liveagent.prechat:First Name'
+            value="{!firstName}" />
+        <input type="hidden" name="liveagent.prechat.save:First Name"
+            value="First_Name__c" />
+        <input type='hidden' name='liveagent.prechat:Last Name'
+            value="{!lastName}" />
+        <input type="hidden" name="liveagent.prechat.save:Last Name"
+            value="Last_Name__c" />
+        <input type='hidden' name='liveagent.prechat:Zip Code'
+            value="{!zipCode}" />
+        <input type="hidden" name="liveagent.prechat.save:Zip Code"
+            value="Zip_Code__c" />
+        <input type='hidden' name='{!parameterDealerCode}'
+            value="{!dealerCode}" />
+        <input type="hidden" name="{!parameterDealerCodeSave}"
+            value="Dealer_Code__c" />
+        <input type='hidden' name='liveagent.prechat:Email'
+            value="{!emailAddress}" />
+        <input type="hidden" name="liveagent.prechat.save:Email"
+            value="Email__c" />
+        <input type='hidden' name='liveagent.prechat:Phone' value="{!phone}" />
+        <input type="hidden" name="liveagent.prechat.save:Phone"
+            value="Phone__c" />
+        <input type='hidden' name='liveagent.prechat.name' id='prechat_field'
+            value="{!firstName}" />
+        <input type='hidden' name='{!parameterSkill}' value="{!buttonSkillId}" />
+        <input type='hidden' name='liveagent.prechat:Pre Chat Data Id'
+            value="{!preChatDataId}" />
+        <input type="hidden" name="liveagent.prechat.save:Pre Chat Data Id"
+            value="Pre_Chat_Data__c" />
+        <input type='hidden' name='{!parameterAccount}' value="{!accountId}" />
+        <input type="hidden" name="{!parameterSaveAccount}" value="Account" />
+
+        <apex:outputPanel rendered="{!isSuccess}">
+            <script>
+                setAction();
+            </script>
+        </apex:outputPanel>
+
+    </apex:form>
+</apex:page>

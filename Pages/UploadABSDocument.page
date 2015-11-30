@@ -1,0 +1,184 @@
+<apex:page showHeader="false" sidebar="false" controller="UploadABSDocumentController" doctype="html-5.0" >
+    <style>
+         #blockmainanim
+        {
+            background: rgba(0, 0, 0, 0.2);
+            width:100%;
+            height:100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 9999;  rgba(0, 0, 0, 0.71);
+            cursor: wait;
+        }
+         #apimgld
+        {   
+        top:49%;
+        left:45%;
+        position:fixed;
+        border-radius: 2px;
+        -webkit-border-radius: 2px ;
+        -moz-border-radius: 2px ;
+        }
+
+        .cke_chrome {
+            visibility: inherit;
+            width: 100%;
+        }
+        .cke_reset {
+            width: 100%;
+        }
+        .cke_contents {
+            height: 120px !important;
+        }
+
+        .imgLoader {
+            display: inline-block;
+        } 
+        .docLoader {
+            display: inline-block;
+        }
+        
+    </style>
+    
+         
+               <div id="blockbckanim" style="display:none">
+                     <img id="apimgld" style="" src="/img/loading32.gif" />
+             </div>
+              <apex:pageMessages />
+              <apex:pageMessage summary="NOTE: Items are added immediately once upload of the file is finished, without pressing on 'Save' button. Please refresh the edit page to see created items" severity="info" strength="2" />
+                                 
+             <apex:form rendered="{!uploadForABS}">
+         <apex:pageBlock >
+             <apex:outputText value="Choose file, than press 'Upload'"/>
+            <apex:pageBlockSection columns="1">
+                <apex:inputFile value="{!d.body}" filename="{!d.name}" styleclass="docLoader"/>
+                <apex:outputText value="(Optional) Enter file subheading"/>
+                <apex:inputText value="{!item.Subheading}" label="Subheading"/>
+                <apex:input type="number" value="{!orderNumber}" label="Sorting Order"/>
+            </apex:pageBlockSection>
+                
+             
+                 
+                <apex:commandButton onclick="return checkFileSize();"   action="{!uploadDoc}" value="Upload"/> 
+         </apex:pageBlock>        
+               </apex:form>
+    
+            <apex:form rendered="{!uploadForQData}">
+         <apex:pageBlock >
+             <apex:outputText value="Choose file, than press 'Upload'"/>
+            <apex:pageBlockSection columns="1">
+                <apex:inputFile value="{!d.body}" filename="{!d.name}" styleclass="docLoader"/>
+                <apex:inputTextarea richtext="true" value="{!qItem.InfoText}" label="Info Text" rendered="{!isInfoTextNeededToBeShown}"/>
+                <apex:input type="number" value="{!orderNumber}" label="Sorting Order" rendered="{!isInfoTextNeededToBeShown}"/>
+            </apex:pageBlockSection>
+                
+             
+                 
+                <apex:commandButton onclick="return checkFileSize();"   action="{!uploadDoc}" value="Upload"/> 
+         </apex:pageBlock>        
+               </apex:form>  
+             
+            <apex:form rendered="{!uploadForPresentation}">
+         <apex:pageBlock >
+             <apex:outputText value="Choose document, than press 'Upload'"/>
+             <apex:pageBlockSection columns="1">
+               <apex:inputFile value="{!d.body}" filename="{!d.name}" styleclass="docLoader"/>
+             </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1">
+            <apex:outputText value="Choose image, than press 'Upload'"/>
+                <apex:inputFile value="{!img.body}" filename="{!img.name}" styleclass="imgLoader"/>
+                <apex:inputTextarea richtext="true" value="{!pItem.ItemText}" label="Item Text" rendered="{!isInfoTextNeededToBeShown}"/>
+                <apex:input type="number" value="{!orderNumber}" label="Sorting Order" rendered="{!isInfoTextNeededToBeShown}"/>
+            </apex:pageBlockSection>
+                
+             
+                 
+                <apex:commandButton onclick="return checkFileSize();"   action="{!uploadDoc}" value="Upload"/> 
+         </apex:pageBlock> 
+              
+               </apex:form>  
+               
+    
+            
+                  <script src="{!$Resource.jQuery1_8}"></script>
+                    <script  type="text/javascript">
+ 
+                   function getIEFileSize(file){
+                        var myFSO = new ActiveXObject("Scripting.FileSystemObject"),
+                        filepath = file.value,
+                        thefile = myFSO.getFile(filepath);
+                        return thefile.size;
+                    }
+ 
+                    function checkFileSize()
+                    {
+                        document.getElementById('blockbckanim').style.display="block";
+                        var goodSize = true;
+                        console.log('CALLED');
+                        $('.imgLoader').each(function()
+                        {
+                            if(typeof this.files[0] !== 'undefined')
+                        {
+                            var file = this.files[0],
+                
+                            size = typeof ActiveXObject !== 'undefined' ?
+                            getIEFileSize(file)
+                            :
+                            file.fileSize || file.size;
+ 
+                            goodSize = 1000000 > size;
+                            if(!goodSize)
+                            {
+                                HideLoading();
+                                alert(this.files[0].name +' is too large - please choose a file with size 1MB or less');
+                                window.close();
+                            }
+                            else
+                            {
+                            if (500000 < size)
+                            {
+                                goodSize=confirm('The file size is ' + size + 
+                                ' bytes - this may take some time. Are you sure you wish to continue');
+                            }
+                    }
+         
+                    return goodSize;
+                    }
+                    });
+
+                    $('.docLoader').each(function()
+                        {
+                            if(typeof this.files[0] !== 'undefined')
+                        {
+                            var file = this.files[0],
+                
+                            size = typeof ActiveXObject !== 'undefined' ?
+                            getIEFileSize(file)
+                            :
+                            file.fileSize || file.size;
+ 
+                            goodSize = 5000000 > size;
+                            if(!goodSize)
+                            {
+                                HideLoading();
+                                alert(this.files[0].name +' is too large - please choose a file with size 5MB or less');
+                                window.close();
+                            }
+                           
+         
+                    return goodSize;
+                    }
+                    });
+                        return goodSize;
+            
+                }
+    
+       
+                 function HideLoading() {
+                     document.getElementById('blockbckanim').style.display="none";
+                  }
+    </script>
+                
+     
+</apex:page>

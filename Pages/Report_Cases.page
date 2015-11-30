@@ -1,0 +1,14 @@
+<apex:page cache="true" 
+        
+        showHeader="false" sidebar="false" standardStylesheets="false" controller="Report_Cases_Controller">
+    <!-- contentType="application/octet-stream#1.csv"  -->
+     <apex:outputText value="test" escape="false"/>
+    
+    <apex:pageBlock >
+       <apex:pageBlockTable value="{!cases}" var="item" style="table-layout: fixed;">
+                        <apex:facet name="caption"> <b>Case report</b> </apex:facet>
+                        <apex:column value="{!item.CaseNumber}" style="word-wrap:break-word; font-size: 14px;"/> 
+                        <apex:column value="{!item.OwnerId}" style="word-wrap:break-word; font-size: 14px;"/>
+       </apex:pageBlockTable> 
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,481 @@
+<apex:page docType="html-5.0" controller="LiveAgent_Direct_Complete" showHeader="false"
+    sidebar="false" title="LEAF" id="thePage">
+
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    
+     <script type="text/javascript">
+                     var loaded=false;
+        var bypass=false;
+        var lastResize;
+        var timer = null;
+        var counter = 0;
+        var flag = false;
+        var widthDiff =0;
+        var heightDiff=0;
+        
+        document.onreadystatechange = function(e)
+        {
+            if (document.readyState === 'interactive')
+            {
+                initResize();
+            }
+        };
+        
+        function initResize() {
+            if (window.outerWidth==0 || window.outerHeight==0)
+                setTimeout(initResize,50);
+            else {
+                loaded=true;
+                bypass=true;                
+                widthDiff = eval('window.outerWidth - window.innerWidth');
+                heightDiff = eval('window.outerHeight - window.innerHeight');
+                resize(500,516);
+            }
+        }
+
+
+        window.onresize = function()
+        {
+            if (!loaded)
+                return;
+
+                if (flag) {
+                    flag = false; return; }
+
+                if (timer==null)
+                {
+                    flag = false;
+                    counter=0;
+                    if (bypass) 
+                    {
+                        bypass=false;
+                        delayResize();
+                    } else {
+                        timer = setTimeout(function(){delayResize();}, 200);
+                    }
+                    
+                } else {
+                    counter++;
+                }
+        };   
+
+        function delayResize() {
+            timer = null;
+            if (counter==0) {
+                flag=true;
+                if (!resize(500,516))
+                    flag = false;
+            } else {
+                    flag = false;
+                    counter=0;
+                    timer = setTimeout(function(){delayResize();}, 200);
+            }
+        }
+
+        function resize(width, height) {
+            var innerWidth = document.documentElement.clientWidth || window.innerWidth || document.body.clientWidth;
+            var innerHeight = document.documentElement.clientHeight || window.innerHeight || document.body.clientHeight;
+            var targetWidth = width;
+            var targetHeight = height;
+            var heightBy = targetHeight-innerHeight;
+            var widthBy = targetWidth-innerWidth;
+
+            if (widthBy == 0 && heightBy==0)
+            {
+                return false;
+            }
+            else
+            {
+                if (window.outerWidth==innerWidth)
+                {
+                    widthBy+=widthDiff;
+                    heightBy+=heightDiff-(window.outerHeight - window.innerHeight);
+                }
+                
+                window.resizeBy(widthBy, heightBy);
+                return true;
+            }
+        }
+    </script>
+
+    <apex:stylesheet value="{!URLFOR($Resource.NissanStyle, 'LeafStyle.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.LiveAgent_PreChat_Style, 'Leaf_Direct_Complete_Adaptive.css')}" />
+    
+    <style>
+        .bPageBlock .labelCol, body .print .topics-label {
+            padding-right: 2px;
+        }
+
+        .submitButtonPosition {
+            background-image: url({!URLFOR($Resource.NissanStyle, 'img/infiniti_submit.gif')} ) !important; background-position: 0 0!important; width:117px; height:30px; border:none!important;
+        }
+
+        .submitButtonPosition:hover {
+            background-image: url({!URLFOR($Resource.NissanStyle, 'img/infiniti_submit.gif')}) !important; background-position: 0 0!important; width:117px; height:30px; border:none!important;
+        }
+
+        #submitButtonPositionId {
+            position: absolute;
+            top: 420px;
+            left: 205px;
+        }
+
+        [id*=inputTextField] {
+            width: 203px !important;
+            max-width: 203px !important;
+        }
+
+        [id*=submitButtonId] {
+            text-indent: -9999px;
+        }
+    </style>
+    <apex:form id="frmMain">
+        <apex:inputHidden id="parentSiteName" value="{!parentSiteURL}" />
+        <apex:actionFunction name="doProcessParentSiteInformation" action="{!processParentSiteInformation}" rerender=""/>
+        <script>
+               window.onload=function()
+               { 
+                 try {  
+                     var parentSite =  window.opener;
+                     var parentSiteName = document.getElementById('thePage:frmMain:parentSiteName');
+
+                     parentSiteName.value = parentSite.location.href;
+                 } catch (e) {
+                 }
+                 doProcessParentSiteInformation();
+               };
+        </script>
+        <apex:pageMessages id="msgMain" escape="false" />
+        <div style="width: 100%;" class="livechat_header"></div>
+        <div class="livechat_leaf_bg" id="livechat_bg_id">
+            <apex:pageblock id="inputPageBlock">
+                <div class="contentAreaContainer " style="height: 305px;">
+                    <div class="livechat_txt">
+                        Chat now with a Nissan LEAF®
+                        Support Team Member
+                    </div>
+                    <div class="required_txt"
+                         style="padding-left: 130px; font: Verdana, Geneva, sans-serif;">
+                        <span style="color: #c71331 !important;" id="requiredBox">* required</span>
+                    </div>
+
+                    <!-- Capturing device info (Device Type, OS, Browse) -->
+                    <apex:inputhidden id="userAgentInput" value="{!userAgent}" />
+                    <apex:inputhidden id="browserInput" value="{!browser}" />
+                    <script type="text/javascript">
+
+                            var OPERA = 'Opera';
+                            var FIREFOX = 'Firefox';
+                            var SAFARI = 'Safari';
+                            var CHROME = 'Chrome';
+                            var IE = 'Internet Explorer';
+
+                            var browserName = "Unknown Browser";
+                            var userAgent = navigator.userAgent;
+
+                            var getCurrentBrowser = function() {
+                                if( !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
+                                    browserName = OPERA;
+                                }
+                                if(isFirefox = typeof InstallTrigger !== 'undefined') {
+                                    browserName = FIREFOX;
+                                }
+                                if(isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0) {
+                                    browserName = SAFARI;
+                                }
+                                if(isChrome = !!window.chrome && !isOpera) {
+                                    browserName = CHROME;
+                                }
+                                if(isIE = /*@cc_on!@*/false || !!document.documentMode) {
+                                    browserName = IE;
+                                }
+                            }
+
+                            getCurrentBrowser();
+
+                            document.getElementById('thePage:frmMain:inputPageBlock:browserInput').value = browserName;
+                            document.getElementById('thePage:frmMain:inputPageBlock:userAgentInput').value = userAgent;
+                    </script>
+                    <!-- -->
+
+                    <div class="inputAreaDesktop" id="inputAreaContainerId">
+                        <apex:pageblocksection collapsible="false" columns="1" id="inputPageblockSection">
+                            <apex:pageblocksectionitem >
+                                <apex:outputlabel value="FIRST NAME *" />
+                                <apex:input type="text" id="inputTextField" value="{!firstName}"
+                                            style="width:220px;" html-placeholder="First Name" />
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem >
+                                <apex:outputlabel value="LAST NAME" />
+                                <apex:input type="text" id="inputTextField" value="{!lastName}"
+                                            style="width:220px;" html-placeholder="Last Name" />
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem >
+                                <apex:outputlabel value="ZIP CODE" />
+                                <apex:input type="text" id="inputTextField" value="{!zipCode}"
+                                            style="width:220px;" html-placeholder="12345" />
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem >
+                                <apex:outputlabel value="EMAIL" />
+                                <apex:input type="email" id="inputTextField" value="{!emailAddress}"
+                                            style="width:220px;" html-placeholder="user@gmail.com" />
+                            </apex:pageblocksectionitem>
+                            <apex:pageblocksectionitem >
+                                <apex:outputlabel value="PHONE" />
+                                <apex:input type="tel" id="inputTextField" value="{!phone}"
+                                            style="width:220px;" html-placeholder="XXX-XXX-XXXX" />
+                            </apex:pageblocksectionitem>
+
+                            <apex:pageblocksectionitem labelstyleclass="livechat_txt_main_fields" id="commentPageblockSectionItem">
+                                <apex:outputlabel value="COMMENTS" id="commentsLabelId" style="display:none;" />
+                                <apex:inputtextarea id="commentsDataId" cols="31" rows="3" value="{!comments}"
+                                                    style="display: none; resize: none; width: 200px !important; max-width: 200px !important;" />
+                            </apex:pageblocksectionitem>
+
+                        </apex:pageblocksection>
+                    </div>
+                    <div class="radioButtonPositionDesktop" id="radioButtonPositionDesktopId">
+                        <apex:pageblocksection >
+                            <apex:selectradio styleclass="selectRadio" value="{!selectedDepartment}"
+                                              layout="pageDirection">
+                                <apex:selectoption itemvalue="LEAF"
+                                                   itemlabel="Interested in Purchasing a Nissan LEAF®?
+                                    <br /><span style='font-size:10px; padding-left:25px;'>Mon-Sat  7:00am – 11:00pm CT<br /></span>"
+                                    itemEscaped="false" />
+                                    <apex:selectoption itemvalue="EVAftersales"
+                                                       itemlabel="Have a question about your purchased Nissan LEAF®?
+                                        <br /><span style='font-size:10px; padding-left:25px;'>Mon-Fri  7:00am – 7:00pm CT<br /></span>"
+                                        itemEscaped="false" />
+                                        <apex:selectoption itemvalue="Telematics"
+                                                           itemlabel="Have a Telematics question about your Nissan LEAF®?
+                                            <br /><span style='font-size:10px; padding-left:25px;'>Mon-Sat  7:00am – 11:00pm CT<br /></span>"
+                                            itemEscaped="false" />
+                            </apex:selectradio>
+                        </apex:pageblocksection>
+                    </div>
+
+                    <apex:outputpanel id="opErrorMessage" styleclass="error_message"
+                                      style="position: absolute; top: 450px; left: 25px;">
+                        <apex:outputlabel value="{!errorMessage}"
+                                          style="color:#c71331; font-weight:bold; font-family:Verdana, Geneva, sans-serif;"
+                                          rendered="{!showErrorMessage}" />
+                    </apex:outputpanel>
+                    <div class="pleaseWaitPosition" id="pleaseWaitPositionId">
+                        Please wait...
+                    </div>
+                    <div class="buttonPosition" id="buttonsPosition">
+                        <!-- Department 1 -->
+                        <div id="liveagent_button_online_{!buttonId}"
+                             style="display: none">
+                            <apex:commandbutton action="{!submitForm}"
+                                                rerender="opErrorMessage,opSuccess"
+                                                styleclass="nissan-btn-startchat">
+                                <apex:param value="button1" assignto="{!chatButtonPressed}" />
+                            </apex:commandbutton>
+                        </div>
+
+                        <!-- Department 2 -->
+                        <div id="divSkill2" style="display: none;">
+                            <div id="liveagent_button_online_{!leafButtonId2}"
+                                 style="display: none">
+                                <apex:commandbutton action="{!submitForm}"
+                                                    rerender="opErrorMessage,opSuccess"
+                                                    styleclass="nissan-btn-startchat">
+                                    <apex:param value="button2" assignto="{!chatButtonPressed}" />
+                                </apex:commandbutton>
+                            </div>
+                            <!-- Department 3 -->
+                            <div id="divSkill3" style="display: none;">
+                                <div id="liveagent_button_online_{!leafButtonId3}"
+                                     style="display: none">
+                                    <apex:commandbutton action="{!submitForm}"
+                                                        rerender="opErrorMessage,opSuccess"
+                                                        styleclass="nissan-btn-startchat">
+                                        <apex:param value="button3" assignto="{!chatButtonPressed}" />
+                                    </apex:commandbutton>
+                                </div>
+                                <!-- Offline Div -->
+                                <div id="liveagent_button_offline_{!leafButtonId3}"
+                                     style="display: none;">
+                                    <apex:commandbutton action="{!showClosedMessage}"
+                                                        rerender="opErrorMessage,opSuccess"
+                                                        styleclass="nissan-btn-startchat">
+                                        <apex:param value="buttonError"
+                                                    assignto="{!chatButtonPressed}" />
+                                    </apex:commandbutton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttonPosition" id="submitButtonPositionId" style="display:none;">
+                    <apex:commandbutton action="{!submitCaseCreation}"
+                                        rerender="opErrorMessage,opSuccess" styleclass="submitButtonPosition" id="submitButtonId">
+                    </apex:commandbutton>
+                </div>
+
+
+                <table class="footer_table" width="480px" align="left">
+                    <tr>
+                        <td class="livechat_footer_privacy_txt" valign="top" align="right"
+                            style="padding-left: 5px; font: Verdana, Geneva, sans-serif; font-size: 9px;">
+                            <a href="http://www.Nissanusa.com/global/privacy.html" target="_blank">Privacy Policy</a>
+                        </td>
+                    </tr>
+                </table>
+            </apex:pageblock>
+        </div>
+
+        <apex:outputPanel id="opSuccess">
+            <script>
+                if ({!isSuccess}) {
+                    switch('{!chatButtonPressed}') {
+                        case 'button1': 
+                            liveagent.startChatWithWindow('{!buttonId}', window.name);
+                            break;
+                        case 'button2': 
+                            liveagent.startChatWithWindow('{!leafButtonId2}', window.name);
+                            break;
+                        case 'button3': 
+                            liveagent.startChatWithWindow('{!leafButtonId3}', window.name);
+                            break;
+                    }
+                }
+            </script>
+        </apex:outputPanel>
+        </apex:form>
+
+    <!-- Operation Hours Message -->
+    <div id="divOperationHours" style="display: none;">
+        <div class="divOperationHoursArea" id="divOperationHoursAreaId"
+             style="opacity: 0.8; filter: alpha(opacity = 80); background-color: #F0F0F0 !important; height: 100%; width: 100%; position: absolute; z-index: 5 !important; top: 0px; left: 0px;">
+        </div>
+        <div class="divOperationHoursText" id="divOperationHoursTextId"
+             style=" z-index: 6 !important; color: #09C; font: bold 11px Arial !important; width: 370px;  position: absolute; top: 115px; padding: 15px 10px 5px 10px;">
+            <apex:outputtext escape="false" value="{!afterHoursMessage}" />
+        </div>
+    </div>
+
+
+            <!-- Agents "away" status but still in HOOP -->
+            <div id="divAwayMessage" style="display: none;">
+                <div
+                    style="opacity: 0.8; filter: alpha(opacity = 80); background-color: #F0F0F0 !important; height: 100%; width: 100%; position: absolute; z-index: 5 !important; top: 0px; left: 0px;">
+                </div>
+                <div
+                    style="text-align: center !important; z-index: 6 !important; color: #09C; font: bold 14px Arial !important; width: 366px; background-color: #404040 !important; position: absolute; top: 160px; left: 75px;">
+                    <apex:outputText escape="false" value="{!awayAgentsMessage}" />
+                </div>
+            </div>
+ 
+            <script type="text/javascript">
+                 if (!{!isDepartmentOpen}) {
+            var divOH = document.getElementById("divOperationHours");
+                    divOH.style.display = 'block';
+
+
+					var divOperationHoursArea = document.getElementById("divOperationHoursAreaId");
+                    divOperationHoursArea.style.display = 'none';
+
+
+                    var divOperationHoursText = document.getElementById("divOperationHoursTextId");
+                    divOperationHoursText.style.top = "110px";
+
+
+                    var submitButtonPosition = document.getElementById("submitButtonPositionId");
+                    submitButtonPosition.style.display = 'block';
+
+
+                    var pleaseWaitPosition = document.getElementById("pleaseWaitPositionId");
+                    pleaseWaitPosition.style.display = 'none';
+
+
+                    var oldbuttonsPosition = document.getElementById("buttonsPosition");
+                    oldbuttonsPosition.style.display = 'none';
+
+                    var radioButtonPosition = document.getElementById("radioButtonPositionDesktopId");
+                    radioButtonPosition.style.display = 'none';
+
+                    var inputArea = document.getElementById("inputAreaContainerId");
+                    inputArea.style.position = 'absolute';
+                    inputArea.style.top = "215px";
+
+                    var requiredBox = document.getElementById("requiredBox");
+                    requiredBox.style.position = 'absolute';
+                    requiredBox.style.top = "200px";
+                    requiredBox.style.left = "120px";
+
+
+                    var commentsLab = document.getElementById("thePage:frmMain:inputPageBlock:inputPageblockSection:commentPageblockSectionItem:commentsLabelId");
+                    commentsLab.style.display = 'block';
+                    commentsLab.style.fontFamily  = 'Verdana, Geneva, sans-serif';
+
+                    var commentsLData = document.getElementById("thePage:frmMain:inputPageBlock:inputPageblockSection:commentPageblockSectionItem:commentsDataId");
+                    commentsLData.style.display = 'block';
+        }
+
+                if ({!showAwayMessage}) {
+                    var divOH = document.getElementById("divAwayMessage");
+                    divOH.style.display = 'block';
+                }
+            </script>
+
+
+
+    <!-- Initialization Code -->
+
+
+    <script type="text/javascript">
+        if('{!buttonId}' != '') {
+            if (!window._laq) { window._laq = []; }
+            window._laq.push(function(){
+                liveagent.showWhenOnline('{!buttonId}', document.getElementById('liveagent_button_online_{!buttonId}'));
+                liveagent.showWhenOffline('{!buttonId}', document.getElementById('divSkill2'));
+            });
+        }
+        else {
+            document.getElementById('divSkill2').style.display = 'block';
+        }
+        
+        if('{!leafButtonId2}' != '') { 
+            if (!window._laq) { window._laq = []; }
+            window._laq.push(function(){
+                liveagent.showWhenOnline('{!leafButtonId2}', document.getElementById('liveagent_button_online_{!leafButtonId2}'));
+                liveagent.showWhenOffline('{!leafButtonId2}', document.getElementById('divSkill3'));
+            });
+        }
+        else {
+            document.getElementById('divSkill3').style.display = 'block';
+        }
+        
+        if('{!leafButtonId3}' != '') {
+            if (!window._laq) { window._laq = []; }
+            window._laq.push(function(){
+                liveagent.showWhenOnline('{!leafButtonId3}', document.getElementById('liveagent_button_online_{!leafButtonId3}'));
+                liveagent.showWhenOffline('{!leafButtonId3}', document.getElementById('liveagent_button_offline_{!leafButtonId3}'));
+            });
+        }
+        else {
+            document.getElementById('liveagent_button_offline_{!leafButtonId3}').style.display = 'block';
+        }
+    </script>
+
+    <script type='text/javascript'
+        src='https://c.la8cs.salesforceliveagent.com/content/g/deployment.js'>
+    </script>
+    <script type='text/javascript'>
+        window.name = 'LiveAgent';
+        document.title = 'LEAF';
+        
+        if ({!isSandbox}) {
+            liveagent.init('{!$Label.LiveAgentInit_Dev}', '{!deploymentId}', '{!$Organization.Id}'.substring(0,15));
+        } else {
+            liveagent.init('{!$Label.LiveAgentInit_Prod}', '{!deploymentId}', '{!$Organization.Id}'.substring(0,15));
+        }     
+        
+        liveagent.addCustomDetail('CustomSessionId','{!customSessionId}').map('Pre_Chat_Data__c','Session_Id__c',true,true,false).saveToTranscript('Session_Id__c');
+    </script>
+
+</apex:page>

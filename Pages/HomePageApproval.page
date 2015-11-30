@@ -1,0 +1,58 @@
+<apex:page showHeader="false" sidebar="false"  doctype="html-5.0" controller="HomePageApprovalController">
+<apex:pageBlock rendered="{!isUserAreApprover}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home Page Approval</title>
+    <apex:stylesheet value="{!$Resource.Home_Page_Styles}"/>
+    <style>
+        .bPageBlock .detailList .labelCol {
+             width: 48% !important;
+        }
+
+        .frameblock {
+            height: 1600px;
+            width: 47.5%;
+            margin: 1%;
+            display: inline-block;
+        }
+        
+    </style>
+    <script src="https://www.nissanusa.com/AppGateway/nissan_global_navigation.js?baseURL=www.nissanusa.com&secure=true" async="true"></script>
+    
+</head>
+<body>
+    <div class="frameblock" >
+        <h1 style="color:red;">TEST PAGE <a href="/apex/Home?version=test" target="_blank">(review in new tab)</a></h1> 
+       <apex:iframe id="left_Iframe" src="/apex/Home?version=test"  scrolling="true" height="100%" width="100%"/>
+
+    </div>
+    
+    <div class="frameblock">
+        <h1 style="color:red;">PRODUCTION PAGE <a href="/apex/Home" target="_blank">(review in new tab)</a></h1> 
+        <apex:iframe id="right_Iframe" src="/apex/Home" scrolling="true" height="100%" width="100%"/>
+   
+    </div>
+    <apex:form >
+    <apex:pageblock >
+    <apex:pageBlockButtons location="top" style="padding-left: 180px;">
+                <apex:commandButton value="Approve & Deploy Changes" action="{!approve}"/>
+                <apex:commandButton value="Reject Changes" action="{!reject}"/>
+                
+    </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1">
+                <div>
+                    <apex:inputTextarea label="Add Comments:" value="{!Comments}" style="margin: 0px; height: 60px; width: 180px;"/>
+                </div>
+            </apex:pageBlockSection>
+    </apex:pageblock>
+    </apex:form>
+
+
+</body>
+</html>
+</apex:pageBlock>
+<apex:pageBlock rendered="{!!isUserAreApprover}">
+    <h1>Access is restricted.</h1>  <apex:outputlink value="/">Go back </apex:outputlink>
+</apex:pageBlock>
+</apex:page>

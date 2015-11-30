@@ -1,0 +1,111 @@
+<apex:page controller="PresentationsEditController" doctype="html-5.0">
+    <script>
+        function createNewLineVisible(input) {
+            if(input.checked) document.getElementById('newSection').style.display = "block";
+            else document.getElementById('newSection').style.display = "none";
+        }
+
+    
+    </script>
+
+    <style>
+      .bPageBlock .detailList .labelCol {
+         width: 8%;
+        }
+      .homeTab .tertiaryPalette, .individualPalette .homeBlock .tertiaryPalette, .layoutEdit .individualPalette .homeBlock .tertiaryPalette {
+         background-color: #00A2D7;
+         border-color: #cfeef8;
+        }
+      .cke_contents {
+            height: 120px !important;
+        }
+
+    </style>
+    
+    <apex:form id="frm">
+               
+            <apex:pageblock >
+            <apex:pageMessages />
+                              
+            <apex:outputpanel layout="block" style="margin:5px;padding:10px;padding-top:2px;">
+                <apex:pageblocksection title="Presentation Object Edit" columns="1" >
+                        <apex:inputTextarea richtext="true" value="{!pres.HeaderText}" label="Header Text"/> 
+                 </apex:pageblocksection>
+                <apex:pageblocksection title="Presentation Items" columns="1"  >
+                        <apex:pageblocktable value="{!items}" var="itm" columnsWidth="10%, 10%, 10%, 50%, 10%, 10%">    
+                               <apex:column >
+                                   <apex:facet name="header">Preview Document</apex:facet>
+                                       <a href="/apex/ReviewDocument?page=Pres&type=doc&id={!itm.objectId}" target="_blank">Review document</a>
+                               </apex:column>
+                               <apex:column >
+                                   <apex:facet name="header">Preview Image</apex:facet>
+                                         <a href="/apex/ReviewDocument?page=Pres&type=image&id={!itm.objectId}" target="_blank">Review image</a> 
+                                   </apex:column>
+                               <apex:column >
+                                   <apex:facet name="header">Sort Order</apex:facet>
+                                          <apex:inputText value="{!itm.OrderNumber}"/>
+                                   </apex:column>
+                             <apex:column >
+                                   <apex:facet name="header">Item Text</apex:facet>
+                                          <apex:inputTextarea richtext="true" value="{!itm.ItemText}"/>
+                                   </apex:column>
+                            <apex:column >
+                                   <apex:facet name="header">Upload New Documents?</apex:facet>
+                                          <input type="button" value="Upload" onclick="var newwindow = window.open('/apex/UploadABSDocument?id={!itm.ObjectId}&page=Pres', 'Upload',  'width=420,height=320,resizable=no,scrollbars=yes,status=yes'); newwindow.focus();" />    
+                                   </apex:column>
+
+                             <apex:column >
+                                   <apex:facet name="header">Delete Presentation?</apex:facet>
+                                          <apex:inputCheckbox value="{!itm.IsDeleted}"/> 
+                             </apex:column>
+                                           
+                           </apex:pageblocktable>
+                         
+                   </apex:pageblocksection>   
+                   <apex:pageblocksection title="Create New Item" columns="1" >
+                            <input type="button" value="Create New Item?" onclick="var newwindow = window.open('/apex/UploadABSDocument?page=Pres&oid={!pres.ObjectId}', 'Upload',  'width=600,height=500,resizable=no,scrollbars=yes,status=yes'); newwindow.focus();" />    
+                   </apex:pageblocksection> 
+                </apex:outputpanel>
+
+                  <apex:inputHidden value="{!errorMsgAvailable}" id="myHiddenField" immediate="true"/>
+      
+            <apex:actionFunction name="doControllerSave" action="{!saveAndPreview}" status="processing" oncomplete="onControllerReturn('{!errorMsgAvailable}');"/>
+
+          
+         <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Save" action="{!save}"/>
+                <apex:commandButton value="Send For Approval" action="{!saveAndSubmit}"/>
+                <apex:commandButton value="Save And Preview" onclick="doControllerSave();return false; "/> 
+             </apex:pageBlockButtons>
+        </apex:pageblock>
+
+            <script src="{!$Resource.jQuery1_8}"></script>
+                <script>  
+                function onControllerReturn(val) {
+
+                 //console.log($('[id$=myHiddenField]').val());
+                 //if($('[id$=myHiddenField]').val() == 'false')
+                 console.log(val);
+                 if(val == 'false')
+                    {
+                    var params = [
+                         'height='+screen.height,
+                         'width='+screen.width,
+                        'fullscreen=yes'
+                            ].join(',');
+
+                     var popup = window.open('/apex/Presentations?version=test', '', params);
+                     popup.moveTo(0,0);
+                     window.open ('/apex/PresentationsEdit?sfdc.tabName=01rM00000009E97','_self',false);
+                   
+                } else {
+                    alert('Order number should be unique');
+                     
+                } 
+                }
+             </script>
+        
+         
+         </apex:form> 
+                         
+</apex:page>

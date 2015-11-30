@@ -1,0 +1,73 @@
+34.0 APEX_CODE,DEBUG;APEX_PROFILING,DEBUG;CALLOUT,DEBUG;DB,DEBUG;SYSTEM,DEBUG;VALIDATION,DEBUG;VISUALFORCE,DEBUG;WORKFLOW,DEBUG
+Execute Anonymous: //cleare Template Name on mappings
+Execute Anonymous: List<Maritz_Case_Mappings__c> toUpdateFTfMappings = new List<Maritz_Case_Mappings__c>{};
+Execute Anonymous: 
+Execute Anonymous: List<Maritz_Case_Mappings__c> fTfMappings = Maritz_Case_Mappings__c.getAll().values();
+Execute Anonymous: for (Maritz_Case_Mappings__c m : fTfMappings) {
+Execute Anonymous: 	m.Template_Name__c = null;
+Execute Anonymous: 	toUpdateFTfMappings.add(m);
+Execute Anonymous: }
+Execute Anonymous: DataBase.update(toUpdateFTfMappings);
+Execute Anonymous: 
+Execute Anonymous: List<Maritz_Case_Mappings_ForAdditionalFields__c> toUpdateAddMappings = new List<Maritz_Case_Mappings_ForAdditionalFields__c>{};
+Execute Anonymous: List<Maritz_Case_Mappings_ForAdditionalFields__c> addMappings = Maritz_Case_Mappings_ForAdditionalFields__c.getAll().values();
+Execute Anonymous: for (Maritz_Case_Mappings_ForAdditionalFields__c m : addMappings) {
+Execute Anonymous: 	m.Template_Name__c = null;
+Execute Anonymous: 	toUpdateAddMappings.add(m);
+Execute Anonymous: }
+Execute Anonymous: DataBase.Update(toUpdateAddMappings);
+Execute Anonymous: 
+Execute Anonymous: List<Maritz_Mappings_Record_Type__c> toUpdateRtMappings = new List<Maritz_Mappings_Record_Type__c>{};
+Execute Anonymous: List<Maritz_Mappings_Record_Type__c> rtMappings = Maritz_Mappings_Record_Type__c.getAll().values();
+Execute Anonymous: for (Maritz_Mappings_Record_Type__c m : rtMappings) {
+Execute Anonymous: 	m.Template_Name__c = null;
+Execute Anonymous: 	toUpdateRtMappings.add(m);
+Execute Anonymous: }
+Execute Anonymous: DataBase.Update(toUpdateRtMappings);
+Execute Anonymous: 
+Execute Anonymous: List<Maritz_Mappings_Lookups__c> toUpdateLookMappings = new List<Maritz_Mappings_Lookups__c>{};
+Execute Anonymous: List<Maritz_Mappings_Lookups__c> lookMappings = Maritz_Mappings_Lookups__c.getAll().values();
+Execute Anonymous: for (Maritz_Mappings_Lookups__c m : lookMappings) {
+Execute Anonymous: 	m.Template_Name__c = null;
+Execute Anonymous: 	toUpdateLookMappings.add(m);
+Execute Anonymous: }
+Execute Anonymous: DataBase.Update(toUpdateLookMappings);
+Execute Anonymous: 
+Execute Anonymous: List<Maritz_Mappings_Ownership__c> toUpdateOwnMappings = new List<Maritz_Mappings_Ownership__c>{};
+Execute Anonymous: List<Maritz_Mappings_Ownership__c> ownMappings = Maritz_Mappings_Ownership__c.getAll().values();
+Execute Anonymous: for (Maritz_Mappings_Ownership__c m : ownMappings) {
+Execute Anonymous: 	m.Template_Name__c = null;
+Execute Anonymous: 	toUpdateOwnMappings.add(m);
+Execute Anonymous: }
+Execute Anonymous: DataBase.Update(toUpdateOwnMappings);
+09:55:07.206 (206588809)|EXECUTION_STARTED
+09:55:07.206 (206599724)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex
+09:55:07.220 (220828298)|DML_BEGIN|[9]|Op:Update|Type:Maritz_Case_Mappings__c|Rows:22
+09:55:07.406 (406107358)|DML_END|[9]
+09:55:07.414 (414231663)|DML_BEGIN|[17]|Op:Update|Type:Maritz_Case_Mappings_ForAdditionalFields__c|Rows:3
+09:55:07.452 (452627738)|DML_END|[17]
+09:55:07.459 (459931525)|DML_BEGIN|[25]|Op:Update|Type:Maritz_Mappings_Record_Type__c|Rows:1
+09:55:07.493 (493079338)|DML_END|[25]
+09:55:07.501 (501148602)|DML_BEGIN|[33]|Op:Update|Type:Maritz_Mappings_Lookups__c|Rows:4
+09:55:07.548 (548572680)|DML_END|[33]
+09:55:07.556 (556786126)|DML_BEGIN|[41]|Op:Update|Type:Maritz_Mappings_Ownership__c|Rows:1
+09:55:07.580 (580060262)|DML_END|[41]
+09:55:07.586 (586287684)|CUMULATIVE_LIMIT_USAGE
+09:55:07.586 (586287684)|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 0 out of 100
+  Number of query rows: 0 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 5 out of 150
+  Number of DML rows: 31 out of 10000
+  Maximum CPU time: 0 out of 10000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+09:55:07.586 (586287684)|CUMULATIVE_LIMIT_USAGE_END
+
+09:55:07.586 (586325297)|CODE_UNIT_FINISHED|execute_anonymous_apex
+09:55:07.587 (587623364)|EXECUTION_FINISHED

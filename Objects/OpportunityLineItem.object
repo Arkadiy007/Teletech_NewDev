@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddProduct</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ChoosePricebook</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EditAllProduct</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Description</fullName>
+    </fields>
+    <fields>
+        <fullName>Discount</fullName>
+    </fields>
+    <fields>
+        <fullName>ListPrice</fullName>
+    </fields>
+    <fields>
+        <fullName>OpportunityId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Over_Standard_Incentive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates that the user has entered Special Incentive Offered greater than Standard Special Incentive</description>
+        <externalId>false</externalId>
+        <label>Over Standard Incentive?</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Product2Id</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ProductCode</fullName>
+    </fields>
+    <fields>
+        <fullName>Qty__c</fullName>
+        <description>Copies the Quantity, unless Quantity is less than zero outputs &quot;TBD&quot;</description>
+        <externalId>false</externalId>
+        <formula>IF( Quantity  &lt; 1, &quot;TBD&quot;, TEXT(Quantity))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Qty</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quantity</fullName>
+    </fields>
+    <fields>
+        <fullName>Sales_Assistance__c</fullName>
+        <description>Standard published discount available for this Vehicle</description>
+        <externalId>false</externalId>
+        <formula>PricebookEntry.Product2.Sales_Assistance__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Sales Assistance</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>ServiceDate</fullName>
+    </fields>
+    <fields>
+        <fullName>Special_Incentive_Commercial__c</fullName>
+        <description>Special Incentive Commercial discount amount based on Opportunity Total Order Quantity</description>
+        <externalId>false</externalId>
+        <formula>IF( Opportunity.Incentive_Level_Commercial__c = &quot;Fleet 1&quot;, PricebookEntry.Product2.Fleet_1__c,
+(IF( Opportunity.Incentive_Level_Commercial__c = &quot;Fleet 2&quot;, PricebookEntry.Product2.Fleet_2__c,
+(IF( Opportunity.Incentive_Level_Commercial__c = &quot;Fleet 3&quot;, PricebookEntry.Product2.Fleet_3__c,
+(IF( Opportunity.Incentive_Level_Commercial__c = &quot;Fleet 4&quot;, PricebookEntry.Product2.Fleet_4__c, 0)))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Commercial</inlineHelpText>
+        <label>Standard Special Incentive</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Special_Incentive_Offered__c</fullName>
+        <defaultValue>0.00</defaultValue>
+        <description>Discount offered per Vehicle to the Customer as defined by the Sales Manager</description>
+        <externalId>false</externalId>
+        <label>Special Incentive Offered</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Special_Incentive_Rental__c</fullName>
+        <description>Special Incentive Rental discount amount based on Opportunity Total Order Quantity</description>
+        <externalId>false</externalId>
+        <formula>IF( Opportunity.Incentive_Level_Rental__c = &quot;Rental 1&quot;, PricebookEntry.Product2.Rental_1__c ,
+(IF( Opportunity.Incentive_Level_Rental__c = &quot;Rental 2&quot;, PricebookEntry.Product2.Rental_2__c ,
+0)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Rental</inlineHelpText>
+        <label>Standard Special Incentive</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Subtotal</fullName>
+    </fields>
+    <fields>
+        <fullName>TotalPrice</fullName>
+    </fields>
+    <fields>
+        <fullName>Total_Incentive__c</fullName>
+        <description>Total discount available per Vehicle</description>
+        <externalId>false</externalId>
+        <formula>Sales_Assistance__c  +   Special_Incentive_Offered__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Incentive</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>UnitPrice</fullName>
+    </fields>
+    <validationRules>
+        <fullName>NCV_Quantity_Control</fullName>
+        <active>true</active>
+        <description>Disallows user entering value of 0.2 through 0.9</description>
+        <errorConditionFormula>OR(Opportunity.RecordTypeId = &quot;012F0000000yCAC&quot;, Opportunity.RecordTypeId = &quot;012F0000000yCAD&quot;)
+&amp;&amp;
+Quantity &gt; 0.1
+&amp;&amp;
+Quantity &lt; 1</errorConditionFormula>
+        <errorDisplayField>Quantity</errorDisplayField>
+        <errorMessage>You must enter a whole number (or enter 0.1 if value is TBD)</errorMessage>
+    </validationRules>
+</CustomObject>

@@ -1,0 +1,64 @@
+34.0 APEX_CODE,DEBUG;APEX_PROFILING,DEBUG;CALLOUT,DEBUG;DB,DEBUG;SYSTEM,DEBUG;VALIDATION,DEBUG;VISUALFORCE,DEBUG;WORKFLOW,DEBUG
+Execute Anonymous: //delete all the custom settings except of 'Default'
+Execute Anonymous: List<Id> toDelete = new List<Id>{};
+Execute Anonymous: 
+Execute Anonymous: List<Maritz_Case_Mappings__c> fTfMappings = Maritz_Case_Mappings__c.getAll().values();
+Execute Anonymous: for (Maritz_Case_Mappings__c m : fTfMappings) {
+Execute Anonymous: 	if (m.Template_Name__c == null || !m.Template_Name__c.equals('Default')) {
+Execute Anonymous: 		toDelete.add(m.id);
+Execute Anonymous: 	}
+Execute Anonymous: }
+Execute Anonymous: 
+Execute Anonymous: List<Maritz_Case_Mappings_ForAdditionalFields__c> addMappings = Maritz_Case_Mappings_ForAdditionalFields__c.getAll().values();
+Execute Anonymous: for (Maritz_Case_Mappings_ForAdditionalFields__c m : addMappings) {
+Execute Anonymous: 	if (m.Template_Name__c == null || !m.Template_Name__c.equals('Default')) {
+Execute Anonymous: 		toDelete.add(m.id);
+Execute Anonymous: 	}
+Execute Anonymous: }
+Execute Anonymous: 
+Execute Anonymous: List<Maritz_Mappings_Record_Type__c> rtMappings = Maritz_Mappings_Record_Type__c.getAll().values();
+Execute Anonymous: for (Maritz_Mappings_Record_Type__c m : rtMappings) {
+Execute Anonymous: 	if (m.Template_Name__c == null || !m.Template_Name__c.equals('Default')) {
+Execute Anonymous: 		toDelete.add(m.id);
+Execute Anonymous: 	}
+Execute Anonymous: }
+Execute Anonymous: 
+Execute Anonymous: List<Maritz_Mappings_Lookups__c> lookMappings = Maritz_Mappings_Lookups__c.getAll().values();
+Execute Anonymous: for (Maritz_Mappings_Lookups__c m : lookMappings) {
+Execute Anonymous: 	if (m.Template_Name__c == null || !m.Template_Name__c.equals('Default')) {
+Execute Anonymous: 		toDelete.add(m.id);
+Execute Anonymous: 	}
+Execute Anonymous: }
+Execute Anonymous: 
+Execute Anonymous: List<Maritz_Mappings_Ownership__c> ownMappings = Maritz_Mappings_Ownership__c.getAll().values();
+Execute Anonymous: for (Maritz_Mappings_Ownership__c m : ownMappings) {
+Execute Anonymous: 	if (m.Template_Name__c == null || !m.Template_Name__c.equals('Default')) {
+Execute Anonymous: 		toDelete.add(m.id);
+Execute Anonymous: 	}
+Execute Anonymous: }
+Execute Anonymous: 
+Execute Anonymous: if (!toDelete.isEmpty()) {
+Execute Anonymous: 	DataBase.delete(toDelete);
+Execute Anonymous: }
+Execute Anonymous: //
+09:36:46.190 (190390743)|EXECUTION_STARTED
+09:36:46.190 (190401064)|CODE_UNIT_STARTED|[EXTERNAL]|execute_anonymous_apex
+09:36:46.218 (218931930)|CUMULATIVE_LIMIT_USAGE
+09:36:46.218 (218931930)|LIMIT_USAGE_FOR_NS|(default)|
+  Number of SOQL queries: 0 out of 100
+  Number of query rows: 0 out of 50000
+  Number of SOSL queries: 0 out of 20
+  Number of DML statements: 0 out of 150
+  Number of DML rows: 0 out of 10000
+  Maximum CPU time: 0 out of 10000
+  Maximum heap size: 0 out of 6000000
+  Number of callouts: 0 out of 100
+  Number of Email Invocations: 0 out of 10
+  Number of future calls: 0 out of 50
+  Number of queueable jobs added to the queue: 0 out of 50
+  Number of Mobile Apex push calls: 0 out of 10
+
+09:36:46.218 (218931930)|CUMULATIVE_LIMIT_USAGE_END
+
+09:36:46.218 (218969450)|CODE_UNIT_FINISHED|execute_anonymous_apex
+09:36:46.220 (220343179)|EXECUTION_FINISHED

@@ -1,0 +1,54 @@
+<apex:page controller="Controller_PreCall_Forms" showHeader="false" cache="true" expires="600">
+
+    <style type="text/css">
+        .detailList {
+            margin-left: 120px;
+        }
+   
+        .bPageBlock {
+            background-image: url('{!$Resource.PreCall_Forms_Background}') !important;
+            background-position: top !important;
+            width: 677px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            min-height: 810px;
+        }
+        td {
+            padding-bottom: 5px !important; 
+        }
+        .bPageBlock .labelCol {
+            font-size: 14px;
+        }
+        body {
+            font-size: 14px !important;
+        }
+        /*.bPageBlock .detailList .labelCol {
+            width: 60% !important;
+        }*/
+        textarea {
+            width: 400px !important;
+        }
+        b {
+            font-size: 14px;
+        }
+            
+
+    </style>
+    <script type="text/javascript">
+          document.onreadystatechange = function(e)
+        {
+            if (document.readyState === 'interactive')
+            {
+               var finishBtn = document.getElementById("j_id0:j_id2:i:f:pb:pbb:finish");
+               finishBtn.value = "Next";
+
+               var verbiage = document.getElementById("j_id0:j_id2:i:f:pb:d:ThisIsNotYourApproval");
+               verbiage.style.color = "#FF0000";
+               verbiage.style.fontWeight = "bold";
+            }
+        };
+
+    </script>
+
+    <flow:interview name="PreCall_Forms" interview="{!myflow}" buttonLocation="bottom" finishLocation="{!OID}"/>
+</apex:page>

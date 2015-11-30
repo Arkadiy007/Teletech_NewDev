@@ -1,0 +1,35 @@
+<apex:page controller="SurveyGizmo_UtilsPage">
+<apex:form >
+    
+  
+    <apex:outputPanel id="myPanel">
+          
+             <apex:outputText escape="false" value="{!outputHTML}"> </apex:outputText>
+
+      </apex:outputPanel>
+      <br/><br/>
+      <apex:pageblock title="Error Log records">
+      <apex:pageBlockTable value="{!errs}" var="thiserr">
+           <apex:column value="{!thiserr.id}"/>
+           <apex:column value="{!thiserr.createddate}"/>
+           
+           <apex:column value="{!thiserr.Error_Message__c}"/>
+           </apex:pageBlockTable>
+          </apex:pageblock>
+           
+      <apex:actionFunction name="aSelectItem" action="{!refreshState}" rerender="myPanel"></apex:actionfunction>
+</apex:form>
+
+<input type="button" onclick="callit()" value="refresh"></input>
+
+    <script type="text/javascript">
+function callit()
+{
+
+
+   aSelectItem();
+  }
+  callit();
+ </script>
+
+</apex:page>

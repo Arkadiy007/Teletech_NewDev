@@ -1,0 +1,47 @@
+<apex:page controller="ElectronicCase_Controller">
+    <apex:form >
+        <apex:pagemessages id="msg"></apex:pagemessages>
+        <apex:outputtext id="ind" value="{!screenIndex}"></apex:outputtext>
+        <apex:outputpanel id="screenPanel">
+            <apex:pageblock title="Contact Information" id="firstScreen" rendered="{!renderFirst}">
+                <apex:outputlabel value="Dealer: " />
+                <apex:inputtext title="Dealer" value="{!dealerName}" />
+                <br />
+                <apex:outputlabel value="Select Dealer Code: " />
+                <apex:inputtext title="Dealer Code" value="{!dealerCode}" />
+            </apex:pageblock>
+            <apex:pageblock title="Contact Information" id="secondScreen" rendered="{!renderSecond}">
+                <apex:outputlabel value="Technician Name: " />
+                <apex:inputtext title="Technician Name" value="{!techName}" />
+                <br />
+                <apex:outputlabel value="LMS ID: " />
+                <apex:inputtext title="LMS ID" value="{!lmsId}" />
+                <br />
+                <apex:outputlabel value="Profiency Level: " />
+                <apex:inputtext title="Profiency Level" value="{!profLevel}" />
+                <br />
+                <apex:outputlabel value="Cell Number: " />
+                <apex:inputtext title="Cell Number" value="{!cellNumber}" />
+                <br />
+                <apex:outputlabel value="Email Address: " />
+                <apex:inputtext title="Email Address" value="{!emailAddr}" />
+                <br />
+                <apex:outputlabel value="Preferred Method: " />
+                <apex:inputtext title="Preferred Method" value="{!prefMethod}" />
+            </apex:pageblock>
+            <apex:pageblock title="Vehicle Information" id="thirdScreen" rendered="{!renderThird}">
+                <apex:outputlabel value="Vehicle: " />
+                <apex:inputtext title="Vehicle" value="{!vin}" />
+                <br />
+                <apex:outputlabel value="Customer Name: " />
+                <apex:inputtext title="Customer Name" value="{!customerName}" />
+                <br />
+                <apex:outputlabel value="Mileage: " />
+                <apex:inputtext title="Mileage" value="{!mileage}" />               
+            </apex:pageblock>
+        </apex:outputpanel>
+            <apex:outputpanel id="buttons">
+                <apex:commandbutton value="Next" action="{!goToNextScreen}" rerender="screenPanel,msg,ind,buttons"></apex:commandbutton>
+            </apex:outputpanel>
+</apex:form>
+</apex:page>

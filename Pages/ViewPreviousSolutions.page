@@ -1,0 +1,149 @@
+<apex:page standardController="Case" doctype="html-5.0" extensions="PreviousSolutionsController">
+
+<apex:stylesheet value="{!URLFOR($Resource.jQueryDataTables, 'css/jquery.dataTables.css')}"/>
+    <style type="text/css">
+       .configPage_Header_Title {
+        font-size: 1.8em;
+        font-weight: normal;
+        line-height: 1.1em;
+        font-family: Arial,Helvetica,sans-serif;
+    }
+        .configPage_Header_Icon {
+       margin-top: 15px;
+       width: 32px;
+       height: 32px;
+       float: left;
+    }
+        .configPage_Header {
+       margin-bottom: 32px;
+    }
+        .configPage_Header_div {
+        margin: 0 0 0 37px;
+        font-size: .9em;
+        font-weight: bold;
+        color: #4a4a56;
+    }
+    .sorting {
+        background: #f2f3f3 url('{! URLFOR($Resource.jQueryDataTables, 'images/sort_both.png') }') no-repeat center right !important;
+        padding-right: 20px !important;
+    }
+    .sorting_asc {
+        background: #f2f3f3 url('{! URLFOR($Resource.jQueryDataTables, 'images/sort_asc.png') }') no-repeat center right !important;
+        padding-right: 20px !important;
+    }
+    .sorting_desc {
+        background: #f2f3f3 url('{! URLFOR($Resource.jQueryDataTables, 'images/sort_desc.png') }') no-repeat center right !important;
+        padding-right: 20px !important;
+    }
+    .sorting_asc_disabled {
+        background: #f2f3f3 url('{! URLFOR($Resource.jQueryDataTables, 'images/sort_asc_disabled.png') }') no-repeat center right !important;
+        padding-right: 20px !important;
+    }
+    .sorting_desc_disabled {
+        background: #f2f3f3 url('{! URLFOR($Resource.jQueryDataTables, 'images/sort_desc_disabled.png') }') no-repeat center right !important;
+        padding-right: 20px !important;
+    }
+    table.dataTable tr.odd { background-color: white; }
+    table.dataTable tr.even { background-color: white; }
+    table.dataTable tr.odd td.sorting_1 { background-color: white; }
+    table.dataTable tr.odd td.sorting_2 { background-color: white; }
+    table.dataTable tr.odd td.sorting_3 { background-color: white; }
+    table.dataTable tr.even td.sorting_1 { background-color: white; }
+    table.dataTable tr.even td.sorting_2 { background-color: white; }
+    table.dataTable tr.even td.sorting_3 { background-color: white; }
+    .dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
+        padding: 3px;
+    }
+</style>
+
+
+
+
+<script type="text/javascript" language="javascript">
+    function busyCursorOn() {
+         document.getElementById('blockbckanim').style.display="block";
+         document.getElementById('quickRepPage:page').style.cursor="wait";
+
+         j$('.btn').attr("disabled", "disabled");
+     }
+
+     function busyCursorOff() {
+         document.getElementById('blockbckanim').style.display="none";
+         document.getElementById('quickRepPage:page').style.cursor="auto";
+
+         j$('.btn').removeAttr("disabled");
+      }
+
+</script>
+
+
+<apex:form id="page">
+
+<apex:actionStatus id="busyCursor" onStart="busyCursorOn()" onStop="busyCursorOff()"/>
+
+<apex:pageblock id="searchParamsBlock" title="Search Parameters">
+      <apex:pageblocksection columns="2" collapsible="false" showheader="false" title="">
+        <apex:repeat value="{!stringFilters}" var="stringLabel">
+            <apex:inputText value="{!stringFilters[stringLabel]}" label="{!stringLabel}" size="20"/>  
+        </apex:repeat>
+      </apex:pageblocksection>
+     <apex:pageblocksection columns="2" collapsible="false" showheader="false" title="">
+          <apex:input label="Start Time Filter" value="{! startTimeFilter }" type="auto"/>
+          <apex:input label="End Time Filter" value="{! endTimeFilter }" type="auto"/>
+      </apex:pageblocksection>
+      <apex:commandbutton value="Search" title="Search" action="{!search}"  status="busyCursor"  style="width: 70px;" rerender="page"/>
+                       
+    </apex:pageblock>
+
+         
+            <div id="blockbckanim" style="width: 100%; height: 100%; display: none; position: relative; z-index: 5; ">
+                <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; margin: 0; text-align: center;">
+                    <img id="apimgld" style="" src="/img/loading32.gif" />
+                </div>
+            </div>
+<apex:pageBlock title="Previous Solutions">
+
+    <apex:pageMessages rendered="{!!relatedRecordsAvailable}" />
+
+    <apex:pageBlockTable value="{!relatedRecords}" var="caseWrapper" styleClass="dataTable"  rendered="{!relatedRecordsAvailable}">  
+	            	  <apex:column headerValue="Subject">
+           <apex:outputText value="{!caseWrapper.subject}" />
+        </apex:column>
+
+
+        <apex:column headerValue="Model Make">
+           <apex:outputText value="{!caseWrapper.make}"/>
+        </apex:column>
+
+        <apex:column headerValue="Model Line">
+           <apex:outputText value="{!caseWrapper.model_line}" />
+        </apex:column>
+
+        <apex:column headerValue="Model Year">
+           <apex:outputText value="{!caseWrapper.model_year}" />
+        </apex:column>
+
+         <apex:column headerValue="Region">
+           <apex:outputText value="{!caseWrapper.regiona}" />
+        </apex:column>
+
+         <apex:column headerValue="Dealer Code">
+           <apex:outputText value="{!caseWrapper.dealer_code}" />
+        </apex:column>
+	</apex:pageBlockTable>
+
+
+    
+</apex:pageBlock>
+
+           <script type="text/javascript" language="javascript" src="{!URLFOR($Resource.jQueryDataTables, 'js/jquery.js')}"></script>
+            <script type="text/javascript" language="javascript" src="{!URLFOR($Resource.jQueryDataTables, 'js/jquery.dataTables.js')}"></script>
+            <script type="text/javascript" language="javascript">
+             var j$ = jQuery.noConflict();
+             j$('table.dataTable').dataTable({
+                 sPaginationType: "full_numbers"
+             });
+        </script>
+</apex:form>
+
+</apex:page>

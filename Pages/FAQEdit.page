@@ -1,0 +1,118 @@
+<apex:page controller="FAQEditController" doctype="html-5.0">
+    <script>
+        function makeFileloadVisible(input) {
+            if(input.checked) document.getElementById('inputFilesBlock').style.display = "block";
+            else document.getElementById('inputFilesBlock').style.display = "none";
+        }
+
+        function ShowLoading() {
+            document.getElementById('blockbckanim').style.display="block";
+         }
+       
+    </script>
+    <style>
+      .bPageBlock .detailList .labelCol {
+         width: 8%;
+        }
+      .homeTab .tertiaryPalette, .individualPalette .homeBlock .tertiaryPalette, .layoutEdit .individualPalette .homeBlock .tertiaryPalette {
+         background-color: #00A2D7;
+         border-color: #cfeef8;
+        }
+    </style>
+
+    <apex:form id="frm">
+            
+
+            <apex:pageblock >
+            <apex:pageMessages />
+            
+                          
+            <apex:outputpanel layout="block" style="margin:5px;padding:10px;padding-top:2px;">
+                <apex:pageblocksection title="FAQ Object Edit" columns="1" >
+                    <apex:pageblocktable value="{!items}" var="itm" columnsWidth="10%, 20%, 70%, 10%">    
+                               <apex:column >
+                                   <apex:facet name="header">Sort Order</apex:facet>
+                                          <apex:inputText value="{!itm.OrderNUmber}"/>
+                                   </apex:column>
+                             <apex:column >
+                                   <apex:facet name="header">Question</apex:facet>
+                                          <apex:inputTextArea value="{!itm.Question}"  label="Question" style="width: 95%; height: 60%" tabindex="200"/>
+                                   </apex:column>
+                            <apex:column >
+                                   <apex:facet name="header">Answer</apex:facet>
+                                          <apex:inputTextArea richText="true" value="{!itm.Answer}"/>
+                                   </apex:column>
+                             <apex:column >
+                                   <apex:facet name="header">Delete Question?</apex:facet>
+                                          <apex:inputCheckbox value="{!itm.IsDeleted}"/> 
+                             </apex:column>
+                                           
+                           </apex:pageblocktable>
+                    
+                    
+                </apex:pageblocksection>
+                <apex:pageblocksection title="Add new row?" columns="1">
+                    <apex:inputCheckbox value="{!showBAImgLoaderBlock}" label="Add new row?" onchange="makeFileloadVisible(this);"/>
+                </apex:pageblocksection>
+                
+                <div id="inputFilesBlock" style="display: none;">
+                    <apex:pageblocksection title="FAQ Row" columns="2" >
+                                <apex:inputTextArea value="{!newQuestion.Question}" label="Question" style="width: 95%; height: 100%"/>
+                                <apex:inputTextArea richText="true" value="{!newQuestion.Answer}" label="Answer"/>
+                                <apex:input type="number" value="{!orderNum}" label="Order Number"/>
+                     </apex:pageblocksection>   
+                </div>
+            </apex:outputpanel>
+            
+                
+                  <apex:inputHidden value="{!errorMsgAvailable}" id="myHiddenField" immediate="true"/>
+      
+            <apex:actionFunction name="doControllerSave" action="{!saveAndPreview}" status="processing" oncomplete="onControllerReturn('{!errorMsgAvailable}');"/>
+
+         
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Save" action="{!save}" /> 
+                <apex:commandButton value="Send For Approval" action="{!saveAndSubmit}"/>
+                <apex:commandButton value="Save And Preview" onclick="doControllerSave();return false; "/>  
+             </apex:pageBlockButtons>
+        </apex:pageblock>
+
+         <script src="{!$Resource.jQuery1_8}"></script>
+                <script>
+
+               $( document ).ready(function() {
+                  
+                        $( "input[type=checkbox]" ).prop("checked", false);
+                    
+                });
+
+                </script>
+                <script>  
+                function onControllerReturn(val) {
+                  $( "input[type=checkbox]" ).prop("checked", false);
+                 //console.log($('[id$=myHiddenField]').val());
+                 //if($('[id$=myHiddenField]').val() == 'false')
+                 console.log(val);
+                 if(val == 'false')
+                    {
+                    var params = [
+                         'height='+screen.height,
+                         'width='+screen.width,
+                        'fullscreen=yes'
+                            ].join(',');
+
+                     var popup = window.open('/apex/FAQ?version=test', '', params);
+                     popup.moveTo(0,0);
+                     window.open ('/apex/FAQEdit?sfdc.tabName=01rM00000009E97','_self',false);
+                   
+                } else {
+                    alert('Please ensure that order numbers are unique and question field is populated');
+                  
+                } 
+                }
+             </script>
+        
+
+    </apex:form> 
+       
+</apex:page>

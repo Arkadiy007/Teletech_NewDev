@@ -1,0 +1,105 @@
+<apex:page Controller="ArchivedTasksController">
+    <apex:stylesheet value="{!URLFOR($Resource.jQueryDataTables, 'css/jquery.dataTables.css')}"/>
+    <style type="text/css">
+       .configPage_Header_Title {
+        font-size: 1.8em;
+        font-weight: normal;
+        line-height: 1.1em;
+        font-family: Arial,Helvetica,sans-serif;
+    }
+        .configPage_Header_Icon {
+       margin-top: 15px;
+       width: 32px;
+       height: 32px;
+       float: left;
+    }
+        .configPage_Header {
+       margin-bottom: 32px;
+    }
+        .configPage_Header_div {
+        margin: 0 0 0 37px;
+        font-size: .9em;
+        font-weight: bold;
+        color: #4a4a56;
+    }
+    .sorting {
+        background: #f2f3f3 url('{! URLFOR($Resource.jQueryDataTables, 'images/sort_both.png') }') no-repeat center right !important;
+        padding-right: 20px !important;
+    }
+    .sorting_asc {
+        background: #f2f3f3 url('{! URLFOR($Resource.jQueryDataTables, 'images/sort_asc.png') }') no-repeat center right !important;
+        padding-right: 20px !important;
+    }
+    .sorting_desc {
+        background: #f2f3f3 url('{! URLFOR($Resource.jQueryDataTables, 'images/sort_desc.png') }') no-repeat center right !important;
+        padding-right: 20px !important;
+    }
+    .sorting_asc_disabled {
+        background: #f2f3f3 url('{! URLFOR($Resource.jQueryDataTables, 'images/sort_asc_disabled.png') }') no-repeat center right !important;
+        padding-right: 20px !important;
+    }
+    .sorting_desc_disabled {
+        background: #f2f3f3 url('{! URLFOR($Resource.jQueryDataTables, 'images/sort_desc_disabled.png') }') no-repeat center right !important;
+        padding-right: 20px !important;
+    }
+    table.dataTable tr.odd { background-color: white; }
+    table.dataTable tr.even { background-color: white; }
+    table.dataTable tr.odd td.sorting_1 { background-color: white; }
+    table.dataTable tr.odd td.sorting_2 { background-color: white; }
+    table.dataTable tr.odd td.sorting_3 { background-color: white; }
+    table.dataTable tr.even td.sorting_1 { background-color: white; }
+    table.dataTable tr.even td.sorting_2 { background-color: white; }
+    table.dataTable tr.even td.sorting_3 { background-color: white; }
+    .dataTables_length, .dataTables_filter, .dataTables_info, .dataTables_paginate {
+        padding: 3px;
+    }
+    </style>
+
+    <div class="configPage_Header">
+      <img src="/img/icon/invoices24.png" class="configPage_Header_Icon"/>
+      <div class="blank">&nbsp;</div>
+      <div class="configPage_Header_div">
+          Archived Activities
+      </div>  
+      <div class="configPage_Header_div">
+      <apex:outputlink styleClass="configPage_Header_Title" value="/{!AccountId}">{!Acc.Name}</apex:outputlink>     
+      </div>
+   </div>
+   
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockTable value="{!Tasks}" var="task" styleClass="dataTable">  
+	            	<apex:column headerValue="Subject" value="{!task.Description}">
+	            	</apex:column>
+                    <apex:column headerValue="Name">
+                        <apex:outputLabel escape="false" value="{!task.AccountId}"/>
+                    </apex:column>
+                    <apex:column headerValue="Related To">
+	            		<apex:outputLabel escape="false" value="{!task.WhatId}"/>
+	            	</apex:column>
+                    <apex:column headerValue="Task">
+	            		<apex:inputCheckbox value="{!IsTask}" disabled="true"/>
+	            	</apex:column>
+                    <apex:column headerValue="Due Date">
+	            		<apex:outputLabel escape="false" value="{!task.ActivityDate}"/>
+	            	</apex:column>
+                    <apex:column headerValue="Assigned To">
+	            		<apex:outputLabel escape="false" value="{!task.OwnerId}"/>
+	            	</apex:column>
+                    <apex:column headerValue="Last Modified Date/Time">
+	            		<apex:outputLabel escape="false" value="{!task.LastModifiedDate}"/>
+	            	</apex:column>
+	            </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageblock>
+        <script type="text/javascript" language="javascript" src="{!URLFOR($Resource.jQueryDataTables, 'js/jquery.js')}"></script>
+            <script type="text/javascript" language="javascript" src="{!URLFOR($Resource.jQueryDataTables, 'js/jquery.dataTables.js')}"></script>
+            <script type="text/javascript" language="javascript">
+             var j$ = jQuery.noConflict();
+             j$('table.dataTable').dataTable({
+                 sPaginationType: "full_numbers"
+             });
+        </script>
+    </apex:form>
+</apex:page>

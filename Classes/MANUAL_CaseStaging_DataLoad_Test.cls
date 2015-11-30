@@ -1,0 +1,51 @@
+/**********************************************************************
+Name: MANUAL_CaseStaging_DataLoad_Test
+Copyright © notice: Nissan Motor Company.
+======================================================
+Purpose:
+This is a test for MANUAL_Batch_CaseStaging_DataLoad.cls.
+ 
+======================================================
+History: 
+
+VERSION AUTHOR DATE DETAIL
+1.0 - Will Taylor 4/23/2014 Created 
+***********************************************************************/
+@isTest
+private class MANUAL_CaseStaging_DataLoad_Test {
+
+    static testMethod void MANUAL_CaseStaging_Test() {
+        List<Vehicle__c> testVehicles = new List<Vehicle__c>();
+        testVehicles.add(new Vehicle__c(Vehicle_identification_Number__c = 'VIN01000010000101', Model_Year__c = '2005'));
+        insert testVehicles;
+
+        RecordType rt = [select id from RecordType where SObjectType = 'Case' and Name = 'CA'];
+
+        State__c state = new State__c(Name = 'CO', Name__c = 'Colorado', Order__c = 1);
+        insert state;
+
+        Account acct = new Account(LastName = 'Test', PersonMailingState = 'CO');
+        insert acct;
+
+        List<Case> cases = new List<Case>();
+        Case c1 = new Case(VIN__c = 'VIN01000010000100',
+                           AccountId = acct.Id,
+                           Dealer_Instructions__c = 'File Reopened',
+                           Who_Called__c = 'P - Parts Department',
+                           Where_Did_This_Originate__c = 'D - Dealership',
+                           What_Is_The_Issue__c = 'AV - Part or Vehicle Availability',
+                           RecordTypeId = rt.Id,
+                           Call_Recording_Id__c = 'ZYXABC');
+        cases.add(c1); 
+                
+        insert cases; 
+        
+        Test.startTest();
+    
+            MANUAL_CaseStaging_DataLoad batch = new MANUAL_CaseStaging_DataLoad();
+            Database.executeBatch(batch);
+    
+        Test.stopTest();
+    }   
+    
+}

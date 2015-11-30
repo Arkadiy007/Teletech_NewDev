@@ -1,0 +1,75 @@
+<apex:page controller="Executive_Case_Tracker_Report_Controller" doctype="html-5.0" action="{!getSettings}">
+
+    <style type="text/css">
+        #blockbckanim {
+            background: rgba(0, 0, 0, 0.2);
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 9999;
+            rgba(0, 0, 0, 0.71);
+            cursor: wait;
+        }
+        #apimgld {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+    </style>
+
+ <script type="text/javascript" language="javascript">
+          function ShowLoading() {
+            document.getElementById('blockbckanim').style.display="block";
+          }
+          function HideLoading() {
+            document.getElementById('blockbckanim').style.display="none";
+          }
+        </script>
+            <apex:actionStatus id="processingStatus" onStart="ShowLoading();" onstop="HideLoading();" />
+        
+    <apex:outputPanel id="outputPanel">
+
+    <apex:form >   
+        <div id="blockbckanim" style="display:none">
+            <img id="apimgld" style="" src="/img/loading32.gif" />
+        </div>
+        <apex:pagemessages />
+        <apex:pageblock title="Executive Case Tracker Report">
+            <apex:pageblockbuttons location="bottom">
+                <apex:commandbutton action="{!generateReport}" value="Generate Report" status="processingStatus" rerender="" />
+                <apex:commandbutton action="{!revertSettings}" value="Cancel" />
+            </apex:pageblockbuttons>
+
+            <apex:pageblocksection columns="1" title="Please set the Case filters below and generate report Executive Case Tracker Report">
+                <!--Record Type Filter-->
+                <apex:pageblocksectionitem >
+                    <apex:outputlabel value="Record Types" />
+                    <apex:selectlist value="{!recordTypes}" multiselect="true" size="15">
+                        <apex:selectoptions value="{!recordTypesSO}" />
+                    </apex:selectlist>
+                </apex:pageblocksectionitem>
+
+                <!--Executive Referral Flag Filter-->
+                <apex:pageblocksectionitem >
+                    <apex:outputlabel value="Executive Referral" />
+                    <apex:inputcheckbox value="{!executiveFlag}" />
+                </apex:pageblocksectionitem>
+
+                <!--Last Modified Date Filter-->
+                <apex:pageblocksectionitem >
+                    <apex:outputlabel value="Last Modified Date From" />
+                    <apex:inputfield value="{!setting.Last_Modified_Date_Filter_From__c}" showdatepicker="true" />
+                </apex:pageblocksectionitem>
+                   
+                 <apex:pageblocksectionitem >
+                    <apex:outputlabel value="Last Modified Date To" />
+                    <apex:inputfield value="{!setting.Last_Modified_Date_Filter_To__c}" showdatepicker="true" />
+                </apex:pageblocksectionitem>
+
+            </apex:pageblocksection>
+        </apex:pageblock>
+    </apex:form>
+        </apex:outputPanel>
+</apex:page>

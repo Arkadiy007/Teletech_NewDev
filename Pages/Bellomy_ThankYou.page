@@ -1,0 +1,52 @@
+<apex:page standardcontroller="Surveys__c" extensions="BellomySurveyController" sidebar="false" showheader="false">
+    <style>
+        .nissan_logo_header {
+            background: url("{!URLFOR($Resource.BellomyNissanLogo)}") no-repeat;
+            height: 100px;
+            width: 300px;
+            text-align: right;
+        }
+
+        .infiniti_logo_header {
+            background: url("{!URLFOR($Resource.BellomyInfinitiLogo)}") no-repeat;
+            height: 100px;
+            width: 300px;
+            text-align: right;
+        }
+
+        .div_radio_scale {
+            width: 200px !important;
+        }
+
+        .div_extremely {
+            display: inline-table;
+        }
+    </style>
+    <script type="text/javascript">
+
+function closeWin() {
+
+         window.close();   // Closes the new window
+
+        }
+
+    </script>
+
+    <apex:form >
+        <apex:outputpanel rendered="{!nissanBrand}">
+            <div style="width: 100%;" class="nissan_logo_header"></div>
+        </apex:outputpanel>
+        <apex:outputpanel rendered="{!infinitiBrand}">
+            <div style="width: 100%;" class="infiniti_logo_header"></div>
+        </apex:outputpanel>
+        <apex:pagemessages id="messages" />
+        <apex:outputpanel id="intro" style="margin-left: 20px; font-size: medium; font-family: Verdana;">
+
+            Thank you very much for your time and opinions.
+            Click here to close your browser window.
+            <br />
+            <apex:commandbutton value="Close" onclick="closeWin();" style="margin-left: 20px; margin-right: auto; margin-top: 20px; width: 150px; height: 32px; font-size: small; " /><br /><br />
+
+        </apex:outputpanel>
+    </apex:form>
+</apex:page>

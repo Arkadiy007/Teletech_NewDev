@@ -1,0 +1,167 @@
+<apex:page >
+    <apex:stylesheet value="{!URLFOR($Resource.NissanStyle, 'NissanStyle.css')}" />
+   <!--  <script type='text/javascript' src='https://c.la1w1.salesforceliveagent.com/content/g/deployment.js'></script>
+    
+<script type='text/javascript'>
+        liveagent.setChatWindowHeight(526);
+        liveagent.setChatWindowWidth(500);
+liveagent.init('https://d.la1w1.salesforceliveagent.com/chat', '572F00000008OSf', '00DA00000009j8L');
+</script>
+
+    <h1>Live Agent</h1>
+    <br />
+    <br />
+
+    <img id="liveagent_button_online_573F00000008OSz" style="display: none; border: 0px none; cursor: pointer" onclick="liveagent.startChat('573F00000008OSz')" src="https://nna.secure.force.com/chat/resource/1371682948000/LiveAgentButton" /><img id="liveagent_button_offline_573F00000008OSz" style="display: none; border: 0px none; " src="https://nna.secure.force.com/chat/resource/1371682974000/LiveAgentButtonNotAvailable" />
+<script type="text/javascript">
+if (!window._laq) { window._laq = []; }
+window._laq.push(function(){liveagent.showWhenOnline('573F00000008OSz', document.getElementById('liveagent_button_online_573F00000008OSz'));
+liveagent.showWhenOffline('573F00000008OSz', document.getElementById('liveagent_button_offline_573F00000008OSz'));
+});</script>
+
+    <br />
+    <br />
+    <br />
+    <br /> -->
+    
+    <!-- <button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_WebToCase?style=NewNissan','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">TEST W2C - Nissan</button>
+    <button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_WebToCase?style=NCV','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">TEST W2C - NCV</button>
+    <br />
+    <br />
+    <br />
+     -->
+    
+   
+    <h1>PROD - Department Implementations</h1>
+    <br />
+    <button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiCA ','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti CA</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiConnection ','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti Connection</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiOwnerServices ','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti Owner Services</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanReservations','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch MCC 2014 Nissan Rogue</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiInbound ','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch MCC Infiniti Inbound - shoppers</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_NCV?routingGroup=NissanCommercialVehicles','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch MCC Nissan Commercial Vehicles</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanInbound ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch MCC Nissan Inbound - shoppers</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanOwnerServices ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Nissan Owner Services</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanConnect ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch NissanConnect</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiWebsite ','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch NO TRANSFERS MCC Infiniti website</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanWebsite ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch NO TRANSFERS MCC Nissan website</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiCustomerLoyalty','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch NO TRANSFERS MCC OB Infiniti</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanCustomerLoyalty','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch NO TRANSFERS MCC OB Nissan</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Infiniti_Direct?routingGroup=TInfiniti','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch NO TRANSFERS MCC Test Infiniti</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Nissan_Direct?routingGroup=TNissan','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch NO TRANSFERS MCC Test Nissan</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Infiniti_Direct?routingGroup=SocialSupportInfiniti ','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Social Support Infiniti</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Nissan_Direct?routingGroup=SocialSupportNissan ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Social Support Nissan</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_NewLeafDirect?routingGroup=LEAF','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Leaf Direct</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_NewLeafDirect?routingGroup=Telematics','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Telematics</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_NewLeafDirect?routingGroup=EVAftersales ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch EV Aftersales</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Leaf_Direct_Complete?routingGroup=LEAF ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch LEAF with selection</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_NewNissan?routingGroup=NissanWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch New Nissan with selection</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_NewInfiniti?routingGroup=InfinitiWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch New Infiniti with selection</button><br/>
+<button onclick="window.open('{!$Label.LiveAgent_SiteURL}/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiVCS','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Infiniti VCS</button><br/>
+ 
+    
+    <div style='display:{!if($Label.LiveAgent_ShowQALinks="false", "none", "block")}'>
+        <br/>
+    <h1>QA - Department Implementations</h1>
+    <br />
+    <i>(Page used for testing purposes)</i><br />
+    <br />
+    <!-- <button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=DPIC_Nissan','DPIC','scrollbars=no,resizable=no,width=500,height=526');">Launch DPIC Nissan</button><br/>  -->
+    
+    <button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_DPIC_Nissan?routingGroup=DPIC_Nissan','DPIC','scrollbars=no,resizable=no,width=500,height=526');">Launch DPIC Nissan</button><br/>
+    <button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiCA ','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti CA</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiConnection ','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti Connection</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiOwnerServices ','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti Owner Services</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanReservations','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch MCC 2014 Nissan Rogue</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiInbound ','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch MCC Infiniti Inbound - shoppers</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_NCV?routingGroup=NissanCommercialVehicles','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch MCC Nissan Commercial Vehicles</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanInbound ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch MCC Nissan Inbound - shoppers</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanOwnerServices ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Nissan Owner Services</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanConnect ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch NissanConnect</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiWebsite ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch NO TRANSFERS MCC Infiniti website</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanWebsite ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch NO TRANSFERS MCC Nissan website</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiCustomerLoyalty','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch NO TRANSFERS MCC OB Infiniti</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanCustomerLoyalty','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch NO TRANSFERS MCC OB Nissan</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=TInfiniti','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch NO TRANSFERS MCC Test Infiniti</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=TNissan','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch NO TRANSFERS MCC Test Nissan</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=SocialSupportInfiniti','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Social Support Infiniti</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=SocialSupportNissan','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Social Support Nissan</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_NewLeafDirect?routingGroup=LEAF','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Leaf Direct</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_NewLeafDirect?routingGroup=Telematics','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Telematics</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_NewLeafDirect?routingGroup=EVAftersales ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch EV Aftersales</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Leaf_Direct_Complete?routingGroup=LEAF ','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch LEAF with selection</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_NewNissan?routingGroup=NissanWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch New Nissan with selection</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_NewInfiniti?routingGroup=InfinitiWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch New Infiniti with selection</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiVCS','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Infiniti VCS</button><br/>
+    <br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanTest2','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Nissan Test 2</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiTest2','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti Test 2</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanMotorAcceptanceCorporation','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Nissan Motor Acceptance Corporation</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=Infiniti_DealerContacted','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti Dealer Contacted</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=NissanHotAlerts','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Nissan Hot Alerts</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=Nissan_DealerContacted','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Nissan Dealer Contacted</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=Nissan_DealerNotContacted','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Nissan Dealer Not Contacted</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiFinancialServices','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti Financial Services</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiHotAlerts','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti Hot Alerts</button><br/>
+<button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Infiniti_Direct?routingGroup=Infiniti_DealerNotContacted','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti Dealer Not Contacted</button><br/>
+<button onclick="window.open('http://qa-nna.cs16.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=ChooseNissan','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Choose Nissan</button><br />       
+    </div>
+    
+    <div style='display:{!if($Label.LiveAgent_ShowQALinks="false", "none", "block")}'>
+        <br/>
+    <h1>NewDev - Department Implementations</h1>
+    <br />
+    <i>(Page used for testing purposes)</i><br />
+    <br />
+    <!-- <button onclick="window.open('http://qa-nna.cs14.force.com/livechat/LiveAgent_Nissan_Direct?routingGroup=DPIC_Nissan','DPIC','scrollbars=no,resizable=no,width=500,height=526');">Launch DPIC Nissan</button><br/>  -->
+    
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_DPIC_Nissan?routingGroup=DPIC_Nissan','DPIC','scrollbars=no,resizable=no,width=500,height=516');">Launch DPIC Nissan</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/livechat/LiveAgent_Infiniti_Direct?routingGroup=InfinitiCA ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Infiniti CA</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=InfinitiConnection ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Infiniti Connection</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=InfinitiOwnerServices ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Infiniti Owner Services</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=NissanReservations','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch MCC 2014 Nissan Rogue</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=InfinitiInbound ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch MCC Infiniti Inbound - shoppers</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NCV?routingGroup=NissanCommercialVehicles','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch MCC Nissan Commercial Vehicles</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=NissanInbound ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch MCC Nissan Inbound - shoppers</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=NissanOwnerServices ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan Owner Services</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=NissanConnect ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch NissanConnect</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=InfinitiWebsite ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch NO TRANSFERS MCC Infiniti website</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=NissanWebsite ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch NO TRANSFERS MCC Nissan website</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=InfinitiCustomerLoyalty','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch NO TRANSFERS MCC OB Infiniti</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=NissanCustomerLoyalty','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch NO TRANSFERS MCC OB Nissan</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=TInfiniti','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch NO TRANSFERS MCC Test Infiniti</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=TNissan','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch NO TRANSFERS MCC Test Nissan</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=SocialSupportInfiniti','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Social Support Infiniti</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=SocialSupportNissan','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Social Support Nissan</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NewLeafDirect?routingGroup=LEAF','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Leaf Direct</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NewLeafDirect?routingGroup=Telematics','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Telematics</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NewLeafDirect?routingGroup=EVAftersales ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch EV Aftersales</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Leaf_Direct_Complete?routingGroup=LEAF ','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch LEAF with selection</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NewNissan?routingGroup=NissanWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch New Nissan with selection</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NewInfiniti?routingGroup=InfinitiWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch New Infiniti with selection</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=InfinitiVCS','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Infiniti VCS</button><br/>
+        <br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=NissanTest2','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan Test 2</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=InfinitiTest2','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Infiniti Test 2</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NMAC_Direct?routingGroup=NissanMotorAcceptanceCorporation','LiveAgent','scrollbars=no,resizable=no,width=500,height=526');">Launch Nissan Motor Acceptance Corporation</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=Infiniti_DealerContacted','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Infiniti Dealer Contacted</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=NissanHotAlerts','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan Hot Alerts</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=Nissan_DealerContacted','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan Dealer Contacted</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=Nissan_DealerNotContacted','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan Dealer Not Contacted</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_IFS_Direct?routingGroup=InfinitiFinancialServices','LiveAgent','scrollbars=no,resizable=no,width=500,height=536');">Launch Infiniti Financial Services</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=InfinitiHotAlerts','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Infiniti Hot Alerts</button><br/>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Infiniti_Direct?routingGroup=Infiniti_DealerNotContacted','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Infiniti Dealer Not Contacted</button><br />
+      <br />
+        <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NewNissan_Mini?routingGroup=NissanWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan Mini</button><br />
+        <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NewNissan_MiniEmail?routingGroup=NissanWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan Mini Email</button><br />
+        <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NewNissan_MiniZip?routingGroup=NissanWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan Mini Zip</button><br />
+        <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_NewNissan_2?routingGroup=NissanWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan with Global Nav</button><br />
+      <br />
+    </div>
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_Direct?routingGroup=ChooseNissan','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Choose Nissan</button><br />
+      <br />
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveChat_Nissan_Mobile_Site_1?routingGroup=NissanWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan For Mobile Site Version 1</button><br />
+    <button onclick="window.open('https://c.cs7.visual.force.com/apex/LiveAgent_Nissan_MS?routingGroup=NissanWebsite','LiveAgent','scrollbars=no,resizable=no,width=500,height=516');">Launch Nissan For Mobile Site Version 2</button><br />
+
+    
+</apex:page>

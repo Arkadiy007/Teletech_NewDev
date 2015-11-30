@@ -1,0 +1,548 @@
+<apex:page docType="html-5.0" controller="LiveAgent_PreChat" showHeader="false" id="page">
+
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+    <apex:stylesheet value="{!URLFOR($Resource.NissanStyle, 'NissanStyle.css')}" />
+
+    <style>
+             /* Descktop (portrait and landscape) ----------- */
+       @media screen         
+        {
+            [id*=inputTextField] {
+                max-width: 200px;
+            }
+            .bPageBlock .labelCol, body .print .topics-label {
+            padding-right: 2px;
+            }
+            /*Buttons*/
+            .buttonPosition {
+                position: absolute; 
+                top: 310px; 
+                left: 330px;
+            }
+            .pleaseWaitPosition {
+                position: absolute; 
+                top: 410px;  
+                left: 290px; 
+                color: #666666 !important; 
+                font-style: italic;
+            }
+            /**/
+            .contentInputLable {
+                height: 305px; 
+                padding-top: 35px;
+            }
+            /*Texts*/
+            .livechat_footer_txt {
+                text-align:left; 
+                width:483px;
+            }
+            .livechat_thankyou_txt {
+                position:absolute !important;
+                text-align:right; 
+                width:270px !important;
+                font-family: Verdana, Geneva, sans-serif !important;
+                color: #333 !important;
+                font-size: 13px !important;
+                top: 310px;
+            }
+            .livechat_txt {
+                padding-left: 0px !important; 
+                width:490px !important;
+            }
+            /*Div*/
+            .inputAreaDesktop {
+                display: block;
+                padding-left: 40px !important;
+                width: 450px !important;
+                padding-top: 5px;
+            }
+            .livechat_infiniti_header {
+                width:500px;
+            }
+            .livechat_infiniti_bg {
+                width:500px;
+            }
+            .content_div {
+                height: 375px; 
+                padding-top: 10px;
+            }
+           body {
+                overflow-y: visible;
+                touch-action: pan-y;
+            }
+           .infiniti-btn-startchat {
+                text-indent:-9999px;
+            }
+        }
+
+        /* iPhone 5,6 ----------- */
+        /* Smartphones (landscape) ----------- */
+        @media screen 
+        and (min-aspect-ratio: 1/1)
+        and (min-device-width : 605px)
+        and (max-device-width : 640px),
+             
+        screen and (min-aspect-ratio: 1/1)
+        and (max-device-width : 599px)       
+        {
+            [id*=inputTextField] {
+                max-width: 180px !important;
+                width:180px;
+            }
+            
+            .bPageBlock .labelCol, body .print .topics-label {
+            padding-right: 2px;
+            }
+            .data2Coll {
+                padding-left: 0px !important;
+            }
+            
+             /*Buttons*/
+            .buttonPosition {
+                position: absolute; 
+                top: 225px; 
+                left: 365px;
+            }
+            
+            .pleaseWaitPosition {
+                position: absolute; 
+                top: 310px; 
+                width:auto;
+                max-width:400px;
+                color: #666666 !important; 
+                font-style: italic;
+            }
+            
+            /**/
+            .livechat_infiniti_header {
+                height:67px !important;
+                width:100% !important;
+                text-align:right;
+            }
+            /**/
+            .contentInputLable {
+                height: 305px; 
+                padding-top: 0px;
+            }
+            /*Texts*/
+            .livechat_footer_txt {
+                position:absolute;
+                top: 287px; 
+                width:auto;
+                max-width:400px;
+                text-align:center; 
+                -webkit-text-size-adjust: 100%;             
+            }
+            .livechat_thankyou_txt {
+                position:absolute;
+                top:132px;
+                left:365px;
+                width:100px !important;
+                font-family: Verdana, Geneva, sans-serif !important;
+                color: #333 !important;
+                font-size: 13px !important;
+            }
+
+            /*Div*/
+
+            .inputAreaDesktop {
+                width:480px !important;
+                padding-top: 0px !important;
+                padding-left: 10px !important;
+            }
+
+            .livechat_infiniti_bg {
+                background:none !important;
+                width:100% !important;
+                height:100px !important;
+            }
+            .livechat_txt {
+                width:480px !important;
+                -webkit-text-size-adjust: 100%; 
+            }
+            .contentAreaContainer {
+                height: 250px !important;
+                padding-top: 0px !important;
+            }
+            
+            .content_div {
+                height:auto !important;
+            }
+            .infiniti-btn-startchat {
+                text-indent:-9999px;
+            }
+        }      
+        
+        /* Smartphones (portrait) ----------- */
+        @media screen  
+        and (min-width : 320px)
+        and (max-width : 479px)
+        {
+            [id*=inputTextField] {
+                width: 170px;
+                max-width: 170px;
+            }
+
+            .livechat_txt_main_fields {
+                font-weight:normal !important;
+            }
+
+			.livechat_txt {
+                width:290px !important;
+                padding-left:20px !important;
+                -webkit-text-size-adjust: 100%; 
+            }
+            .bPageBlock .labelCol, body .print .topics-label {
+                padding-right: 2px;
+            }
+            .bPageBlock .detailList .dataCol {
+                width: 30% !important;
+            }
+
+            /*Buttons*/
+            .buttonPosition {
+                position: absolute; 
+                top: 375px; 
+                left: 90px;
+            }
+             
+            .pleaseWaitPosition {
+                position:absolute;
+                left:90px;
+                top:485px;
+                color: #666666 !important; 
+                font-style: italic;
+            }
+            
+            .livechat_infiniti_header {
+                height:77px;
+                width:100%  !important;
+                text-align:right;
+            }
+            /**/
+            .contentInputLable {
+                height: 305px; 
+                padding-top: 35px;
+            }
+            /*Texts*/
+            .livechat_footer_txt {
+                position:absolute;
+                top:410px;
+                text-align:right; 
+                width:auto;
+                max-width:300px;
+                text-align:center; 
+                -webkit-text-size-adjust: 100%;    
+            }
+            .livechat_thankyou_txt {
+                position:absolute;
+                top:320px !important;
+                left:30px !important;
+                width:270px !important;
+                padding-top: 10px !important;
+            }
+            .radioButtonPositionDesktop {
+                display: none;
+            }
+            .radioButtonPositionMobileLandscape {
+                display:block !important;
+                position:absolute;
+                top:280px;
+                left:69px;
+                display: none;
+            }
+            
+            .selectRadio {
+                width:auto !important;
+            }
+            .bPageBlock .detailList .labelCol { /*increase standart width of input labels*/
+                width: 30% !important;
+            }
+            /*Div*/
+            .inputAreaDesktop {
+                width:auto !important;
+                padding-top: 5px !important; 
+                padding-left: 10px !important;
+            }
+
+            .livechat_infiniti_bg {
+                background:none !important;
+                width:100% !important;
+                height:100px;
+            }
+            .contentAreaContainer {
+                padding-top: 0px !important;
+            }
+            .content_div {
+                height:auto !important;
+            }
+            .infiniti-btn-startchat {
+                text-indent:-9999px;
+            }
+
+        }        
+    </style>
+
+     <script type="text/javascript">
+                     var loaded=false;
+        var bypass=false;
+        var lastResize;
+        var timer = null;
+        var counter = 0;
+        var flag = false;
+        var widthDiff =0;
+        var heightDiff=0;
+        
+        document.onreadystatechange = function(e)
+        {
+            if (document.readyState === 'interactive')
+            {
+                initResize();
+            }
+        };
+        
+        function initResize() {
+            if (window.outerWidth==0 || window.outerHeight==0)
+                setTimeout(initResize,50);
+            else {
+                loaded=true;
+                bypass=true;                
+                widthDiff = eval('window.outerWidth - window.innerWidth');
+                heightDiff = eval('window.outerHeight - window.innerHeight');
+                resize(500,516);
+            }
+        }
+
+
+        window.onresize = function()
+        {
+            if (!loaded)
+                return;
+
+                if (flag) {
+                    flag = false; return; }
+
+                if (timer==null)
+                {
+                    flag = false;
+                    counter=0;
+                    if (bypass) 
+                    {
+                        bypass=false;
+                        delayResize();
+                    } else {
+                        timer = setTimeout(function(){delayResize();}, 200);
+                    }
+                    
+                } else {
+                    counter++;
+                }
+        };   
+
+        function delayResize() {
+            timer = null;
+            if (counter==0) {
+                flag=true;
+                if (!resize(500,516))
+                    flag = false;
+            } else {
+                    flag = false;
+                    counter=0;
+                    timer = setTimeout(function(){delayResize();}, 200);
+            }
+        }
+
+        function resize(width, height) {
+            var innerWidth = document.documentElement.clientWidth || window.innerWidth || document.body.clientWidth;
+            var innerHeight = document.documentElement.clientHeight || window.innerHeight || document.body.clientHeight;
+            var targetWidth = width;
+            var targetHeight = height;
+            var heightBy = targetHeight-innerHeight;
+            var widthBy = targetWidth-innerWidth;
+
+            if (widthBy == 0 && heightBy==0)
+            {
+                return false;
+            }
+            else
+            {
+                if (window.outerWidth==innerWidth)
+                {
+                    widthBy+=widthDiff;
+                    heightBy+=heightDiff-(window.outerHeight - window.innerHeight);
+                }
+                
+                window.resizeBy(widthBy, heightBy);
+                return true;
+            }
+        }
+    </script>
+    <script type="text/javascript">
+    (function() {
+        function handlePageLoad() {
+            var endpointMatcher = new RegExp("[\\?\\&]endpoint=([^&#]*)");
+            setToAction = endpointMatcher.exec(document.location.search)[1];
+        } 
+        if (window.addEventListener) {
+            window.addEventListener('load', handlePageLoad, false);
+        } else { 
+            window.attachEvent('onload', handlePageLoad, false);
+        }
+    })();
+    
+    function setAction() {
+        document.getElementById('page:preChatForm').setAttribute('action', decodeURIComponent(setToAction));
+        document.forms["page:preChatForm"].submit();
+    }
+    
+    </script>
+     <apex:includeScript value="{!URLFOR($Resource.LiveAgent_LimitText, 'limitText.js')}" /> 
+    <apex:form id="preChatForm">
+        <apex:actionFunction name="submitForm" action="{!submitForm}" />
+        <div class="livechat_infiniti_header">
+
+            <div class="infiniti_livechat_endsession"
+                onclick="javascript:window.close()"></div>
+
+        </div>
+        <div Class="livechat_infiniti_bg">
+            <apex:pageblock rendered="{!!isSuccess}">
+
+                <div class="content_div">
+                    <div class="livechat_txt">
+                        We're ready to chat. Please fill out the form below. <span
+                            style="color: #C00 !important;">*</span> = Required Field.
+                    </div>
+
+                    <div class="inputAreaDesktop">
+                        <apex:pageblockSection collapsible="false" columns="1">
+                            <apex:pageblockSectionItem labelStyle="width:23%;"
+                                labelStyleClass="livechat_field_label_txt">
+                                <apex:outputLabel value="First Name *" 
+                                    styleClass="livechat_txt_main_fields"/>
+                                <apex:input styleClass="livechat_textbox" id="inputTextField" value="{!firstName}" html-placeholder="First Name"/>
+                            </apex:pageblockSectionItem>
+                            <apex:pageblockSectionItem labelStyleClass="livechat_field_label_txt">
+                                <apex:outputLabel value="Last Name" 
+                                    styleClass="livechat_txt_main_fields"/>
+                                <apex:input styleClass="livechat_textbox" id="inputTextField" value="{!lastName}" html-placeholder="Last Name"/>
+                            </apex:pageblockSectionItem>
+                            <apex:pageblockSectionItem labelStyleClass="livechat_field_label_txt">
+                                <apex:outputLabel value="Zip Code" 
+                                    styleClass="livechat_txt_main_fields"/>
+                                <apex:input styleClass="livechat_textbox" id="inputTextField" value="{!zipCode}" html-placeholder="12345" onKeyUp="limitText(this,{!$Setup.Zip_and_Phone_numbers_limits__c.Zip_length__c})"/>
+                            </apex:pageblockSectionItem>
+                            <apex:pageblockSectionItem labelStyleClass="livechat_field_label_txt">
+                                <apex:outputLabel value="Email" 
+                                    styleClass="livechat_txt_main_fields"/>
+                                <apex:input styleClass="livechat_textbox" id="inputTextField" value="{!emailAddress}" html-placeholder="user@gmail.com" />
+                            </apex:pageblockSectionItem>
+                            <apex:pageblockSectionItem labelStyleClass="livechat_field_label_txt">
+                                <apex:outputLabel value="Phone" 
+                                    styleClass="livechat_txt_main_fields"/>
+                                <apex:input styleClass="livechat_textbox" id="inputTextField" value="{!phone}" html-placeholder="1-888-242-9431" onKeyUp="limitText(this,{!$Setup.Zip_and_Phone_numbers_limits__c.Phone_length__c})"/>
+                            </apex:pageblockSectionItem>
+                        </apex:pageblockSection>
+                    </div>
+
+                   
+                    <apex:outputLabel value="{!errorMessage}"
+                        style="margin-left:215px;color:red; font-weight:bold; font-family:Verdana, Geneva, sans-serif;"
+                        rendered="{!showErrorMessage}" />
+
+
+                    <table width="90%" align="center">
+                        <tr>
+                            <td width="60%" class="livechat_thankyou_txt" style="text-align: left;">
+                                <b>Thank you.</b> An Infiniti Representative will be right with
+                                you.</td>
+                            <td class="buttonPosition"><apex:commandButton action="{!submitForm}" reRender="preChatForm"
+                                    styleClass="infiniti-btn-startchat">
+                                    <apex:param assignTo="{!isInfiniti}" value="true" />
+                                </apex:commandButton>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <table width="90%" align="center">
+                    <tr>
+                        <td class="livechat_footer_txt" valign="top">For additional
+                            assistance, please contact us at 800.662.6200 or visit <a
+                            href="http://www.infinitiusa.com/iapps/contactus" target="_blank"
+                            style="color: white">www.infinitiusa.com/iapps/contactus</a>
+                        </td>
+                        <!-- 
+                        <td class="livechat_footer_txt" valign="top">If you have a
+                            concern or issue with your Infiniti vehicle that you would like
+                            us to address, we want to help, but we cannot help you from this
+                            forum.</td>
+                        <td class="livechat_footer_txt" valign="top"
+                            style="padding-left: 20px;">Please contact us at
+                            800.662.6200 or visit: <a
+                            href="http://www.infinitiusa.com/iapps/contactus" target="_blank"
+                            style="color: white">www.infinitiusa.com/iapps/contactus</a>
+                        </td>
+                        -->
+                    </tr>
+                </table>
+
+
+            </apex:pageblock>
+        </div>
+        <apex:outputPanel rendered="{!isSuccess}">
+            <script>
+                setAction();
+            </script>
+
+            <input type='hidden' name='liveagent.prechat:First Name'
+                value="{!firstName}" />
+            <input type="hidden" name="liveagent.prechat.save:First Name"
+                value="First_Name__c" />
+            <input type='hidden' name='liveagent.prechat:Last Name'
+                value="{!lastName}" />
+            <input type="hidden" name="liveagent.prechat.save:Last Name"
+                value="Last_Name__c" />
+            <input type='hidden' name='liveagent.prechat:Zip Code'
+                value="{!zipCode}" />
+            <input type="hidden" name="liveagent.prechat.save:Zip Code"
+                value="Zip_Code__c" />
+            <input type='hidden' name='liveagent.prechat:Email'
+                value="{!emailAddress}" />
+            <input type="hidden" name="liveagent.prechat.save:Email"
+                value="Email__c" />
+            <input type='hidden' name='liveagent.prechat:Phone' value="{!phone}" />
+            <input type="hidden" name="liveagent.prechat.save:Phone"
+                value="Phone__c" />
+
+            <input type='hidden' name='liveagent.prechat.name' id='prechat_field'
+                value="{!CompletedName}" />
+
+            <input type='hidden' name='liveagent.prechat:Pre Chat Data Id'
+                value="{!preChatDataId}" />
+            <input type="hidden" name="liveagent.prechat.save:Pre Chat Data Id"
+                value="Pre_Chat_Data__c" />
+            <input type="hidden" name="liveagent.prechat.query:Pre Chat Data Id"
+                value="Pre_Chat_Data__c,Pre_Chat_Data__c.Id" />
+
+            <apex:outputPanel rendered="{!contactId != null}">
+                <input type='hidden' name='liveagent.prechat:Contact Id'
+                    value="{!contactId}" />
+                <input type="hidden" name="liveagent.prechat.save:Contact Id"
+                    value="Contact" />
+
+                <input type='hidden' name='liveagent.prechat:Account Id'
+                    value="{!accountId}" />
+                <input type="hidden" name="liveagent.prechat.save:Account Id"
+                    value="Account" />
+                <!-- 
+                <input type="hidden" name="liveagent.prechat.query:Account Id"
+                    value="Account,Account.Id" /> -->
+            </apex:outputPanel>
+
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

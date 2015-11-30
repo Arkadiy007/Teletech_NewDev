@@ -1,0 +1,76 @@
+<apex:page controller="VehicleInformationRequest_thk_Controller" showHeader="false" >
+
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+    <apex:stylesheet value="{!URLFOR($Resource.VehicleInfoRequestStyle, 'VehicleInfoRequestStyle.css')}" />
+    <apex:form id="frmMain">
+        <div class="sg-wrapper">
+            <div class="sg-header">
+                
+                <apex:outputPanel id="inflogo" rendered="{!infinitiBrand}">
+                 <div style="width: 100%; margin-left: 20px;">
+                    <apex:image url="{!$Resource.Infiniti_logo}"/>
+                </div>
+                </apex:outputPanel>
+                
+                <apex:outputPanel id="nislogo" rendered="{!nissanBrand}">
+                 <div style="width: 100%; margin-left: 20px;">
+                    <apex:image url="{!$Resource.Nissan_logo}"/>
+                </div>
+                </apex:outputPanel>
+
+                <apex:outputPanel rendered="{!nissanBrand}">
+                <h1 class="sg-title"><span>Your Nissan Vehicle Information Request</span></h1>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!infinitiBrand}">
+                <h1 class="sg-title"><span>Your Infiniti Vehicle Information Request</span></h1>
+                </apex:outputPanel> 
+            </div>
+            <div class="sg-content">
+                <div class="sg-content-hook-1"></div>                  
+                <div class="sg-question-set"><div id="sgE-1921732-2-1-box" class="sg-question sg-type-instruction">
+    <apex:outputPanel id="nissanText" rendered="{!nissanBrand}">
+                    <div class="sg-instructions" rendered="{!nissanBrand}">
+                        Thank you for taking our survey. Your response is very important to us.  We use feedback like yours to improve our own processes and those of our dealer partners. If you need assistance now, we are here to help with your shopping experience. Please chat with us by clicking the button below or call us at (800)-826-6500. Our business hours are Monday through Friday 10:00 AM to 8:00 PM Eastern.  
+
+                    </div>
+        </apex:outputPanel>
+                    <apex:outputPanel id="infinitiText" rendered="{!infinitiBrand}">
+                    <div class="sg-instructions" rendered="{!infinitiBrand}">
+                        Thank you for taking our survey. Your response is very important to us.  We use feedback like yours to improve our own processes and those of our retailer partners. If you need assistance now, we are here to help with your shopping experience. Please chat with us by clicking the button below or call us at 800.235.8880. Our business hours are Monday through Friday 10:00 AM to 8:00 PM Eastern.  
+
+                    </div>
+        </apex:outputPanel>
+                    </div>
+
+                    <div id="sgE-1921732-2-53-box" class="sg-question sg-type-instruction">
+    
+                        <div class="sg-instructions">
+                            <div style="text-align: center;">
+                                <b>Click below to chat with an Agent</b><br/><br/>
+
+                                <button onclick="openWin()"><font style="color:Green; font-weight:bold;">Live Chat</font></button>
+
+                                <script>
+                                    function openWin()
+                                    {
+                                        window.open("{!ChatUrl}","LiveAgent","scrollbars=no,resizable=no,width=500,height=520");
+                                    }
+                                </script>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+    <div class="sg-footer">        
+            <div class="sg-footer-hook-1"></div>            
+            <div class="sg-footer-hook-2"></div>
+        </div>   
+            </div>
+        </div>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,6 @@
+<apex:page standardController="Contact" extensions="Controller_AgentConsoleLandingPage" >
+<apex:include pageName="{!IncludeString}"/>
+
+
+
+</apex:page>

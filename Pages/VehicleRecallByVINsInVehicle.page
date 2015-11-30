@@ -1,0 +1,4 @@
+<apex:page standardController="Vehicle__c" >
+<apex:image url="{!URLFOR($Resource.CommonIcons, 'exclamation-point.png')}" width="30" height="30" rendered="{!Vehicle__c.Open_Recall__c == true}"/>
+<apex:outputText value="{!$Label.Vehicle_Recall_Message_Vehicle}" style="font-size:medium; color:red; font-weight:bold" rendered="{!Vehicle__c.Open_Recall__c == true}" />
+</apex:page>

@@ -1,0 +1,138 @@
+<apex:page controller="FooterEditController" doctype="html-5.0" >
+    <style>
+         #blockmainanim
+        {
+            background: rgba(0, 0, 0, 0.2);
+            width:100%;
+            height:100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 9999;  rgba(0, 0, 0, 0.71);
+            cursor: wait;
+        }
+         #apimgld
+        {   
+        top:49%;
+        left:45%;
+        position:fixed;
+        border-radius: 2px;
+        -webkit-border-radius: 2px ;
+        -moz-border-radius: 2px ;
+        }
+
+        .docLoader {
+            display: inline-block;
+        }
+        
+         .frameblock {
+            height: 900px;
+        }
+    </style>
+    
+<apex:form >        
+    <div id="blockbckanim" style="display:none">
+        <img id="apimgld" style="" src="/img/loading32.gif" />
+    </div>
+   
+    <apex:pageMessages />
+        
+         <apex:pageBlock >
+             <div class="frameblock">
+                <apex:iframe src="{!currentDocumentLink}" scrolling="true" height="95%" width="100%" rendered="{!IF(LEN(currentDocumentLink)==0, 'false', 'true')}"/>
+             </div>
+             <apex:outputText value="Upload new document?"/>
+             <apex:pageBlockSection columns="1">
+               <apex:inputFile value="{!d.body}" filename="{!d.name}" styleclass="docLoader"/>
+             </apex:pageBlockSection>
+             
+            <apex:pageBlockButtons location="bottom">    
+                <apex:commandButton onclick="return checkFileSize();"  action="{!save}" value="Save"/>
+                <apex:commandButton onclick="return checkFileSize();"  action="{!saveAndSubmit}" value="Send For Approval"/> 
+                <apex:commandButton onclick="return checkFileSize();"  action="{!saveAndPreview}" value="Save And Preview"/>   
+            </apex:pageBlockButtons>
+         </apex:pageBlock> 
+              
+               </apex:form>  
+
+                  <script src="{!$Resource.jQuery1_8}"></script>
+                    <script  type="text/javascript">
+ 
+                   function getIEFileSize(file){
+                        var myFSO = new ActiveXObject("Scripting.FileSystemObject"),
+                        filepath = file.value,
+                        thefile = myFSO.getFile(filepath);
+                        return thefile.size;
+                    }
+ 
+                    function checkFileSize()
+                    {
+                        document.getElementById('blockbckanim').style.display="block";
+                        var goodSize = true;
+                        console.log('CALLED');
+                        $('.imgLoader').each(function()
+                        {
+                            if(typeof this.files[0] !== 'undefined')
+                        {
+                            var file = this.files[0],
+                
+                            size = typeof ActiveXObject !== 'undefined' ?
+                            getIEFileSize(file)
+                            :
+                            file.fileSize || file.size;
+ 
+                            goodSize = 1000000 > size;
+                            if(!goodSize)
+                            {
+                                HideLoading();
+                                alert(this.files[0].name +' is too large - please choose a file with size 1MB or less');
+                                window.close();
+                            }
+                            else
+                            {
+                            if (500000 < size)
+                            {
+                                goodSize=confirm('The file size is ' + size + 
+                                ' bytes - this may take some time. Are you sure you wish to continue');
+                            }
+                    }
+         
+                    return goodSize;
+                    }
+                    });
+
+                    $('.docLoader').each(function()
+                        {
+                            if(typeof this.files[0] !== 'undefined')
+                        {
+                            var file = this.files[0],
+                
+                            size = typeof ActiveXObject !== 'undefined' ?
+                            getIEFileSize(file)
+                            :
+                            file.fileSize || file.size;
+ 
+                            goodSize = 5000000 > size;
+                            if(!goodSize)
+                            {
+                                HideLoading();
+                                alert(this.files[0].name +' is too large - please choose a file with size 5MB or less');
+                                window.close();
+                            }
+                           
+         
+                    return goodSize;
+                    }
+                    });
+                        return goodSize;
+            
+                }
+    
+       
+                 function HideLoading() {
+                     document.getElementById('blockbckanim').style.display="none";
+                  }
+    </script>
+                
+     
+</apex:page>
