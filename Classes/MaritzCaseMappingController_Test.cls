@@ -220,13 +220,6 @@ public class MaritzCaseMappingController_Test {
 		Test.startTest();
 		//Save mappings
 		controller.saveMappings();
-		
-
-		Maritz_Case_Mappings__c[] fTFM = [SELECT Id FROM Maritz_Case_Mappings__c];
-		Maritz_Case_Mappings_ForAdditionalFields__c[] statM = [SELECT Id FROM Maritz_Case_Mappings_ForAdditionalFields__c];
-		Maritz_Mappings_Ownership__c[] ownershipM = [SELECT Id FROM Maritz_Mappings_Ownership__c];
-		Maritz_Mappings_Record_Type__c[] rectypeM = [SELECT Id FROM Maritz_Mappings_Record_Type__c];
-		Maritz_Mappings_Lookups__c[] lookupM = [SELECT Id FROM Maritz_Mappings_Lookups__c];
 
 		Adhoc_Campaign_Object__c adhoc = new Adhoc_Campaign_Object__c(Name = 'Test_AdHoc', Address1__c = 'Add_1', Address2__c = 'Add_2', 
 																	BankruptcyFL__c = 'BankruptcyFL_Test', BonusCashCode__c = 'BonusCashCode_Test', 
@@ -239,11 +232,92 @@ public class MaritzCaseMappingController_Test {
 		Test.stopTest();
 
 		System.assertEquals(1, newCase.size());
-		//System.assertEquals(5, fTFM.size());
-		//System.assertEquals(1, lookupM.size());
-		//System.assertEquals(1, rectypeM.size());
-		//System.assertEquals(1, ownershipM.size());
-		//System.assertEquals(1, statM.size());
+	}
+
+	static testmethod void testMappingTemplatesRetrieving() {
+		PageReference pageRef = Page.MaritzCaseMapping;
+		Test.setCurrentPage(pageRef);
+
+		//setup templates
+		createTemplate('default', true);
+		createTemplate('tesr', false);
+
+		MaritzCaseMappingController controller = new MaritzCaseMappingController();
+		controller.IntermMappingObject = SOURCE_OBJECT;
+		controller.recalcDependValues();
+
+		//create Select Option
+
+		SelectOption[] templateOptions = controller.templateOptions;
+
+		System.assertNotEquals(null, templateOptions);
+		System.assertEquals(3, templateOptions.size());
+	}
+
+	static testmethod void testGetBusinessItems() {
+		PageReference pageRef = Page.MaritzCaseMapping;
+		Test.setCurrentPage(pageRef);
+
+		//setup templates
+		createTemplate('default', true);
+		createTemplate('tesr', false);
+
+		MaritzCaseMappingController controller = new MaritzCaseMappingController();
+		controller.IntermMappingObject = SOURCE_OBJECT;
+		controller.recalcDependValues();
+
+		//create Select Option
+		SelectOption[] templateOptions = controller.templateOptions;
+
+		//get select options
+		SelectOption[] getBusinessItems = controller.getBusinessItems();
+
+		System.assertNotEquals(null, getBusinessItems);
+	}
+
+	 static testmethod void testCancelMappings() {
+		PageReference pageRef = Page.MaritzCaseMapping;
+		Test.setCurrentPage(pageRef);
+
+		//setup mappings
+		setupMappings();
+
+		MaritzCaseMappingController controller = new MaritzCaseMappingController();
+		controller.IntermMappingObject = SOURCE_OBJECT;
+		controller.recalcDependValues();
+
+		//Set Field-to-Field mapping
+		controller.mappings[0].Source_field__c =  controller.mappingFields[1].getValue();
+
+		//Set RecordType mapping
+		controller.recordTypeMapping.Record_Type_Name__c =  controller.recordTypeSO[1].getValue();
+
+		//Set Lookup mapping
+		
+		controller.lookupEntytyMapping[0].externalIdsOfTheRelateedObject =  controller.lookupEntytyMapping[0].externalIdsOfTheRelateedObjectSO[0].getValue();
+		controller.lookupEntytyMapping[0].recordTypeOfTheRelatedObject =  controller.lookupEntytyMapping[0].recordTypeOfTheRelatedObjectSO[0].getValue();
+		controller.lookupEntytyMapping[0].fieldOfIntermediateObject =  controller.lookupEntytyMapping[0].fieldsOfIntermediateObjectSO[2].getValue();
+		
+		//Set Static value mapping
+		controller.addAdditionalMappingRow();
+		controller.mappingsAdditional[1].Target_field__c = controller.targetMappingFieldsSO[2].getValue();
+		controller.mappingsAdditional[1].Value_of_the_target_field__c = 'test';
+		
+		//Set Ownership mapping
+		SelectOption[] ownerTypeSO = controller.ownerTypeSO;
+		controller.targetOwnerMapping.Owner_Name__c = 'some user';
+		controller.targetOwnerMapping.Type_Of_Ownership__c = MaritzCaseMappingController.USER_RADIOBUTTON_VALUE;
+		
+		//cancelMappings
+		controller.cancelMappings();
+		
+
+
+		System.assertEquals(null, controller.mappings);
+		System.assertEquals(null, controller.mappingsAdditional);
+		System.assertEquals(null, controller.targetOwnerMapping);
+		System.assertEquals(null, controller.recordTypeMapping);
+		System.assertEquals(null, controller.lookupEntytyMapping);
 	}
 
 	/*---------------------HELPERS-------------------------------*/
@@ -285,6 +359,11 @@ public class MaritzCaseMappingController_Test {
 		insert lookupMappings;
 		insert staticMapping;
 		insert ownershipMapping;
+	}
+
+	static void createTemplate(String name, Boolean isActive) {
+		Maritz_Mapping_Templates__c template = new Maritz_Mapping_Templates__c(Name = name, IsActive__c = isActive);
+		insert template;
 	}
 
 	static Maritz_Case_Mappings__c createFieldToFieldmapping(Integer name, String sourceField, String targetField) {

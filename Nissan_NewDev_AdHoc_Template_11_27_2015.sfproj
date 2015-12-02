@@ -1988,8 +1988,8 @@
     <Compile Include="Classes\LiveAgent_W2C_Controller.cls">
       <SubType>Class</SubType>
       <Id>01pM0000000Lg3bIAC</Id>
-      <LastModifiedDateUtcTicks>130857537660000000</LastModifiedDateUtcTicks>
-      <Hash>UZuLVnNksPyvcXyfjwVhvA==</Hash>
+      <LastModifiedDateUtcTicks>130934630560000000</LastModifiedDateUtcTicks>
+      <Hash>ylaXLicGU3POYfqCVo6sZg==</Hash>
     </Compile>
     <Compile Include="Classes\LiveChatTranscript_After_Test.cls">
       <SubType>Class</SubType>
@@ -2042,8 +2042,8 @@
     <Compile Include="Classes\MaritzCaseMappingController_Test.cls">
       <SubType>Class</SubType>
       <Id>01pM0000000HHdoIAG</Id>
-      <LastModifiedDateUtcTicks>130933743310000000</LastModifiedDateUtcTicks>
-      <Hash>GVjh5e1I+UQ+/9jOhfu5bA==</Hash>
+      <LastModifiedDateUtcTicks>130935377280000000</LastModifiedDateUtcTicks>
+      <Hash>0p9Rul9wIfUdLVKHowMa4Q==</Hash>
     </Compile>
     <Compile Include="Classes\MaritzCreditCardTransactionHistory.cls">
       <SubType>Class</SubType>
@@ -7270,7 +7270,7 @@
     <None Include="Classes\LiveAgent_W2C_Controller.cls-meta.xml">
       <SubType>Metadata</SubType>
       <DependentUpon>Classes\LiveAgent_W2C_Controller.cls</DependentUpon>
-      <LastModifiedDateUtcTicks>130857537660000000</LastModifiedDateUtcTicks>
+      <LastModifiedDateUtcTicks>130934630560000000</LastModifiedDateUtcTicks>
       <Hash>qPYxbthsTjFyWy7IXTGaXw==</Hash>
     </None>
     <None Include="Classes\LiveChatTranscript_After_Test.cls-meta.xml">
@@ -7324,7 +7324,7 @@
     <None Include="Classes\MaritzCaseMappingController_Test.cls-meta.xml">
       <SubType>Metadata</SubType>
       <DependentUpon>Classes\MaritzCaseMappingController_Test.cls</DependentUpon>
-      <LastModifiedDateUtcTicks>130933743310000000</LastModifiedDateUtcTicks>
+      <LastModifiedDateUtcTicks>130935377280000000</LastModifiedDateUtcTicks>
       <Hash>nwvs5e25DzLVSrFWjufsFw==</Hash>
     </None>
     <None Include="Classes\MaritzCreditCardTransactionHistory.cls-meta.xml">

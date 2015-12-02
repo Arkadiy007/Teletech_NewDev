@@ -37,7 +37,7 @@ public class LiveAgent_W2C_Controller {
 	// -------- Constructor --------
 	public LiveAgent_W2C_Controller() {
 		Map<String, String> urlParameters = Apexpages.CurrentPage().getParameters();
-		reasons = new List<SelectOption> ();
+		reasons = new List<SelectOption> (); 
 		renderReason = true;
 		precompleteValuesWithParameters(urlParameters);
 		populateLabelsCustomSettings();
@@ -49,6 +49,7 @@ public class LiveAgent_W2C_Controller {
 				 if (selectedDepartment.contains('&')){
 						 selectedDepartment = selectedDepartment.substringBefore('&');
 				 }
+
 				
 			if (labelsByRountingGroup.containsKey(selectedDepartment)){
                  reasons.add(new SelectOption(selectedDepartment, labelsByRountingGroup.get(selectedDepartment)));   
